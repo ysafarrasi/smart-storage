@@ -42,7 +42,7 @@
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="home.php">
+                <a class="nav-link collapsed" href="{{ route('board') }}">
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
                 </a>
@@ -51,20 +51,20 @@
             <li class="nav-heading">Page</li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="papan.php">
+                <a class="nav-link collapsed" href="{{ route('board') }}">
                     <i class="bi bi-clipboard"></i>
                     <span>Weapon Status</span>
                 </a>
             </li><!-- End Profile Page Nav -->
             <li class="nav-item">
-                <a class="nav-link" href="data-akses.php">
+                <a class="nav-link" href="{{ route('personnel') }}">
                     <i class="fa-solid fa-person-rifle"></i>
                     <span>Personnel Data</span>
                 </a>
             </li><!-- End Profile Page Nav -->
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="data-senjata.php">
+                <a class="nav-link collapsed" href="{{ route('weapon') }}">
                     <i class="fa-solid fa-gun"></i>
                     <span>Weapon Data</span>
                 </a>

@@ -40,7 +40,7 @@
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="{{ route('board') }}">
                     <i class="bi bi-grid"></i>
                     <span>dashboard</span>
                 </a>
@@ -77,7 +77,8 @@
             <h1>dashboard</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="home.php"><i class="bi bi-house-door"></i></a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('board') }}"><i class="bi bi-house-door"></i></a>
+                    </li>
                     <li class="breadcrumb-item active">dashboard</li>
                 </ol>
             </nav>
@@ -160,45 +161,7 @@
 
     <!-- Template Main JS File -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
-    <script>
-        $.ajax({
-            url: '{{ route('dashboard-status') }}',
-            type: 'GET',
-            success: function(data) {
-                // Assuming the response is an object with keys 'code', 'message', and 'data'
-                var code = data.code;
-                var message = data.message;
-                var datas = data.data;
 
-                // Now you can use the variables code, message, and datas in your code
-                console.log(code, message, datas);
-
-                // Assuming you have a table with id 'dataTable' in your HTML
-                var dataTable = $('#dataTable');
-
-                // Clear the table
-                dataTable.empty();
-
-                // Loop through the datas and append to the table
-                $.each(datas, function(index, item) {
-                    // console.log(item);
-                    dataTable.append('<tr>' +
-                        '<td>' + (index + 1) + '</td>' +
-                        '<td>' + item.loadCellID + '</td>' +
-                        '<td>' + item.personnel_id + '</td>' +
-                        '<td>' + item.nama + '</td>' +
-                        '<td>' + item.tanggal + '</td>' +
-                        '<td>' + item.time_out + '</td>' +
-                        '<td>' + item.time_in + '</td>' +
-                        '</tr>');
-                });
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                // Handle error response
-                console.log("Error: ", textStatus, errorThrown);
-            }
-        });
-    </script>
 </body>
 
 </html>

@@ -18,7 +18,6 @@ use App\Http\Controllers\PersonnelController;
 */
 
 Route::get('/dashboard', [DashboardController::class, 'showDATAHome'])->name('dashboard');
-Route::get('/dashboard-status', [DashboardController::class, 'showDATAHome'])->name('dashboard-status');
 
 Route::get('/board',  [BoardController::class, 'ShowDataBoard'])->name('board');
 Route::get('/load-data', [BoardController::class, 'loadData'])->name('load-data');
