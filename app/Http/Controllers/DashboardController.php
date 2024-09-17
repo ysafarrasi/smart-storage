@@ -20,9 +20,9 @@ class DashboardController extends Controller
     {
         $date = Carbon::now()->format('Y-m-d');
 
-        $status = Status::join('personnel', 'status.loadCellID', '=', 'personnel.loadCellID')
+        $status = Status::join('personnels', 'status.loadCellID', '=', 'personnels.loadCellID')
             ->where('status.tanggal', $date)
-            ->select('status.*', 'personnel.personnel_id', 'personnel.nama')
+            ->select('status.*', 'personnels.personnel_id', 'personnels.nama')
             ->get();
 
         return view('/dashboard', compact('status'));
@@ -68,8 +68,8 @@ class DashboardController extends Controller
         }
 
         $tanggal = now()->format('Y-m-d');
-        $statusData = status::select('status.*', 'personnel.personnel_id', 'personnel.nama')
-            ->join('personnel', 'status.loadCellID', '=', 'personnel.loadCellID')
+        $statusData = status::select('status.*', 'personnels.personnel_id', 'personnels.nama')
+            ->join('personnels', 'status.loadCellID', '=', 'personnels.loadCellID')
             ->where('status.tanggal', $tanggal)
             ->get();
 

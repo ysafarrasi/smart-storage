@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Http;
 
 class BoardController extends Controller
 {
+    public function index(){
+        return view('board');
+    }
+    
     public function showDataBoard()
     {
         return view('/board');

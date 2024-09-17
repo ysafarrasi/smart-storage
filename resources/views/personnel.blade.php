@@ -7,8 +7,9 @@
     <script type="text/javascript" src="{{ asset('jquery/jquery.min.js') }}"></script>
 
     <title>Personel - Penyimpanan Senjata Otomatis</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
+    <meta name="keywords" content="{{ $metaKeywords ?? 'default, keywords' }}">
+    <title>{{ $metaTitle ?? 'Default Title' }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Favicons -->
     <link href="assets/img/Logo G - STAS RG.png" rel="icon">

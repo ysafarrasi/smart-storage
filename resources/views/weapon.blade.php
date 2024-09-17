@@ -7,8 +7,9 @@
     <script type="text/javascript" src="{{ asset('jquery/jquery.min.js') }}"></script>
 
     <title>Weapon - Automation Weapon Rack</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
+    <meta name="keywords" content="{{ $metaKeywords ?? 'default, keywords' }}">
+    <title>{{ $metaTitle ?? 'Default Title' }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Favicons -->
     <link href="{{ asset('assets/img/Logo G - STAS RG.png') }}" rel="icon">
@@ -81,7 +82,7 @@
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="home.php"><i class="bi bi-house-door"></i></a></li>
-                    <li class="breadcrumb-item">Page</li>
+                    <li class="  breadcrumb-item">Page</li>
                     <li class="breadcrumb-item active">Weapon Data</li>
                 </ol>
             </nav>

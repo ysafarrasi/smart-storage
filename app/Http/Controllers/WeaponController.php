@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class WeaponController extends Controller
 {
+
+    public function index(){
+        return view('weapon');
+    }
+
     public function ShowDataWeapon()
     {
         $client = new Client();
@@ -18,4 +23,7 @@ class WeaponController extends Controller
         $data = $contentArray['data'];
         return view('weapon', ['data' => $data]);
     }
+
+
 }
+

@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, sshirink-to-fit=no">
     <script type="text/javascript" src="{{ asset('jquery/jquery.min.js') }}"></script>
 
-    <title>('auth.home_title')</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
+    <title>Dashboard - Penyimpanan Senjata Otomatis</title>
+    <meta name="keywords" content="{{ $metaKeywords ?? 'default, keywords' }}">
+    <title>{{ $metaTitle ?? 'Default Title' }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Favicons -->
     <link href="{{ asset('img/Logo G - STAS RG.png') }}" rel="icon">
@@ -40,7 +41,7 @@
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('board') }}">
+                <a class="nav-link" href="{{ route('dashboard') }}">
                     <i class="bi bi-grid"></i>
                     <span>dashboard</span>
                 </a>
@@ -51,20 +52,20 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('board') }}">
                     <i class="bi bi-clipboard"></i>
-                    <span>papan_Status_Senjata</span>
+                    <span>Weapon Status</span>
                 </a>
             </li><!-- End Profile Page Nav -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('personnel') }}">
                     <i class="fa-solid fa-person-rifle"></i>
-                    <span>data_Pengguna</span>
+                    <span>Personnel Data</span>
                 </a>
             </li><!-- End Profile Page Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('weapon') }}">
                     <i class="fa-solid fa-gun"></i>
-                    <span>data_Senjata</span>
+                    <span>Weapon data</span>
                 </a>
             </li><!-- End F.A.Q Page Nav -->
         </ul>
@@ -103,27 +104,27 @@
                                             <h6>Filter</h6>
                                         </li>
 
-                                        <li><a class="dropdown-item" href="#">hari_ini</a></li>
-                                        <li><a class="dropdown-item" href="#">bulan_ini</a></li>
-                                        <li><a class="dropdown-item" href="#">tahun_ini</a></li>
+                                        <li><a class="dropdown-item" href="#">hari ini</a></li>
+                                        <li><a class="dropdown-item" href="#">bulan ini</a></li>
+                                        <li><a class="dropdown-item" href="#">tahun ini</a></li>
                                     </ul>
                                 </div>
 
                                 <div class="card-body">
-                                    <h5 class="card-title">status_Penggunaan_Senjata
-                                        <span>|_Hari_ini</span>
+                                    <h5 class="card-title">Status Penggunaan Senjata
+                                        <span>| Hari ini</span>
                                     </h5>
 
                                     <table class="table table-borderless datatable">
                                         <thead>
                                             <tr>
                                                 <th scope="col">No</th>
-                                                <th scope="col">iD_Senjata</th>
-                                                <th scope="col">iD_Pengguna</th>
-                                                <th scope="col">Nama_Pengguna</th>
+                                                <th scope="col">ID Senjata</th>
+                                                <th scope="col">ID Pengguna</th>
+                                                <th scope="col">Nama Pengguna</th>
                                                 <th scope="col">tanggal</th>
-                                                <th scope="col">waktu_Keluar</th>
-                                                <th scope="col">waktu_Masuk</th>
+                                                <th scope="col">waktu Keluar</th>
+                                                <th scope="col">waktu Masuk</th>
                                             </tr>
                                         </thead>
                                         <tbody id="dataTable">

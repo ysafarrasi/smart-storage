@@ -2,14 +2,14 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-start">
-        <a href="home.php" class="logo d-flex align-items-center">
+        <a href="#" class="logo d-flex align-items-center">
             <img src="assets/img/stas-rg_logo-removebg-preview.png" alt="">
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
     <div class="search-bar">
-        <form class="search-form d-flex align-items-center" method="POST" action="#">
+        <form class="search-form d-flex align-items-center" method="get" action="{{ route('search.index') }}">
             <input type="text" name="query" placeholder="Search" title="Enter search keyword">
             <button type="submit" title="Search"><i class="bi bi-search"></i></button>
         </form>

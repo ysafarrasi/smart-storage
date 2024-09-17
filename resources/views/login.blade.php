@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.118.2">
-    <title>@lang('auth.head')</title>
+    <title>Penyimpanan Senjata Otomatis</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -41,11 +41,11 @@
                     <div class="dropdown">
                         <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button"
                             id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            @lang('auth.language')
+                            {{ app()->getLocale() == 'id' ? 'Bahasa Indonesia' : 'English' }}
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" href="{{ url('id/dashboard') }}">Bahasa Indonesia</a></li>
-                            <li><a class="dropdown-item" href="{{ url('en/dashboard') }}">English</a></li>
+                            <li><a class="dropdown-item" href="{{ route('setlocale', ['locale' => 'id']) }}">Bahasa Indonesia</a></li>
+                            <li><a class="dropdown-item" href="{{ route('setlocale', ['locale' => 'en']) }}">English</a></li>
                         </ul>
                     </div>
                 </div>
@@ -57,15 +57,15 @@
         <section class="py-5 text-center container">
             <div class="row py-lg-5">
                 <div class="col-lg-6 col-md-8 mx-auto">
-                    <h1 class="fw-light">@lang('auth.title')</h1>
+                    <h1 class="fw-light">Penyimpanan Senjata Otomatis</h1>
                     <p class="lead text-body-secondary">
-                        @lang('auth.subtitle')
+                        Dashboard Penyimpanan Senjata Otomatis: Pantau dan kendalikan akses ke senjata dengan mudah. Sistem kami memberikan kontrol penuh terhadap siapa saja yang dapat mengakses senjata, kapan saja.
                     </p>
                     <p>
 
                         <button type="button" class="button" data-bs-toggle="modal"
                             data-bs-target="#verticalycentered">
-                            @lang('auth.mulai')
+                            Mulai
                             <div class="hoverEffect">
                                 <div>
                                 </div>
@@ -76,24 +76,24 @@
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title">@lang('auth.masuk')</h5>
+                                    <h5 class="modal-title">Mulai</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="/login" method="POST" class="row g-3 needs-validation" novalidate>
+                                    <form action="{{ route('login') }}" method="POST" class="row g-3 needs-validation" novalidate>
                                         @csrf
                                         <div class="col-12">
-                                            <label for="Email" class="form-label">@lang('auth.email')</label>
+                                            <label for="name" class="form-label">Masukan username</label>
                                             <div class="input-group has-validation">
                                                 <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                                <input type="email" name="email" class="form-control" id="email"
+                                                <input type="text" name="name" class="form-control" id="name"
                                                     required>
                                             </div>
                                         </div>
 
                                         <div class="col-12">
-                                            <label for="Password" class="form-label">@lang('auth.password')</label>
+                                            <label for="Password" class="form-label">Masukan Password</label>
                                             <input type="password" name="password" class="form-control"
                                                 id="password" required>
                                         </div>
@@ -103,7 +103,7 @@
                                                 <!-- <p class="small mb-0">Akun tidak terdaftar? <a href="registrasi.php">Daftarkan sebuah akun</a></p> -->
                                             </div>
                                             <button type="submit">
-                                                @lang('auth.masuk')
+                                                Masuk
                                                 <div class="star-1">
                                                     <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve"
                                                         version="1.1"
@@ -258,7 +258,7 @@
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                     <span class="visually-hidden">Previous</span>
                                 </button>
-                                <button class="carousel-control-next" type="button"
+                                <button class="1carousel-control-next" type="button"
                                     data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                     <span class="visually-hidden">Next</span>

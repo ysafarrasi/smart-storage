@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Weapon;
+use App\Models\Tmprfid;
 use GuzzleHttp\Client;
 use App\Models\Personnel;
 use Illuminate\Http\Request;
@@ -60,8 +61,17 @@ class PersonnelController extends Controller
     public function store(Request $request)
     {
         // menggunakan mass assignment
-        $personnel = Personnel::create($request->all());
-        return redirect()->route('personnel');
+        $personnel = Personnel::create([
+            'nokartu' => Tmprfid::first()->nokartu,
+            'personnel_id' => $request->input('personnel_id'),
+            'loadCellID' => Weapon::where('rackNumber', $request->input('rackNumber'))->value('loadCellID'),
+            'nama' => $request->input('nama'),
+            'pangkat' => $request->input('pangkat'),
+            'nrp' => $request->input('nrp'),
+            'jabatan' => $request->input('jabatan'),
+            'kesatuan' => $request->input('kesatuan'),
+        ]);
+        return redirect()->route('webpage.personnel-add');
     }
 
     /**
