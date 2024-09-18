@@ -62,9 +62,9 @@ class PersonnelController extends Controller
     {
         // menggunakan mass assignment
         $personnel = Personnel::create([
-            'nokartu' => Tmprfid::first()->nokartu,
             'personnel_id' => $request->input('personnel_id'),
             'loadCellID' => Weapon::where('rackNumber', $request->input('rackNumber'))->value('loadCellID'),
+            'nokartu' => $request->input('nokartu'),
             'nama' => $request->input('nama'),
             'pangkat' => $request->input('pangkat'),
             'nrp' => $request->input('nrp'),

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.118.2">
-    <title>Penyimpanan Senjata Otomatis</title>
+    <title>{{__('users.Penyimpanan Senjata Otomatis')}} - Automation Weapon Rack</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -57,15 +57,15 @@
         <section class="py-5 text-center container">
             <div class="row py-lg-5">
                 <div class="col-lg-6 col-md-8 mx-auto">
-                    <h1 class="fw-light">Penyimpanan Senjata Otomatis</h1>
+                    <h1 class="fw-light">{{ __('users.Penyimpanan Senjata Otomatis') }}</h1>
                     <p class="lead text-body-secondary">
-                        Dashboard Penyimpanan Senjata Otomatis: Pantau dan kendalikan akses ke senjata dengan mudah. Sistem kami memberikan kontrol penuh terhadap siapa saja yang dapat mengakses senjata, kapan saja.
+                        {{__('users.Deskripsi')}}
                     </p>
                     <p>
 
                         <button type="button" class="button" data-bs-toggle="modal"
                             data-bs-target="#verticalycentered">
-                            Mulai
+                            {{ __('users.Mulai')}}
                             <div class="hoverEffect">
                                 <div>
                                 </div>
@@ -76,7 +76,7 @@
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title">Mulai</h5>
+                                    <h5 class="modal-title">{{ __('users.Mulai')}}</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
@@ -84,7 +84,7 @@
                                     <form action="{{ route('login') }}" method="POST" class="row g-3 needs-validation" novalidate>
                                         @csrf
                                         <div class="col-12">
-                                            <label for="name" class="form-label">Masukan username</label>
+                                            <label for="name" class="form-label">{{__('users.Masukan_username')}}</label>
                                             <div class="input-group has-validation">
                                                 <span class="input-group-text" id="inputGroupPrepend">@</span>
                                                 <input type="text" name="name" class="form-control" id="name"
@@ -93,7 +93,7 @@
                                         </div>
 
                                         <div class="col-12">
-                                            <label for="Password" class="form-label">Masukan Password</label>
+                                            <label for="Password" class="form-label">{{__('users.Masukan_Password')}}</label>
                                             <input type="password" name="password" class="form-control"
                                                 id="password" required>
                                         </div>
@@ -103,7 +103,7 @@
                                                 <!-- <p class="small mb-0">Akun tidak terdaftar? <a href="registrasi.php">Daftarkan sebuah akun</a></p> -->
                                             </div>
                                             <button type="submit">
-                                                Masuk
+                                                {{ __('users.Masuk')}}
                                                 <div class="star-1">
                                                     <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve"
                                                         version="1.1"

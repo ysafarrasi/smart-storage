@@ -20,10 +20,12 @@ use App\Http\Controllers\SearchController;
 |
 */
 
-Route::get('/home',  [LoginController::class, 'index'])->name('login');
+
 // Route::get('/login', 'LoginController@index');
 // Route::post('/login', 'LoginController@login');
 // Route::get('/logout', 'LoginController@logout');
+
+Route::get('/home',  [LoginController::class, 'index'])->name('login');
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
@@ -42,28 +44,27 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/fetch-personnel', [PersonnelController::class, 'fetchPersonnel'])->name('fetch-personnel');
     // Route::get('/personnel-add',  [PersonnelController::class, 'create'])->name('personnel-add');
 
-    Route::get('setlocale/{locale}', function ($locale) {
-      if (in_array($locale, ['en', 'id'])) {
-          session(['locale' => $locale]);
-      }
-      return redirect()->back();
-    })->name('setlocale');
-
-    Route::get('setlocale/{locale?}', function ($locale = null) {
-      if (!$locale) {
-          $locale = app()->getLocale(); // Detect the user's preferred language
-      }
-
-      if (in_array($locale, ['en', 'id'])) {
-          session(['locale' => $locale]);
-      }
-
-      return redirect()->back();
-    })->name('setlocale');
-
     Route::match(['get', 'post'], '/search', [SearchController::class, 'index'])->name('search.index');
 });
 
+Route::get('setlocale/{locale}', function ($locale) {
+  if (in_array($locale, ['en', 'id'])) {
+      session(['locale' => $locale]);
+  }
+  return redirect()->back();
+})->name('setlocale');
+
+Route::get('setlocale/{locale?}', function ($locale = null) {
+  if (!$locale) {
+      $locale = app()->getLocale(); // Detect the user's preferred language
+  }
+
+  if (in_array($locale, ['en', 'id'])) {
+      session(['locale' => $locale]);
+  }
+
+  return redirect()->back();
+})->name('setlocale');
 
 // Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 // Route::get('/dashboard', [DashboardController::class, 'showDATAHome'])->middleware('auth')->name('dashboard');

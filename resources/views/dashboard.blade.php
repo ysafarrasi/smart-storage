@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, sshirink-to-fit=no">
     <script type="text/javascript" src="{{ asset('jquery/jquery.min.js') }}"></script>
 
-    <title>Dashboard - Penyimpanan Senjata Otomatis</title>
+    <title>Dashboard - {{__('users.Penyimpanan Senjata Otomatis')}} - Automation Weapon Rack</title>
     <meta name="keywords" content="{{ $metaKeywords ?? 'default, keywords' }}">
     <title>{{ $metaTitle ?? 'Default Title' }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
@@ -43,29 +43,29 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('dashboard') }}">
                     <i class="bi bi-grid"></i>
-                    <span>dashboard</span>
+                    <span>{{__('users.Dashboard')}}</span>
                 </a>
             </li><!-- End Dashboard Nav -->
 
-            <li class="nav-heading">halaman</li>
+            <li class="nav-heading">{{__('users.halaman')}}</li>
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('board') }}">
                     <i class="bi bi-clipboard"></i>
-                    <span>Weapon Status</span>
+                    <span>{{__('users.Papan Status Senjata')}}</span>
                 </a>
             </li><!-- End Profile Page Nav -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('personnel') }}">
                     <i class="fa-solid fa-person-rifle"></i>
-                    <span>Personnel Data</span>
+                    <span>{{__('users.Data Pengguna')}}</span>
                 </a>
             </li><!-- End Profile Page Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('weapon') }}">
                     <i class="fa-solid fa-gun"></i>
-                    <span>Weapon data</span>
+                    <span>{{__('users.Data Senjata')}}</span>
                 </a>
             </li><!-- End F.A.Q Page Nav -->
         </ul>
@@ -75,12 +75,12 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>dashboard</h1>
+            <h1>{{__('users.Dashboard')}}</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('board') }}"><i class="bi bi-house-door"></i></a>
                     </li>
-                    <li class="breadcrumb-item active">dashboard</li>
+                    <li class="breadcrumb-item active">{{__('users.Dashboard')}}</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -101,30 +101,30 @@
                                             class="bi bi-three-dots"></i></a>
                                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                         <li class="dropdown-header text-start">
-                                            <h6>Filter</h6>
+                                            <h6>{{__('users.Filter')}}</h6>
                                         </li>
 
-                                        <li><a class="dropdown-item" href="#">hari ini</a></li>
-                                        <li><a class="dropdown-item" href="#">bulan ini</a></li>
-                                        <li><a class="dropdown-item" href="#">tahun ini</a></li>
+                                        <li><a class="dropdown-item" href="#">{{__('users.Hari ini')}}</a></li>
+                                        <li><a class="dropdown-item" href="#">{{__('users.Bulan ini')}}</a></li>
+                                        <li><a class="dropdown-item" href="#">{{__('users.Tahun ini')}}</a></li>
                                     </ul>
                                 </div>
 
                                 <div class="card-body">
-                                    <h5 class="card-title">Status Penggunaan Senjata
-                                        <span>| Hari ini</span>
+                                    <h5 class="card-title">{{__('users.Status Penggunaan Senjata')}}
+                                        <span>{{__('users. | Hari ini')}}</span>
                                     </h5>
 
                                     <table class="table table-borderless datatable">
                                         <thead>
                                             <tr>
                                                 <th scope="col">No</th>
-                                                <th scope="col">ID Senjata</th>
-                                                <th scope="col">ID Pengguna</th>
-                                                <th scope="col">Nama Pengguna</th>
-                                                <th scope="col">tanggal</th>
-                                                <th scope="col">waktu Keluar</th>
-                                                <th scope="col">waktu Masuk</th>
+                                                <th scope="col">{{__('users.ID Senjata')}}</th>
+                                                <th scope="col">{{__('users.ID Pengguna')}}</th>
+                                                <th scope="col">{{__('users.ID Senjata')}}</th>
+                                                <th scope="col">{{__('users.Tanggal')}}</th>
+                                                <th scope="col">{{__('users.Waktu Keluar')}}</th>
+                                                <th scope="col">{{__('users.Waktu Masuk')}}</th>
                                             </tr>
                                         </thead>
                                         <tbody id="dataTable">
@@ -162,6 +162,9 @@
 
     <!-- Template Main JS File -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script>
+        
+    </script>
 
 </body>
 

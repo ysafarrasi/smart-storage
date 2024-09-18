@@ -33,13 +33,13 @@
 
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <li>
-                        <a class="dropdown-item" href="{{ url('id/dashboard') }}">
+                        <a class="dropdown-item" href="{{ route('setlocale', ['locale' => 'id']) }}">
                             <img src="assets\img\bendera-id.png" alt="" class="rounded-circle" width="20px">
                             ID
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="{{ url('en/dashboard') }}">
+                        <a class="dropdown-item" href="{{ route('setlocale', ['locale' => 'en']) }}">
                             <img src="assets\img\bendera-amerika.png" alt="" class="rounded-circle"
                                 width="20px">
                             EN

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, shrink-to-fit=no">
     <script type="text/javascript" src="{{ asset('jquery/jquery.min.js') }}"></script>
 
-    <title>Weapon - Automation Weapon Rack</title>
+    <title>{{__('users.Weapon')}} - {{__('users.Penyimpanan Senjata Otomatis')}}</title>
     <meta name="keywords" content="{{ $metaKeywords ?? 'default, keywords' }}">
     <title>{{ $metaTitle ?? 'Default Title' }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
@@ -43,31 +43,31 @@
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="//">
+                <a class="nav-link collapsed" href="{{ route('dashboard') }}">
                     <i class="bi bi-grid"></i>
-                    <span>Dashboard</span>
+                    <span>{{__('users.dashboard')}}</span>
                 </a>
             </li><!-- End Dashboard Nav -->
 
-            <li class="nav-heading">Page</li>
+            <li class="nav-heading">{{__('users.halaman')}}</li>
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('board') }}">
                     <i class="bi bi-clipboard"></i>
-                    <span>Weapon Status</span>
+                    <span>{{__('users.Papan Status Senjata')}}</span>
                 </a>
             </li><!-- End Profile Page Nav -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('personnel') }}">
                     <i class="fa-solid fa-person-rifle"></i>
-                    <span>Personnel Data</span>
+                    <span>{{__('users.Personnel Data')}}</span>
                 </a>
             </li><!-- End Profile Page Nav -->
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('weapon') }}">
                     <i class="fa-solid fa-gun"></i>
-                    <span>Weapon Data</span>
+                    <span>{{__('users.Weapon Data')}}</span>
                 </a>
             </li><!-- End F.A.Q Page Nav -->
         </ul>
@@ -78,12 +78,12 @@
         <!-- Page content here -->
 
         <div class="pagetitle">
-            <h1>Weapon Data</h1>
+            <h1>{{__('users.Weapon Data')}}</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="home.php"><i class="bi bi-house-door"></i></a></li>
-                    <li class="  breadcrumb-item">Page</li>
-                    <li class="breadcrumb-item active">Weapon Data</li>
+                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i class="bi bi-house-door"></i></a></li>
+                    <li class="  breadcrumb-item">{{__('users.halaman')}}</li>
+                    <li class="breadcrumb-item active">{{__('users.Weapon Data')}}</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -101,11 +101,11 @@
                                             class="bi bi-three-dots"></i></a>
                                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                         <li class="dropdown-header text-start">
-                                            <h6>Filter</h6>
+                                            <h6>{{__('users.Filter')}}</h6>
                                         </li>
-                                        <li><a class="dropdown-item" href="#"><?= __('Hari ini') ?></a></li>
-                                        <li><a class="dropdown-item" href="#"><?= __('Bulan ini') ?></a></li>
-                                        <li><a class="dropdown-item" href="#"><?= __('Tahun ini') ?></a></li>
+                                        <li><a class="dropdown-item" href="#">{{__('Hari ini')}}</a></li>
+                                        <li><a class="dropdown-item" href="#">{{__('Minggu ini')}}</a></li>
+                                        <li><a class="dropdown-item" href="#">{{__('Bulan ini')}}</a></li>
                                     </ul>
                                 </div>
 
@@ -118,10 +118,10 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">No</th>
-                                                <th scope="col">ID Senjata</th>
-                                                <th scope="col">Nomor Rak</th>
-                                                <th scope="col">Status</th>
-                                                <th scope="col">Berat</th>
+                                                <th scope="col">{{__('users.ID Senjata')}}</th></th>
+                                                <th scope="col">{{__('users.Nomor Rak')}}</th>
+                                                <th scope="col">{{__('users.Status')}}</th>
+                                                <th scope="col">{{__('users.Berat')}}</th>
                                             </tr>
                                         </thead>
                                         <tbody id="weapon-data">

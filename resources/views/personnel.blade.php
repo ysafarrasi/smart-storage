@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script type="text/javascript" src="{{ asset('jquery/jquery.min.js') }}"></script>
 
-    <title>Personel - Penyimpanan Senjata Otomatis</title>
+    <title>Personnel - {{__('users.Penyimpanan Senjata Otomatis')}} - Automation Weapon Rack</title>
     <meta name="keywords" content="{{ $metaKeywords ?? 'default, keywords' }}">
     <title>{{ $metaTitle ?? 'Default Title' }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
@@ -43,31 +43,31 @@
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('board') }}">
+                <a class="nav-link collapsed" href="{{ route('dashboard') }}">
                     <i class="bi bi-grid"></i>
-                    <span>Dashboard</span>
+                    <span>{{__('users.dashboard')}}</span>
                 </a>
             </li><!-- End Dashboard Nav -->
 
-            <li class="nav-heading">Page</li>
+            <li class="nav-heading">{{__('users.halaman')}}</li>
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('board') }}">
                     <i class="bi bi-clipboard"></i>
-                    <span>Weapon Status</span>
+                    <span>{{__('users.Papan Status Senjata')}}</span>
                 </a>
             </li><!-- End Profile Page Nav -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('personnel') }}">
                     <i class="fa-solid fa-person-rifle"></i>
-                    <span>Personnel Data</span>
+                    <span>{{__('users.Data Pengguna')}}</span>
                 </a>
             </li><!-- End Profile Page Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('weapon') }}">
                     <i class="fa-solid fa-gun"></i>
-                    <span>Weapon Data</span>
+                    <span>{{__('users.Data Senjata')}}</span>
                 </a>
             </li><!-- End F.A.Q Page Nav -->
         </ul>
@@ -77,12 +77,12 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Data Pengguna</h1>
+            <h1>{{__('users.Data Pengguna')}}</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="##"><i class="bi bi-house-door"></i></a></li>
-                    <li class="breadcrumb-item">Halaman</li>
-                    <li class="breadcrumb-item active">Data Pengguna</li>
+                    <li class="breadcrumb-item">{{__('users.halaman')}}</li>
+                    <li class="breadcrumb-item active">{{__('users.Data Pengguna')}}</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -103,38 +103,55 @@
                                             class="bi bi-three-dots"></i></a>
                                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                         <li class="dropdown-header text-start">
-                                            <h6>Filter</h6>
+                                            <h6>{{__('users.Filter')}}</h6>
                                         </li>
 
-                                        <li><a class="dropdown-item" href="#">Hari ini</a></li>
-                                        <li><a class="dropdown-item" href="#">Bulan ini</a></li>
-                                        <li><a class="dropdown-item" href="#">Tahun ini</a></li>
+                                        <li><a class="dropdown-item" href="#">{{__('users.Hari ini')}}</a></li>
+                                        <li><a class="dropdown-item" href="#">{{__('users.Minggu ini')}}</a></li>
+                                        <li><a class="dropdown-item" href="#">{{__('users.Bulan ini')}}</a></li>
                                     </ul>
                                 </div>
 
                                 <div class="card-body">
-                                    <h5 class="card-title">Data Pengguna <span>| Hari ini</span></h5>
+                                    <h5 class="card-title">{{__('users.Data Pengguna')}} <span>| Hari ini</span></h5>
 
                                     <table class="table table-borderless datatable">
                                         <thead>
                                             <tr>
                                                 <th scope="col">No</th>
-                                                <th scope="col">ID Senjata</th>
-                                                <th scope="col">ID Pengguna</th>
-                                                <th scope="col">Nama Pengguna</th>
-                                                <th scope="col">Pangkat</th>
-                                                <th scope="col">NRP</th>
-                                                <th scope="col">Jabatan</th>
-                                                <th scope="col">Kesatuan</th>
-                                                <th scope="col">Aksi</th>
+                                                <th scope="col">{{__('users.ID Senjata')}}</th>
+                                                <th scope="col">{{__('users.ID Pengguna')}}</th>
+                                                <th scope="col">{{__('users.Nama')}}</th>
+                                                <th scope="col">{{__('users.Pangkat')}}</th>
+                                                <th scope="col">{{__('users.NRP')}}</th>
+                                                <th scope="col">{{__('users.Jabatan')}}</th>
+                                                <th scope="col">{{__('users.Unit')}}</th>
+                                                <th scope="col">{{__('users.Aksi')}}</th>
                                             </tr>
                                         </thead>
                                         <tbody id="personnel-data">
-                                            <!-- Data akan diisi secara dinamis melalui AJAX -->
+                                            @foreach ($personnels as $personnel)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $personnel->weapon_id }}</td>
+                                                <td>{{ $personnel->personnel_id }}</td>
+                                                <td>{{ $personnel->name }}</td>
+                                                <td>{{ $personnel->rank }}</td>
+                                                <td>{{ $personnel->nrp }}</td>
+                                                <td>{{ $personnel->position }}</td>
+                                                <td>{{ $personnel->unit }}</td>
+                                                <td>
+                                                    <a href="{{ route('personnel-edit', $personnel->personnel_id) }}"
+                                                        class="btn btn-primary">Edit</a>
+                                                    <a href="{{ route('personnel-delete', $personnel->personnel_id) }}"
+                                                        class="btn btn-danger">Hapus</a>
+                                                </td>
+                                            </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                     <a href="{{ route('personnel-add') }}">
-                                        <button class="btn btn-primary">Tambah Data</button>
+                                        <button class="btn btn-primary">{{__('users.Tambah Data')}}</button>
                                     </a>
                                 </div>
 

@@ -1,0 +1,65 @@
+<?php
+
+return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Authentication Language Lines
+    |--------------------------------------------------------------------------
+    |
+    | The following language lines are used during authentication for various
+    | messages that we need to display to the user. You are free to modify
+    | these language lines according to your application's requirements.
+    |
+    */
+    
+    'Penyimpanan Senjata Otomatis' => 'Weapon Storage System',
+    'Deskripsi' => 'Automated Weapon Storage Dashboard: Easily monitor and control access to weapons. Our system gives you full control over who can access your weapons, at any time.',
+    'Mulai' => 'Start',
+    'Masukan_username' => 'Enter username',
+    'Masukan_Password' => 'Enter Password',
+    'Halaman' => 'Pages',
+	'Bahasa Indonesia' => 'English',
+	'Masuk' => 'Login',
+	'Pengguna' => 'User',
+	'Nama Pengguna' => 'Username',
+	'Kata Sandi' => 'Password',
+	'Keluar' => 'Logout',
+	'Dashboard' => 'Dashboard',
+	'Data Pengguna' => 'User Data',
+	'Data Senjata' => 'Weapon Data',
+	'Pangkat' => 'Rank',
+	'NRP' => 'NRP',
+	'Jabatan' => 'Position',
+	'Kesatuan' => 'Unit',
+	'Simpan' => 'Save',
+	'Profil Saya' => 'My Profile',
+	'Butuh bantuan?' => 'Need help?',
+	'Tanggal' => 'Date',
+	'Waktu Keluar' => 'Time Out',
+	'Waktu Masuk' => 'Time In',
+	'ID Senjata' => 'Weapon ID',
+	'ID Pengguna' => 'User ID',
+	'Status' => 'Status',
+	'Berat' => 'Weight',
+	'Status Penggunaan Senjata' => 'Weapon Usage Status',
+	' | Hari ini' => ' | Today',
+	'Hari ini' => 'Today',
+	'Bulan ini' => 'This Month',
+	'Tahun ini' => 'This Year',
+	'Tempelkan Kartu RFID' => 'Tap RFID Card',
+	'Buka pilihan ini' => 'Open this select menu',
+	'Tambah Data Pengguna' => 'Add User Data',
+	'Tambah Data' => 'Add Data',
+	'Hapus' => 'Delete',
+	'Papan Status Senjata' => 'Weapon Status Board',
+	'Rak 1' => 'Rack 1',
+	'Rak 2' => 'Rack 2',
+	'Rak 3' => 'Rack 3',
+	'Rak 4' => 'Rack 4',
+	'Rak 5' => 'Rack 5',
+	'Rak 6' => 'Rack 6',
+	'Nomor Rak' => 'Rack Number',
+	'Aksi' => 'Action',
+    'Filter' => 'Filter',
+];

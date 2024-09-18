@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, sshirink-to-fit=no">
     <script type="text/javascript" src="{{ asset('jquery/jquery.min.js') }}jquery/jquery.min.js"></script>
 
-    <title>Weapon Status - Automation Weapon Rack</title>
+    <title>{{__('users.Penyimpanan Senjata Otomatis')}} - Automation Weapon Rack</title>
     <meta name="keywords" content="{{ $metaKeywords ?? 'default, keywords' }}">
     <title>{{ $metaTitle ?? 'Default Title' }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
@@ -46,29 +46,29 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('dashboard') }}">
                     <i class="bi bi-grid"></i>
-                    <span>Dashboard</span>
+                    <span>{{__('users.dashboard')}}</span>
                 </a>
             </li><!-- End Dashboard Nav -->
 
-            <li class="nav-heading">Page</li>
+            <li class="nav-heading">{{__('users.halaman')}}</li>
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('board') }}">
                     <i class="bi bi-clipboard"></i>
-                    <span>Weapon Status</span>
+                    <span>{{__('users.Papan Status Senjata')}}</span>
                 </a>
             </li><!-- End Profile Page Nav -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('personnel') }}">
                     <i class="fa-solid fa-person-rifle"></i>
-                    <span>Personnel Data</span>
+                    <span>{{__('users.Data Pengguna')}}</span>
                 </a>
             </li><!-- End Profile Page Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('weapon') }}">
                     <i class="fa-solid fa-gun"></i>
-                    <span>Weapon Data</span>
+                    <span>{{__('users.Data Senjata')}}</span>
                 </a>
             </li><!-- End F.A.Q Page Nav -->
         </ul>
@@ -77,12 +77,12 @@
 
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>Weapon Status</h1>
+            <h1>{{__('users.Papan Status Senjata.')}}</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#"><i class="bi bi-house-door"></i></a></li>
-                    <li class="breadcrumb-item">Page</li>
-                    <li class="breadcrumb-item active">Weapon Status</li>
+                    <li class="breadcrumb-item">{{__('users.halaman')}}</li>
+                    <li class="breadcrumb-item active">{{__('users.weapon data')}}</li>
                 </ol>
             </nav>
         </div>
@@ -104,7 +104,7 @@
                             <ul class="nav nav-tabs nav-tabs-bordered">
                                 <li class="nav-item">
                                     <button class="nav-link active" data-bs-toggle="tab"
-                                        data-bs-target="#profile-overview">Weapon Status</button>
+                                        data-bs-target="#profile-overview">{{__('users.Weapon Status')}}</button>
                                 </li>
                             </ul>
 
