@@ -36,4 +36,3 @@ class AuthController extends Controller
         ])->withInput();
     }
 }
-

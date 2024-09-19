@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, shrink-to-fit=no">
     <script type="text/javascript" src="{{ asset('jquery/jquery.min.js') }}"></script>
 
-    <title>{{__('users.Weapon')}} - {{__('users.Penyimpanan Senjata Otomatis')}}</title>
+    <title>{{__('users.Senjata')}} - {{__('users.Penyimpanan Senjata Otomatis')}}</title>
     <meta name="keywords" content="{{ $metaKeywords ?? 'default, keywords' }}">
     <title>{{ $metaTitle ?? 'Default Title' }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
@@ -45,7 +45,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('dashboard') }}">
                     <i class="bi bi-grid"></i>
-                    <span>{{__('users.dashboard')}}</span>
+                    <span>{{__('users.Dashboard')}}</span>
                 </a>
             </li><!-- End Dashboard Nav -->
 
@@ -60,14 +60,14 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('personnel') }}">
                     <i class="fa-solid fa-person-rifle"></i>
-                    <span>{{__('users.Personnel Data')}}</span>
+                    <span>{{__('users.Data Pengguna')}}</span>
                 </a>
             </li><!-- End Profile Page Nav -->
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('weapon') }}">
                     <i class="fa-solid fa-gun"></i>
-                    <span>{{__('users.Weapon Data')}}</span>
+                    <span>{{__('users.Data Senjata')}}</span>
                 </a>
             </li><!-- End F.A.Q Page Nav -->
         </ul>
@@ -78,12 +78,12 @@
         <!-- Page content here -->
 
         <div class="pagetitle">
-            <h1>{{__('users.Weapon Data')}}</h1>
+            <h1>{{__('users.Data Senjata')}}</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i class="bi bi-house-door"></i></a></li>
-                    <li class="  breadcrumb-item">{{__('users.halaman')}}</li>
-                    <li class="breadcrumb-item active">{{__('users.Weapon Data')}}</li>
+                    <li class="  breadcrumb-item">{{__('users.Halaman')}}</li>
+                    <li class="breadcrumb-item active">{{__('users.Data Senjata')}}</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -111,7 +111,8 @@
 
                                 <div class="card-body">
                                     <h5 class="card-title">
-                                        <?= __('Data Senjata') ?><span><?= __(' | Hari ini') ?></span>
+                                        {{__('users.Data Senjata')}}
+                                        <span>{{__(' | Hari ini')}}</span>
                                     </h5>
 
                                     <table class="table table-borderless datatable">
@@ -125,6 +126,38 @@
                                             </tr>
                                         </thead>
                                         <tbody id="weapon-data">
+                                            <script>
+                                                document.addEventListener('DOMContentLoaded', function() {
+                                                    fetch('http://127.0.0.1:8000/api/weapons')
+                                                        .then(response => response.json())
+                                                        .then(result => {
+                                                            if(result.code === 200) {
+                                                                let data = result.data;
+                                                                let tableBody = document.getElementById('weapon-data');
+                                                                let rows = '';
+                                            
+                                                                data.forEach((weapon, index) => {
+                                                                    rows += `
+                                                                        <tr>
+                                                                            <td>${index + 1}</td>
+                                                                            <td>${weapon.id}</td>
+                                                                            <td>${weapon.rack_number}</td>
+                                                                            <td>${weapon.status}</td>
+                                                                            <td>${weapon.weight}</td>
+                                                                        </tr>
+                                                                    `;
+                                                                });
+                                            
+                                                                tableBody.innerHTML = rows;
+                                                            } else {
+                                                                console.error('Gagal mengambil data:', result.message);
+                                                            }
+                                                        })
+                                                        .catch(error => {
+                                                            console.error('Error:', error);
+                                                        });
+                                                });
+                                            </script>    
                                             <!-- data here -->
                                         </tbody>
                                     </table>

@@ -15,10 +15,10 @@ class Weapon extends Model
     public $timestamps = false; // Tambahkan baris ini
 
     protected $fillable = [
+        'loadCellID',
         'slaveNumber',
         'status',
         'weight',
-        'loadCellID',
         'rackNumber',
         'timestamp'
     ];

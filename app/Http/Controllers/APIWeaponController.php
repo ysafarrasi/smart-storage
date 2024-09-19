@@ -9,7 +9,9 @@ class APIWeaponController extends Controller
 {
     public function getDataWeapon()
     {
-        $weapon = Weapon::orderBy('loadCellID', 'asc')->get();
+        $weapon = Weapon::orderBy('loadCellID', 'asc')
+            ->select('loadCellID', 'rackNumber', 'status', 'weight')
+            ->get();
         return response()->json([
             'code' => 200,
             'message' => 'success',

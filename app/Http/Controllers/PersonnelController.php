@@ -60,18 +60,29 @@ class PersonnelController extends Controller
      */
     public function store(Request $request)
     {
-        // menggunakan mass assignment
-        $personnel = Personnel::create([
-            'personnel_id' => $request->input('personnel_id'),
-            'loadCellID' => Weapon::where('rackNumber', $request->input('rackNumber'))->value('loadCellID'),
-            'nokartu' => $request->input('nokartu'),
-            'nama' => $request->input('nama'),
-            'pangkat' => $request->input('pangkat'),
-            'nrp' => $request->input('nrp'),
-            'jabatan' => $request->input('jabatan'),
-            'kesatuan' => $request->input('kesatuan'),
+        $request->validate([
+            'personnel_id' => 'required|unique:personnels',
+            'loadCellID' => 'required|exists:weapons,loadCellID',
+            'nokartu' => 'required',
+            'nama' => 'required',
+            'pangkat' => 'required',
+            'nrp' => 'required',
+            'jabatan' => 'required',
+            'kesatuan' => 'required',
         ]);
-        return redirect()->route('webpage.personnel-add');
+
+        $personnel = Personnel::create($request->only([
+            'personnel_id',
+            'loadCellID',
+            'nokartu',
+            'nama',
+            'pangkat',
+            'nrp',
+            'jabatan',
+            'kesatuan',
+        ]));
+
+        return redirect()->route('personnel-add')->with('success', 'Data berhasil disimpan');
     }
 
     /**

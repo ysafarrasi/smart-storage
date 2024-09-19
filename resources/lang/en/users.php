@@ -62,4 +62,5 @@ return [
 	'Nomor Rak' => 'Rack Number',
 	'Aksi' => 'Action',
     'Filter' => 'Filter',
+		'Senjata' => 'Weapon',
 ];

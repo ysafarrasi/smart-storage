@@ -28,7 +28,9 @@ use App\Http\Controllers\APIPersonnelController;
 Route::post('/load-cell-data', [ArduinoController::class, 'postLoadCellData']);
 Route::post('/rfid-data', [ArduinoController::class, 'postRFIDData']);
 
-Route::get('/load-cell-data', [APIWeaponController::class, 'getDataWeapon']);
+Route::get('/weapons', [APIweaponController::class, 'getDataWeapon']);
+
+// Route::get('/load-cell-data', [APIWeaponController::class, 'getDataWeapon']);
 Route::get('/load-cell-data/{loadCellID}', [APIWeaponController::class, 'filterDataWeapon']);
 
 Route::get('/rfid-data', [APIPersonnelController::class, 'getDataRFID']);
@@ -36,3 +38,4 @@ Route::get('/rfid-data', [APIPersonnelController::class, 'getDataRFID']);
 Route::get('/data-from-arduino', [ArduinoController::class, 'getData']);
 
 Route::get('/personnel-data',  [APIPersonnelController::class, 'getPersonnel']);
+

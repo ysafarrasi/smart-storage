@@ -62,4 +62,5 @@ return [
 	'Nomor Rak' => 'Nomor Rak',
 	'Aksi' => 'Aksi',
     'Filter' => 'Urutkan Berdasarkan',
+	'Senjata' => 'Senjata'
 ];

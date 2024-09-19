@@ -46,11 +46,11 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('dashboard') }}">
                     <i class="bi bi-grid"></i>
-                    <span>{{__('users.dashboard')}}</span>
+                    <span>{{__('users.Dashboard')}}</span>
                 </a>
             </li><!-- End Dashboard Nav -->
 
-            <li class="nav-heading">{{__('users.halaman')}}</li>
+            <li class="nav-heading">{{__('users.Halaman')}}</li>
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('board') }}">
@@ -77,12 +77,12 @@
 
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>{{__('users.Papan Status Senjata.')}}</h1>
+            <h1>{{__('users.Papan Status Senjata')}}</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#"><i class="bi bi-house-door"></i></a></li>
-                    <li class="breadcrumb-item">{{__('users.halaman')}}</li>
-                    <li class="breadcrumb-item active">{{__('users.weapon data')}}</li>
+                    <li class="breadcrumb-item">{{__('users.Halaman')}}</li>
+                    <li class="breadcrumb-item active">{{__('users.Data Senjata')}}</li>
                 </ol>
             </nav>
         </div>
@@ -104,7 +104,7 @@
                             <ul class="nav nav-tabs nav-tabs-bordered">
                                 <li class="nav-item">
                                     <button class="nav-link active" data-bs-toggle="tab"
-                                        data-bs-target="#profile-overview">{{__('users.Weapon Status')}}</button>
+                                        data-bs-target="#profile-overview">{{__('users.Papan Status Senjata')}}</button>
                                 </li>
                             </ul>
 

@@ -45,11 +45,11 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('dashboard') }}">
                     <i class="bi bi-grid"></i>
-                    <span>{{__('users.dashboard')}}</span>
+                    <span>{{__('users.Dashboard')}}</span>
                 </a>
             </li><!-- End Dashboard Nav -->
 
-            <li class="nav-heading">{{__('users.halaman')}}</li>
+            <li class="nav-heading">{{__('users.Halaman')}}</li>
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('board') }}">
@@ -81,7 +81,7 @@
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="##"><i class="bi bi-house-door"></i></a></li>
-                    <li class="breadcrumb-item">{{__('users.halaman')}}</li>
+                    <li class="breadcrumb-item">{{__('users.Halaman')}}</li>
                     <li class="breadcrumb-item active">{{__('users.Data Pengguna')}}</li>
                 </ol>
             </nav>
@@ -107,13 +107,13 @@
                                         </li>
 
                                         <li><a class="dropdown-item" href="#">{{__('users.Hari ini')}}</a></li>
-                                        <li><a class="dropdown-item" href="#">{{__('users.Minggu ini')}}</a></li>
                                         <li><a class="dropdown-item" href="#">{{__('users.Bulan ini')}}</a></li>
+                                        <li><a class="dropdown-item" href="#">{{__('users.Tahun ini')}}</a></li>
                                     </ul>
                                 </div>
 
                                 <div class="card-body">
-                                    <h5 class="card-title">{{__('users.Data Pengguna')}} <span>| Hari ini</span></h5>
+                                    <h5 class="card-title">{{__('users.Data Pengguna')}} <span>{{__('users. | Hari ini')}}</span></h5>
 
                                     <table class="table table-borderless datatable">
                                         <thead>
@@ -121,34 +121,14 @@
                                                 <th scope="col">No</th>
                                                 <th scope="col">{{__('users.ID Senjata')}}</th>
                                                 <th scope="col">{{__('users.ID Pengguna')}}</th>
-                                                <th scope="col">{{__('users.Nama')}}</th>
+                                                <th scope="col">{{__('users.Nama Pengguna')}}</th>
                                                 <th scope="col">{{__('users.Pangkat')}}</th>
                                                 <th scope="col">{{__('users.NRP')}}</th>
                                                 <th scope="col">{{__('users.Jabatan')}}</th>
-                                                <th scope="col">{{__('users.Unit')}}</th>
+                                                <th scope="col">{{__('users.Kesatuan')}}</th>
                                                 <th scope="col">{{__('users.Aksi')}}</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="personnel-data">
-                                            @foreach ($personnels as $personnel)
-                                            <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $personnel->weapon_id }}</td>
-                                                <td>{{ $personnel->personnel_id }}</td>
-                                                <td>{{ $personnel->name }}</td>
-                                                <td>{{ $personnel->rank }}</td>
-                                                <td>{{ $personnel->nrp }}</td>
-                                                <td>{{ $personnel->position }}</td>
-                                                <td>{{ $personnel->unit }}</td>
-                                                <td>
-                                                    <a href="{{ route('personnel-edit', $personnel->personnel_id) }}"
-                                                        class="btn btn-primary">Edit</a>
-                                                    <a href="{{ route('personnel-delete', $personnel->personnel_id) }}"
-                                                        class="btn btn-danger">Hapus</a>
-                                                </td>
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
                                     </table>
                                     <a href="{{ route('personnel-add') }}">
                                         <button class="btn btn-primary">{{__('users.Tambah Data')}}</button>
