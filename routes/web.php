@@ -38,39 +38,39 @@ Route::middleware(['auth'])->group(function () {
   Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
-    Route::get('/dashboard', [DashboardController::class, 'index']);
-    Route::get('/dashboard', [DashboardController::class, 'showDATAHome'])->name('dashboard');
+  Route::get('/dashboard', [DashboardController::class, 'index']);
+  Route::get('/dashboard', [DashboardController::class, 'showDATAHome'])->name('dashboard');
 
-    Route::get('/board',  [BoardController::class, 'ShowDataBoard'])->name('board'); 
-    Route::get('/load-data', action: [BoardController::class, 'loadData'])->name('load-data');
+  Route::get('/board',  [BoardController::class, 'ShowDataBoard'])->name('board');
+  Route::get('/load-data', action: [BoardController::class, 'loadData'])->name('load-data');
 
-    Route::get('/weapon',  [WeaponController::class, 'index'])->name('weapon');
+  Route::get('/weapon',  [WeaponController::class, 'index'])->name('weapon');
 
-    Route::get('/personnel',  [PersonnelController::class, 'index'])->name('personnel');
-    Route::get('/personnel/add-personnel',  [PersonnelController::class, 'store'])->name('personnel-add');
+  Route::get('/personnel',  [PersonnelController::class, 'index'])->name('personnel');
+  Route::get('/personnel/add-personnel',  [PersonnelController::class, 'store'])->name('personnel-add');
   Route::get('/personnel/edit/{id}',  [PersonnelController::class, 'edit'])->name('personneledit');
   Route::post('/personnel/delete/{id}',  [PersonnelController::class, 'destroy'])->name('personnel-delete');
 
-    Route::get('/fetch-personnel', [PersonnelController::class, 'fetchPersonnel'])->name('fetch-personnel');
-    // Route::get('/personnel-add',  [PersonnelController::class, 'create'])->name('personnel-add');
+  Route::get('/fetch-personnel', [PersonnelController::class, 'fetchPersonnel'])->name('fetch-personnel');
+  // Route::get('/personnel-add',  [PersonnelController::class, 'create'])->name('personnel-add');
 
-    Route::match(['get', 'post'], '/search', [SearchController::class, 'index'])->name('search.index');
+  Route::match(['get', 'post'], '/search', [SearchController::class, 'index'])->name('search.index');
 });
 
 Route::get('setlocale/{locale}', function ($locale) {
   if (in_array($locale, ['en', 'id'])) {
-      session(['locale' => $locale]);
+    session(['locale' => $locale]);
   }
   return redirect()->back();
 })->name('setlocale');
 
 Route::get('setlocale/{locale?}', function ($locale = null) {
   if (!$locale) {
-      $locale = app()->getLocale(); // Detect the user's preferred language
+    $locale = app()->getLocale(); // Detect the user's preferred language
   }
 
   if (in_array($locale, ['en', 'id'])) {
-      session(['locale' => $locale]);
+    session(['locale' => $locale]);
   }
 
   return redirect()->back();

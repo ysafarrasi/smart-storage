@@ -9,11 +9,12 @@ use Illuminate\Http\Request;
 class WeaponController extends Controller
 {
 
-    public function index() {
+    public function index()
+    {
         $weapons = Weapon::all(); // Pastikan model Weapon sudah ada
         return view('weapon', compact('weapons')); // Kirim data ke view
     }
-    
+
 
     public function ShowDataWeapon()
     {
@@ -25,7 +26,4 @@ class WeaponController extends Controller
         $data = $contentArray['data'];
         return view('weapon', ['data' => $data]);
     }
-
-
 }
-
