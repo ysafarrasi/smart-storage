@@ -23,11 +23,5 @@ class LoginController extends Controller
         return redirect()->route('home')->withErrors(['Invalid credentials']);
     }
 
-    public function logout()
-    {
-        auth()->logout();
-
-        return redirect()->route('login');
-    }
 }
 

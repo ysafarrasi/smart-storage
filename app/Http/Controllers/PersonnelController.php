@@ -18,7 +18,9 @@ class PersonnelController extends Controller
      */
     public function index()
     {
-        return view('/personnel');
+        $personnel = Personnel::all();
+        $weapon = Weapon::select('loadCellID')->get();
+        return view('/personnel',compact('personnel'), compact('weapon'));
     }
 
     public function fetchPersonnel()
@@ -48,11 +50,11 @@ class PersonnelController extends Controller
         $response = $client->request('GET', $url);
         $content = $response->getBody()->getContents();
         $contentArray = json_decode($content, true);
-        $data = $contentArray['data'];
+        $data = $contentArray['data'] ?? [];
 
         $weapon = Weapon::select('loadCellID')->get();
 
-        return view('webpage.personnel-add', compact('data', 'weapon'));
+        return view('personnel', compact('data', 'weapon'));
     }
 
     /**
@@ -81,25 +83,34 @@ class PersonnelController extends Controller
             'jabatan',
             'kesatuan',
         ]));
+        
 
-        return redirect()->route('personnel-add')->with('success', 'Data berhasil disimpan');
+        return redirect()->route('personnel',compact($personnel))->with('success', 'Data berhasil disimpan', );
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $personnel = Personnel::find($id); // Misalnya mengambil data dari model Personnel
+        $weapon = Weapon::select('loadCellID')->get(); 
+        return view('webpage.personnel', compact('personnel'), compact('weapon'), );
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
+public function edit( $id)
+{
+    $personnel = Personnel::find($id); // Pastikan data ditemukan
+    $weapon = Weapon::select('loadCellID')->get(); 
+    if (!$personnel) {
+        abort(404); // Jika tidak ditemukan, tampilkan error 404
     }
+    return view('webpage.personnel-edit', compact('personnel'), compact('weapon'), );
+}
+
 
     /**
      * Update the specified resource in storage.
@@ -114,6 +125,13 @@ class PersonnelController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $personnel = Personnel::where('personnel_id', $id)->first();
+
+        if ($personnel) {
+            $personnel->delete();
+            return redirect()->route('personnel')->with('success', 'Data berhasil dihapus');
+        }
+
+        return redirect()->route('webpage.personnel-delete',compact($personnel))->with('error', 'Data tidak ditemukan');
     }
 }

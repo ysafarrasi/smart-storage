@@ -78,7 +78,7 @@
             <h1>{{__('users.Dashboard')}}</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('board') }}"><i class="bi bi-house-door"></i></a>
+                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i class="bi bi-house-door"></i></a>
                     </li>
                     <li class="breadcrumb-item active">{{__('users.Dashboard')}}</li>
                 </ol>
@@ -121,15 +121,47 @@
                                                 <th scope="col">No</th>
                                                 <th scope="col">{{__('users.ID Senjata')}}</th>
                                                 <th scope="col">{{__('users.ID Pengguna')}}</th>
-                                                <th scope="col">{{__('users.ID Senjata')}}</th>
+                                                <th scope="col">{{__('users.Nama Pengguna')}}</th>
                                                 <th scope="col">{{__('users.Tanggal')}}</th>
                                                 <th scope="col">{{__('users.Waktu Keluar')}}</th>
                                                 <th scope="col">{{__('users.Waktu Masuk')}}</th>
                                             </tr>
                                         </thead>
                                         <tbody id="dataTable">
-                                            
+                                            @foreach ($status as $LogActivity)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $LogActivity->loadCellID }}</td>
+                                                <td>{{ $LogActivity->personnel_id }}</td>
+                                                <td>{{ $LogActivity->nama }}</td>
+                                                <td>{{ $LogActivity->tanggal }}</td>
+                                                <td>{{ $LogActivity->waktu_keluar }}</td>
+                                                <td>{{ $LogActivity->waktu_masuk }}</td>
+                                            </tr>
+                                            @endforeach
                                         </tbody>
+                                        <script>
+                                            fetch("http://127.0.0.1:8000/api/")
+                                                .then(response => response.json())
+                                                .then(data => {
+                                                    let html = '';
+                                                    data.forEach(logActivity => {
+                                                        html += `
+                                                            <tr>
+                                                                <td>${logActivity.id}</td>
+                                                                <td>${logActivity.loadCellID}</td>
+                                                                <td>${logActivity.personnel_id}</td>
+                                                                <td>${logActivity.nama}</td>
+                                                                <td>${logActivity.tanggal}</td>
+                                                                <td>${logActivity.waktu_keluar}</td>
+                                                                <td>${logActivity.waktu_masuk}</td>
+                                                            </tr>
+                                                        `;
+                                                    });
+                                                    document.getElementById('dataTable').innerHTML = html;
+                                                })
+                                                .catch(error => console.error('Error:', error));
+                                        </script>
                                     </table>
                                 </div>
 

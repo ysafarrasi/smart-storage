@@ -20,6 +20,9 @@ class Weapon extends Model
         'status',
         'weight',
         'rackNumber',
-        'timestamp'
+        'timestamp',
+        
     ];
+
+    
 }

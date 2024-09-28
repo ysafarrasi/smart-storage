@@ -13,7 +13,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('/dashboard');
+        return view('dashboard');
     }
 
     public function showDATAHome()
@@ -25,7 +25,7 @@ class DashboardController extends Controller
             ->select('status.*', 'personnels.personnel_id', 'personnels.nama')
             ->get();
 
-        return view('/dashboard', compact('status'));
+        return view('dashboard', compact('status'));
     }
 
     public function LoadStatusHome()

@@ -25,11 +25,18 @@ use App\Http\Controllers\SearchController;
 // Route::post('/login', 'LoginController@login');
 // Route::get('/logout', 'LoginController@logout');
 
-Route::get('/home',  [LoginController::class, 'index'])->name('login');
+Route::get('/home',  [LoginController::class, 'index'])->name('index');
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
+
+
+
+
 Route::middleware(['auth'])->group(function () {
+
+  Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
 
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::get('/dashboard', [DashboardController::class, 'showDATAHome'])->name('dashboard');
@@ -41,6 +48,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/personnel',  [PersonnelController::class, 'index'])->name('personnel');
     Route::get('/personnel/add-personnel',  [PersonnelController::class, 'store'])->name('personnel-add');
+  Route::get('/personnel/edit/{id}',  [PersonnelController::class, 'edit'])->name('personneledit');
+  Route::post('/personnel/delete/{id}',  [PersonnelController::class, 'destroy'])->name('personnel-delete');
+
     Route::get('/fetch-personnel', [PersonnelController::class, 'fetchPersonnel'])->name('fetch-personnel');
     // Route::get('/personnel-add',  [PersonnelController::class, 'create'])->name('personnel-add');
 
@@ -65,6 +75,9 @@ Route::get('setlocale/{locale?}', function ($locale = null) {
 
   return redirect()->back();
 })->name('setlocale');
+
+
+
 
 // Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 // Route::get('/dashboard', [DashboardController::class, 'showDATAHome'])->middleware('auth')->name('dashboard');

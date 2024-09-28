@@ -70,4 +70,16 @@ class ArduinoController extends Controller
             ]);
         }
     }
+
+    
+    public function getData()
+    {
+        $data = Weapon::all();
+        return response()->json([
+            'code' => 200,
+            'message' => 'success',
+            'data' => $data
+        ]);
+    }
+    
 }

@@ -129,6 +129,36 @@
                                                 <th scope="col">{{__('users.Aksi')}}</th>
                                             </tr>
                                         </thead>
+                                        <tbody>
+                                            @foreach ($personnel as $personnel)
+                                                <tr>
+                                                    <th scope="row">{{ $loop->iteration }}</th>
+                                                    <td>{{ $weapon = DB::table('weapons')->where('loadCellID', $personnel->loadCellID)->value('loadCellID') }}</td>
+                                                    <td>{{ $personnel->personnel_id }}</td>
+                                                    <td>{{ $personnel->nama }}</td>
+                                                    <td>{{ $personnel->pangkat }}</td>
+                                                    <td>{{ $personnel->nrp }}</td>
+                                                    <td>{{ $personnel->jabatan }}</td>
+                                                    <td>{{ $personnel->kesatuan }}</td>
+                                                    <td>
+                                                        @if($personnel)
+                                                        <a href="{{ route('personneledit', $personnel->personnel_id) }}">
+                                                            <button class="btn btn-warning">{{__('users.Edit')}}</button>
+                                                        </a>
+                                                        @else
+                                                        <p>No personnel found</p>
+                                                        @endif
+                                                        
+                                                        <form action="{{ route('personnel-delete', $personnel->personnel_id) }}"
+                                                            method="POST" class="d-inline">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button class="btn btn-danger">{{__('users.Hapus')}}</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
                                     </table>
                                     <a href="{{ route('personnel-add') }}">
                                         <button class="btn btn-primary">{{__('users.Tambah Data')}}</button>

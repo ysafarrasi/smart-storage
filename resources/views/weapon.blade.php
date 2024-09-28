@@ -125,40 +125,16 @@
                                                 <th scope="col">{{__('users.Berat')}}</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="weapon-data">
-                                            <script>
-                                                document.addEventListener('DOMContentLoaded', function() {
-                                                    fetch('http://127.0.0.1:8000/api/weapons')
-                                                        .then(response => response.json())
-                                                        .then(result => {
-                                                            if(result.code === 200) {
-                                                                let data = result.data;
-                                                                let tableBody = document.getElementById('weapon-data');
-                                                                let rows = '';
-                                            
-                                                                data.forEach((weapon, index) => {
-                                                                    rows += `
-                                                                        <tr>
-                                                                            <td>${index + 1}</td>
-                                                                            <td>${weapon.id}</td>
-                                                                            <td>${weapon.rack_number}</td>
-                                                                            <td>${weapon.status}</td>
-                                                                            <td>${weapon.weight}</td>
-                                                                        </tr>
-                                                                    `;
-                                                                });
-                                            
-                                                                tableBody.innerHTML = rows;
-                                                            } else {
-                                                                console.error('Gagal mengambil data:', result.message);
-                                                            }
-                                                        })
-                                                        .catch(error => {
-                                                            console.error('Error:', error);
-                                                        });
-                                                });
-                                            </script>    
-                                            <!-- data here -->
+                                        <tbody id="#weapon-data">
+                                            @foreach ($weapons as $item)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $item->loadCellID }}</td>
+                                                <td>{{ $item->slaveNumber }}</td>
+                                                <td>{{ $item->status }}</td>
+                                                <td>{{ $item->weight }}</td>
+                                            </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -194,7 +170,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $.ajax({
-                url: '{{ route('load-data') }}',
+                url: 'http://127.0.0.1:8000/api/weapons',
                 type: 'GET',
                 success: function(data) {
                     var weaponData = $('#weapon-data');

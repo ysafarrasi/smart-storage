@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class APIWeaponController extends Controller
 {
-    public function getDataWeapon()
+    public function getDataWeapon(Request $request)
     {
         $weapon = Weapon::orderBy('loadCellID', 'asc')
             ->select('loadCellID', 'rackNumber', 'status', 'weight')

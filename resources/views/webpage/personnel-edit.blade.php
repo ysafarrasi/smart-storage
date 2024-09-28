@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, sshirink-to-fit=no">
-    <script type="text/javascript" src="jquery/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script type="text/javascript" src="{{ asset('jquery/jquery.min.js') }}"></script>
 
-    <title><?= __('Edit Data Personel - Penyimpanan Senjata Otomatis') ?></title>
+    <title>{{ __('Edit Data Personel - Penyimpanan Senjata Otomatis') }}</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="assets/img/stasrg1-modified.png" rel="icon">
+    <link href="{{ asset('assets/img/stasrg1-modified.png') }}" rel="icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -20,13 +20,13 @@
         rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
-    <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/quill/quill.snow.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
@@ -36,7 +36,7 @@
         $(document).ready(function() {
             setInterval(function() {
                 $("#norfid").load('nokartu.php')
-            }, 0); // pembacaan file no kartu sesuai detik karena 0 jadi refresh langsung muncul
+            }, 2); // pembacaan file no kartu sesuai detik karena 0 jadi refresh langsung muncul
         });
     </script>
 </head>
@@ -52,29 +52,29 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('dashboard') }}">
                     <i class="bi bi-grid"></i>
-                    <span><?= __('Dashboard') ?></span>
+                    <span>{{ __('Dashboard') }}</span>
                 </a>
             </li><!-- End Dashboard Nav -->
 
-            <li class="nav-heading"><?= __('Halaman') ?></li>
+            <li class="nav-heading">{{ __('Halaman') }}</li>
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('board') }}">
                     <i class="bi bi-clipboard"></i>
-                    <span><?= __('Papan Status Senjata') ?></span>
+                    <span>{{ __('Papan Status Senjata') }}</span>
                 </a>
             </li><!-- End Profile Page Nav -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('personnel') }}">
                     <i class="fa-solid fa-person-rifle"></i>
-                    <span><?= __('Data Pengguna') ?></span>
+                    <span>{{ __('Data Pengguna') }}</span>
                 </a>
             </li><!-- End Profile Page Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('weapon') }}">
                     <i class="fa-solid fa-gun"></i>>
-                    <span><?= __('Data Senjata') ?></span>
+                    <span>{{ __('Data Senjata') }}</span>
                 </a>
             </li><!-- End F.A.Q Page Nav -->
         </ul>
@@ -83,80 +83,81 @@
 
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1><?= __('Edit Data Personel') ?></h1>
+            <h1>{{ __('Edit Data Personel') }}</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><?= __('Dashboard') ?></a></li>
-                    <li class="breadcrumb-item"><?= __('Halaman') ?></li>
-                    <li class="breadcrumb-item"><a href="{{ route('personnel') }}"><?= __('Data Personel') ?></a></li>
-                    <li class="breadcrumb-item active"><?= __('Edit Data Personel') ?></li>
+                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{
+                            __('Dashboard') }}</a></li>
+                    <li class="breadcrumb-item">{{ __('Halaman') }}</li>
+                    <li class="breadcrumb-item"><a href="{{ route('personnel') }}">{{ __('Data Personel') }}</a>
+                    </li>
+                    <li class="breadcrumb-item active">{{ __('Edit Data Personel') }}</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
 
         <section class="section">
             <div class="row">
-                <div class="col">
+                <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title"><?= __('Edit Data Personel') ?></h5>
+                            <h5 class="card-title">{{ __('Edit Data Personel') }}</h5>
                             <!--Data Akses -->
-                            <form method="POST" action="/personnels//{{ $personnel->personnel_id }}"
+                            <form method="POST" action="{{ route('personnel')}} "
                                 class="row g-3 needs-validation">
-                                @method('PUT')
+                                @method('POST')
                                 @csrf
                                 <div id="norfid"></div>
 
                                 <div class="col-12">
-                                    <label class="col-sm-2 col-form-label"><?= __('ID Senjata') ?></label>
+                                    <label class="col-sm-2 col-form-label">{{ __('ID Senjata') }}</label>
                                     <div class="col">
-                                        <select class="form-select" aria-label="Default select example" name="weapon_id"
-                                            id="weapon" required>
-                                            <option value="{{ $personnel->weapon->weapon_id }}">
-                                                {{ $personnel->weapon->weapon_id }}</option>
+                                        <select class="form-select" name="loadCellID" id="loadCellID" required>
+                                            <option value="{{ $personnel->loadCellID }}">{{ $personnel->loadCellID }}</option>
+                                            @php
+                                                $weapon = DB::table('weapons')->distinct()->pluck('loadCellID');
+                                            @endphp
+
                                             @foreach ($weapon as $item)
-                                                <option value="{{ $item->weapon_id }}">{{ $item->weapon_id }}</option>
+                                                @if ($item != $personnel->loadCellID)
+                                                    <option value="{{ $item }}">{{ $item }}</option>
+                                                @endif
                                             @endforeach
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <label for="inputEmail" class="form-label"><?= __('ID Personnel') ?></label>
+                                    <label for="inputEmail" class="form-label">{{ __('ID Personnel') }}</label>
                                     <input type="text" class="form-control" name="personnel_id" id="personnel_id"
-                                        value="{{ $personnel->personnel_id }}" required>
+                                        value="{{ $personnel->personel_id }}" required>
                                 </div>
                                 <div class="col-12">
-                                    <label for="inputText" class="form-label"><?= __('Nama Pengguna') ?></label>
+                                    <label for="inputText" class="form-label">{{ __('Nama Pengguna') }}</label>
                                     <input type="text" class="form-control" name="name" id="name"
                                         value="{{ $personnel->name }}" required>
                                 </div>
                                 <div class="col-12">
-                                    <label for="inputText" class="form-label"><?= __('Pangkat') ?></label>
+                                    <label for="inputText" class="form-label">{{ __('Pangkat') }}</label>
                                     <input type="text" class="form-control" name="rank" id="rank"
                                         value="{{ $personnel->rank }}" required>
                                 </div>
                                 <div class="col-12">
-                                    <label for="inputNumber" class="form-label"><?= __('NRP') ?></label>
+                                    <label for="inputNumber" class="form-label">{{ __('NRP') }}</label>
                                     <input type="text" class="form-control" name="nrp" id="nrp"
                                         value="{{ $personnel->nrp }}" required>
                                 </div>
                                 <div class="col-12">
-                                    <label for="inputText" class="form-label"><?= __('Jabatan') ?></label>
+                                    <label for="inputText" class="form-label">{{ __('Jabatan') }}</label>
                                     <input type="text" class="form-control" name="position" id="position"
                                         value="{{ $personnel->position }}" required>
                                 </div>
                                 <div class="col-12">
-                                    <label for="inputText" class="form-label"><?= __('Kesatuan') ?></label>
+                                    <label for="inputText" class="form-label">{{ __('Kesatuan') }}</label>
                                     <input type="text" class="form-control" name="unit" id="unit"
                                         value="{{ $personnel->unit }}" required>
                                 </div>
-                                <div class="col-12">
-                                    <label for="inputText" class="form-label"><?= __('No. Beacukai') ?></label>
-                                    <input type="number" class="form-control" name="beacukai" id="beacukai"
-                                        value="{{ $personnel->beacukai }}" required>
-                                </div>
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary" name="btnSubmit"
-                                        id="btnSubmit"><?= __('Simpan') ?></button>
+                                    <button type="submit" class="btn btn-primary" name="btnSubmit"id="btnSubmit">{{ __('Simpan') }}</button>
                                     <button type="reset" class="btn btn-secondary">Reset</button>
                                 </div>
                             </form><!-- Vertical Form -->
@@ -188,3 +189,4 @@
 </body>
 
 </html>
+

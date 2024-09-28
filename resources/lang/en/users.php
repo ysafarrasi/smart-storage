@@ -61,6 +61,14 @@ return [
 	'Rak 6' => 'Rack 6',
 	'Nomor Rak' => 'Rack Number',
 	'Aksi' => 'Action',
-    'Filter' => 'Filter',
-		'Senjata' => 'Weapon',
+  'Filter' => 'Filter',
+	'Senjata' => 'Weapon',
+	'deskripsivideo' => 'A Peek into the Development of Prototype 2 of the Automation Weapon Rack',
+	'deskripsicard1' => 'input description 1',
+	'deskripsicard2' => 'input description 2',
+	'deskripsicard3' => 'input description 3',
+	'deskripsivideo2'=> 'input description video 2',
+	'deskripsivideo3'=> 'input description video 3',
+	'Edit' => 'Edit',
+	'Butuh Bantuan' => 'Need Help?'
 ];

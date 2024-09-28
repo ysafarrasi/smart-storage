@@ -10,6 +10,7 @@
     <meta name="keywords" content="{{ $metaKeywords ?? 'default, keywords' }}">
     <title>{{ $metaTitle ?? 'Default Title' }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    
 
     <!-- Favicons -->
     <link href="{{ asset('assets/img/Logo G - STAS RG.png') }}" rel="icon">
@@ -111,59 +112,7 @@
                             <div class="tab-content pt-2">
                                 <div class="row">
                                     <div class="row" id="rack-data">
-                                        <script>
-                                            $(document).ready(function() {
-                                                $.ajax({
-                                                    url: '{{ route('load-data') }}',
-                                                    type: 'GET',
-                                                    success: function(response) {
-                                                        var rackData = $('#rack-data');
-                                                        rackData.empty();
-                                                        response.forEach(function(rack) {
-                                                            var rackElement = $('<div>', {
-                                                                id: 'rack' + rack.rackNumber,
-                                                                class: 'col-lg-6'
-                                                            });
-                                                            var card = $('<div>', {
-                                                                class: 'card'
-                                                            });
-                                                            var cardBody = $('<div>', {
-                                                                class: 'card-body'
-                                                            });
-                                                            var cardTitle = $('<h5>', {
-                                                                class: 'card-title',
-                                                                text: 'Rack ' + rack.rackNumber
-                                                            });
-                                                            var senjataContainer = $('<div>', {
-                                                                id: 'senjata' + rack.loadCellID,
-                                                                class: 'container d-flex justify-content-evenly align-item-center'
-                                                            });
-
-                                                            // Menentukan warna LED berdasarkan status
-                                                            var ledGreen = $('<div>', {
-                                                                class: 'pill'
-                                                            }).append($('<div>', {
-                                                                class: 'led led-green' + (rack.status == '1' ? ' on' : '')
-                                                            }));
-                                                            var ledYellow = $('<div>', {
-                                                                class: 'pill'
-                                                            }).append($('<div>', {
-                                                                class: 'led led-yellow' + (rack.status == '2' ? ' on' : '')
-                                                            }));
-
-                                                            cardBody.append(cardTitle);
-                                                            cardBody.append(senjataContainer.append(ledGreen).append(ledYellow));
-                                                            card.append(cardBody);
-                                                            rackElement.append(card);
-                                                            rackData.append(rackElement);
-                                                        });
-                                                    },
-                                                    error: function(xhr, status, error) {
-                                                        console.error('AJAX Error: ' + status + error);
-                                                    }
-                                                });
-                                            });
-                                        </script>
+                                        <!-- Data akan ditampilkan di sini -->
                                     </div>
                                 </div>
                             </div>

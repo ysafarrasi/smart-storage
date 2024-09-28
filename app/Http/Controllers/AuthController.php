@@ -14,8 +14,8 @@ class AuthController extends Controller
     {
         // Validasi input name dan password
         $request->validate([
-            'name' => 'required',
-            'password' => 'required',
+            'name' => 'required|filled',
+            'password' => 'required|filled',
         ]);
 
         // Cek apakah user dengan name tersebut ada
@@ -35,4 +35,20 @@ class AuthController extends Controller
             'name' => 'Name atau password salah.',
         ])->withInput();
     }
+
+    public function logout(Request $request)    
+    {
+        // Logout user dan hapus session
+        Auth::logout();
+
+        // Hapus session yang sedang aktif
+        $request->session()->invalidate();
+
+        // Buat token session baru
+        $request->session()->regenerateToken();
+
+        // Redirect ke halaman login setelah logout berhasil
+        return redirect()->route('index');
+    }
+
 }

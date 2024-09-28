@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Weapon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,7 +12,7 @@ class Personnel extends Model
 
     public function weapon()
     {
-        return $this->hasOne(Weapon::class, 'loadCellID', 'loadCellID');
+        return $this->belongsTo(Weapon::class, 'LoadCellID', 'personnel_id');
     }
 
     protected $table = 'personnels';
@@ -21,7 +20,7 @@ class Personnel extends Model
 
     protected $fillable = [
         'personnel_id',
-        'loadCellID',
+        'weapon_id',
         'nokartu',
         'nama',
         'pangkat',
@@ -32,3 +31,4 @@ class Personnel extends Model
 
     protected $primaryKey = 'personnel_id';
 }
+

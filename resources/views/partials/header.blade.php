@@ -8,12 +8,7 @@
         <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
-    <div class="search-bar">
-        <form class="search-form d-flex align-items-center" method="get" action="{{ route('search.index') }}">
-            <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-            <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-        </form>
-    </div><!-- End Search Bar -->
+
 
     <nav class="header-nav ms-auto">
         <ul class="d-flex align-items-center">
@@ -49,6 +44,8 @@
             </li>
             <!-- Penutup translate -->
 
+            <span style="text-transform:lowercase; margin-right: 5px ">{{ Auth::user()->name }}</span>
+
             <li class="nav-item dropdown pe-3">
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                     <i class="bi bi-person-bounding-box"></i>
@@ -57,13 +54,6 @@
 
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-
-                    <li>
-                        <a class="dropdown-item d-flex align-items-center" href="users-profile.php">
-                            <i class="bi bi-person"></i>
-                            <span><?= __('Profil Saya') ?></span>
-                        </a>
-                    </li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
@@ -71,7 +61,7 @@
                     <li>
                         <a class="dropdown-item d-flex align-items-center" href="pages-contact.php">
                             <i class="bi bi-question-circle"></i>
-                            <span><?= __('Butuh bantuan?') ?></span>
+                            <span>{{__('users.Butuh Bantuan')}}</span>
                         </a>
                     </li>
                     <li>
@@ -79,9 +69,9 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="/logout">
+                        <a class="dropdown-item d-flex align-items-center" href="logout">
                             <i class="bi bi-box-arrow-right"></i>
-                            <span><?= __('Keluar') ?></span>
+                            <span>{{__('users.Keluar')}}</span>
                         </a>
                     </li>
 
