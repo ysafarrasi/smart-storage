@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Personnel;
+use GuzzleHttp\Client;
 use App\Models\Tmprfid;
+use App\Models\Personnel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Cache;
 
 class APIPersonnelController extends Controller
 {
@@ -24,17 +27,51 @@ class APIPersonnelController extends Controller
 
     public function getPersonnel()
     {
-        // Mengambil semua data personnels dari database
-        $personnels = Personnel::orderBy('personnel_id', 'asc')->get();
-
-        // Mengembalikan data dalam format JSON
-        return response()->json([
-            'code' => 200,
-            'message' => 'success',
-            'data' => $personnels,
-        ]);
+        try {
+            // Menggunakan caching dan pagination untuk mengurangi beban
+            $personnel = Cache::remember('personnel_data', 60, function () {
+                return Personnel::paginate(10);
+            });
+            return response()->json(['data' => $personnel], 200);
+        } catch (\Exception $e) {
+            Log::error('Error fetching personnel data: ' . $e->getMessage());
+            return response()->json(['error' => 'Failed to fetch personnel data'], 500);
+        }
     }
 
+    // public function postPersonnelData(Request $request)
+    // {
+    //     // Buat client Guzzle
+    //     $client = new Client();
+
+    //     // Buat request ke API `rfid-data`
+    //     $response = $client->get('http://localhost:8000/api/rfid-data');
+
+    //     // Ambil data dari response
+    //     $data = json_decode($response->getBody(), true);
+
+    //     // Ambil nokartu dari data
+    //     $nokartu = $data['data'][0]['nokartu']; // Sesuaikan dengan struktur data yang dikembalikan oleh API
+
+    //     // Simpan data ke database
+    //     $dataPersonnel = new Personnel();
+    //     $dataPersonnel->nokartu = $request->nokartu;
+    //     $dataPersonnel->loadCellID = $request->loadCellID;
+    //     $dataPersonnel->personnel_id = $request->personnel_id;
+    //     $dataPersonnel->nama = $request->nama;
+    //     $dataPersonnel->pangkat = $request->pangkat;
+    //     $dataPersonnel->nrp = $request->nrp;
+    //     $dataPersonnel->jabatan = $request->jabatan;
+    //     $dataPersonnel->kesatuan = $request->kesatuan;
+
+    //     $dataPersonnel->save();
+
+    //     return response()->json([
+    //         'code' => 200,
+    //         'message' => 'success',
+    //         'data' => $dataPersonnel
+    //     ]);
+    // }
     /**
      * Show the form for creating a new resource.
      */

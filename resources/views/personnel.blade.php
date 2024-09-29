@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script type="text/javascript" src="{{ asset('jquery/jquery.min.js') }}"></script>
 
-    <title>Personnel - {{__('users.Penyimpanan Senjata Otomatis')}} - Automation Weapon Rack</title>
+    <title>Personnel - {{ __('users.Penyimpanan Senjata Otomatis') }} - Automation Weapon Rack</title>
     <meta name="keywords" content="{{ $metaKeywords ?? 'default, keywords' }}">
     <title>{{ $metaTitle ?? 'Default Title' }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
@@ -45,29 +45,29 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('dashboard') }}">
                     <i class="bi bi-grid"></i>
-                    <span>{{__('users.Dashboard')}}</span>
+                    <span>{{ __('users.Dashboard') }}</span>
                 </a>
             </li><!-- End Dashboard Nav -->
 
-            <li class="nav-heading">{{__('users.Halaman')}}</li>
+            <li class="nav-heading">{{ __('users.Halaman') }}</li>
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('board') }}">
                     <i class="bi bi-clipboard"></i>
-                    <span>{{__('users.Papan Status Senjata')}}</span>
+                    <span>{{ __('users.Papan Status Senjata') }}</span>
                 </a>
             </li><!-- End Profile Page Nav -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('personnel') }}">
                     <i class="fa-solid fa-person-rifle"></i>
-                    <span>{{__('users.Data Pengguna')}}</span>
+                    <span>{{ __('users.Data Pengguna') }}</span>
                 </a>
             </li><!-- End Profile Page Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('weapon') }}">
                     <i class="fa-solid fa-gun"></i>
-                    <span>{{__('users.Data Senjata')}}</span>
+                    <span>{{ __('users.Data Senjata') }}</span>
                 </a>
             </li><!-- End F.A.Q Page Nav -->
         </ul>
@@ -77,12 +77,12 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>{{__('users.Data Pengguna')}}</h1>
+            <h1>{{ __('users.Data Pengguna') }}</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="##"><i class="bi bi-house-door"></i></a></li>
-                    <li class="breadcrumb-item">{{__('users.Halaman')}}</li>
-                    <li class="breadcrumb-item active">{{__('users.Data Pengguna')}}</li>
+                    <li class="breadcrumb-item">{{ __('users.Halaman') }}</li>
+                    <li class="breadcrumb-item active">{{ __('users.Data Pengguna') }}</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -103,37 +103,42 @@
                                             class="bi bi-three-dots"></i></a>
                                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                         <li class="dropdown-header text-start">
-                                            <h6>{{__('users.Filter')}}</h6>
+                                            <h6>{{ __('users.Filter') }}</h6>
                                         </li>
 
-                                        <li><a class="dropdown-item" href="#">{{__('users.Hari ini')}}</a></li>
-                                        <li><a class="dropdown-item" href="#">{{__('users.Bulan ini')}}</a></li>
-                                        <li><a class="dropdown-item" href="#">{{__('users.Tahun ini')}}</a></li>
+                                        <li><a class="dropdown-item" href="#">{{ __('users.Hari ini') }}</a></li>
+                                        <li><a class="dropdown-item" href="#">{{ __('users.Bulan ini') }}</a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="#">{{ __('users.Tahun ini') }}</a>
+                                        </li>
                                     </ul>
                                 </div>
 
                                 <div class="card-body">
-                                    <h5 class="card-title">{{__('users.Data Pengguna')}} <span>{{__('users. | Hari ini')}}</span></h5>
+                                    <h5 class="card-title">{{ __('users.Data Pengguna') }}
+                                        <span>{{ __('users. | Hari ini') }}</span>
+                                    </h5>
 
                                     <table class="table table-borderless datatable">
                                         <thead>
                                             <tr>
                                                 <th scope="col">No</th>
-                                                <th scope="col">{{__('users.ID Senjata')}}</th>
-                                                <th scope="col">{{__('users.ID Pengguna')}}</th>
-                                                <th scope="col">{{__('users.Nama Pengguna')}}</th>
-                                                <th scope="col">{{__('users.Pangkat')}}</th>
-                                                <th scope="col">{{__('users.NRP')}}</th>
-                                                <th scope="col">{{__('users.Jabatan')}}</th>
-                                                <th scope="col">{{__('users.Kesatuan')}}</th>
-                                                <th scope="col">{{__('users.Aksi')}}</th>
+                                                <th scope="col">{{ __('users.ID Senjata') }}</th>
+                                                <th scope="col">{{ __('users.ID Pengguna') }}</th>
+                                                <th scope="col">{{ __('users.Nama Pengguna') }}</th>
+                                                <th scope="col">{{ __('users.Pangkat') }}</th>
+                                                <th scope="col">{{ __('users.NRP') }}</th>
+                                                <th scope="col">{{ __('users.Jabatan') }}</th>
+                                                <th scope="col">{{ __('users.Kesatuan') }}</th>
+                                                <th scope="col">{{ __('users.Aksi') }}</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($personnel as $personnel)
                                                 <tr>
                                                     <th scope="row">{{ $loop->iteration }}</th>
-                                                    <td>{{ $weapon = DB::table('weapons')->where('loadCellID', $personnel->loadCellID)->value('loadCellID') }}</td>
+                                                    <td>{{ $weapon = DB::table('weapons')->where('loadCellID', $personnel->loadCellID)->value('loadCellID') }}
+                                                    </td>
                                                     <td>{{ $personnel->personnel_id }}</td>
                                                     <td>{{ $personnel->nama }}</td>
                                                     <td>{{ $personnel->pangkat }}</td>
@@ -141,19 +146,23 @@
                                                     <td>{{ $personnel->jabatan }}</td>
                                                     <td>{{ $personnel->kesatuan }}</td>
                                                     <td>
-                                                        @if($personnel)
-                                                        <a href="{{ route('personneledit', $personnel->personnel_id) }}">
-                                                            <button class="btn btn-warning">{{__('users.Edit')}}</button>
-                                                        </a>
+                                                        @if ($personnel)
+                                                            <a
+                                                                href="{{ route('personneledit', $personnel->personnel_id) }}">
+                                                                <button
+                                                                    class="btn btn-warning">{{ __('users.Edit') }}</button>
+                                                            </a>
                                                         @else
-                                                        <p>No personnel found</p>
+                                                            <p>No personnel found</p>
                                                         @endif
-                                                        
-                                                        <form action="{{ route('personnel-delete', $personnel->personnel_id) }}"
+
+                                                        <form
+                                                            action="{{ route('personnel-delete', $personnel->personnel_id) }}"
                                                             method="POST" class="d-inline">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button class="btn btn-danger">{{__('users.Hapus')}}</button>
+                                                            <button
+                                                                class="btn btn-danger">{{ __('users.Hapus') }}</button>
                                                         </form>
                                                     </td>
                                                 </tr>
@@ -161,7 +170,7 @@
                                         </tbody>
                                     </table>
                                     <a href="{{ route('personnel-add') }}">
-                                        <button class="btn btn-primary">{{__('users.Tambah Data')}}</button>
+                                        <button class="btn btn-primary">{{ __('users.Tambah Data') }}</button>
                                     </a>
                                 </div>
 
@@ -193,39 +202,7 @@
 
     <!-- Template Main JS File -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
-
-    <script>
-        $(document).ready(function() {
-            fetchPersonnel();
-
-            function fetchPersonnel() {
-                $.ajax({
-                    url: '{{ url('fetch-personnel') }}',
-                    method: 'GET',
-                    dataType: 'json',
-                    success: function(data) {
-                        var tbody = '';
-                        $.each(data, function(index, personnel) {
-                            tbody += '<tr>';
-                            tbody += '<td>' + (index + 1) + '</td>';
-                            tbody += '<td>' + personnel.loadCellID + '</td>';
-                            tbody += '<td>' + personnel.personnel_id + '</td>';
-                            tbody += '<td>' + personnel.nama + '</td>';
-                            tbody += '<td>' + personnel.pangkat + '</td>';
-                            tbody += '<td>' + personnel.nrp + '</td>';
-                            tbody += '<td>' + personnel.jabatan + '</td>';
-                            tbody += '<td>' + personnel.kesatuan + '</td>';
-                            tbody += '<td><a href="edit/' + personnel.loadCellID +
-                                '">Edit</a> | <a href="hapus/' + personnel.loadCellID +
-                                '">Hapus</a></td>';
-                            tbody += '</tr>';
-                        });
-                        $('#personnel-data').html(tbody);
-                    }
-                });
-            }
-        });
-    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </body>
 

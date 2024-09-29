@@ -30,7 +30,7 @@ Route::post('rfid-data', [ArduinoController::class, 'postRFIDData']);
 
 Route::get('weapons', [APIweaponController::class, 'getDataWeapon']);
 
-Route::get('/load-cell-data', [APIWeaponController::class, 'getDataWeapon']);
+Route::get('load-cell-data', [APIWeaponController::class, 'getDataWeapon']);
 Route::get('load-cell-data/{loadCellID}', [APIWeaponController::class, 'filterDataWeapon']);
 
 Route::get('rfid-data', [APIPersonnelController::class, 'getDataRFID']);

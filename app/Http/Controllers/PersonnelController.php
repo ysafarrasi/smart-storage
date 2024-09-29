@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Log;
 use App\Models\Weapon;
-use App\Models\Tmprfid;
 use GuzzleHttp\Client;
+use App\Models\Tmprfid;
 use App\Models\Personnel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -20,25 +21,21 @@ class PersonnelController extends Controller
     {
         $personnel = Personnel::all();
         $weapon = Weapon::select('loadCellID')->get();
-        return view('/personnel',compact('personnel'), compact('weapon'));
+        return view('/personnel', compact('personnel'), compact('weapon'));
     }
 
     public function fetchPersonnel()
     {
-        $response = Http::get('http://localhost:8000/api/personnel-data');
+        try {
+            $response = Http::get('http://localhost:8000/api/personnel-data');
+            $data = $response->json()['data'] ?? [];
 
-        // Jika ada masalah dengan response, atau API tidak berhasil diakses
-        if ($response->failed()) {
-            return response()->json(['message' => 'Failed to retrieve personnel data'], 500);
+            return response()->json($data);
+        } catch (\Exception $e) {
+            Log::error('Error fetching personnel data: ' . $e->getMessage());
+            return response()->json(['error' => 'Failed to fetch personnel data'], 500);
         }
-
-        // Ambil data personnel
-        $data = $response->json()['data'] ?? [];
-
-        // Mengembalikan data sebagai JSON response
-        return response()->json($data);
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -50,11 +47,11 @@ class PersonnelController extends Controller
         $response = $client->request('GET', $url);
         $content = $response->getBody()->getContents();
         $contentArray = json_decode($content, true);
-        $data = $contentArray['data'] ?? [];
+        $data = $contentArray['data'];
 
         $weapon = Weapon::select('loadCellID')->get();
 
-        return view('personnel', compact('data', 'weapon'));
+        return view('webpage.personnel-add', compact('data', 'weapon'));
     }
 
     /**
@@ -62,31 +59,55 @@ class PersonnelController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'personnel_id' => 'required|unique:personnels',
-            'loadCellID' => 'required|exists:weapons,loadCellID',
-            'nokartu' => 'required',
-            'nama' => 'required',
-            'pangkat' => 'required',
-            'nrp' => 'required',
-            'jabatan' => 'required',
-            'kesatuan' => 'required',
-        ]);
-
-        $personnel = Personnel::create($request->only([
-            'personnel_id',
-            'loadCellID',
-            'nokartu',
-            'nama',
-            'pangkat',
-            'nrp',
-            'jabatan',
-            'kesatuan',
-        ]));
-        
-
-        return redirect()->route('personnel',compact($personnel))->with('success', 'Data berhasil disimpan', );
+        // menggunakan mass assignment
+        $personnel = Personnel::create($request->all());
+        return redirect()->route('personnel');
     }
+
+    // /**
+    //  * Store a newly created resource in storage.
+    //  */
+    // public function store(Request $request)
+    // {
+    //     $nokartu = $request->nokartu;
+    //     $loadCellID = $request->loadCellID;
+    //     $personnel_id = $request->personnel_id;
+    //     $nama = $request->nama;
+    //     $pangkat = $request->pangkat;
+    //     $nrp = $request->nrp;
+    //     $jabatan = $request->jabatan;
+    //     $kesatuan = $request->kesatuan;
+
+    //     $parameter = [
+    //         'nokartu' => $nokartu,
+    //         'loadCellID' => $loadCellID,
+    //         'personnel_id' => $personnel_id,
+    //         'nama' => $nama,
+    //         'pangkat' => $pangkat,
+    //         'nrp' => $nrp,
+    //         'jabatan' => $jabatan,
+    //         'kesatuan' => $kesatuan
+    //     ];
+
+    //     $client = new Client();
+    //     $url = "http://localhost:8000/api/personnel-data";
+    //     $response = $client->request('POST', $url, [
+    //         'headers' => [
+    //             'Content-Type' => 'application/json'
+    //         ],
+    //         'body' => json_encode($parameter)
+    //     ]);
+    //     $content = $response->getBody()->getContents();
+    //     $contentArray = json_decode($content, true);
+    //     if ($contentArray['success'] == true) {
+    //         $error = $contentArray['data'];
+    //         return redirect()->to('personnel-add')->with('error', $error);
+    //     }
+
+    //     return redirect()->route('personnel');
+
+    //     // print_r($data);
+    // }
 
     /**
      * Display the specified resource.
@@ -94,22 +115,22 @@ class PersonnelController extends Controller
     public function show($id)
     {
         $personnel = Personnel::find($id); // Misalnya mengambil data dari model Personnel
-        $weapon = Weapon::select('loadCellID')->get(); 
-        return view('webpage.personnel', compact('personnel'), compact('weapon'), );
+        $weapon = Weapon::select('loadCellID')->get();
+        return view('webpage.personnel', compact('personnel'), compact('weapon'),);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-public function edit( $id)
-{
-    $personnel = Personnel::find($id); // Pastikan data ditemukan
-    $weapon = Weapon::select('loadCellID')->get(); 
-    if (!$personnel) {
-        abort(404); // Jika tidak ditemukan, tampilkan error 404
+    public function edit($id)
+    {
+        $personnel = Personnel::find($id); // Pastikan data ditemukan
+        $weapon = Weapon::select('loadCellID')->get();
+        if (!$personnel) {
+            abort(404); // Jika tidak ditemukan, tampilkan error 404
+        }
+        return view('webpage.personnel-edit', compact('personnel'), compact('weapon'),);
     }
-    return view('webpage.personnel-edit', compact('personnel'), compact('weapon'), );
-}
 
 
     /**
@@ -132,6 +153,6 @@ public function edit( $id)
             return redirect()->route('personnel')->with('success', 'Data berhasil dihapus');
         }
 
-        return redirect()->route('webpage.personnel-delete',compact($personnel))->with('error', 'Data tidak ditemukan');
+        return redirect()->route('webpage.personnel-delete', compact($personnel))->with('error', 'Data tidak ditemukan');
     }
 }

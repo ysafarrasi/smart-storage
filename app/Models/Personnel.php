@@ -12,7 +12,7 @@ class Personnel extends Model
 
     public function weapon()
     {
-        return $this->belongsTo(Weapon::class, 'LoadCellID', 'personnel_id');
+        return $this->belongsTo(Weapon::class, 'loadCellID', 'personnel_id');
     }
 
     protected $table = 'personnels';
@@ -20,7 +20,7 @@ class Personnel extends Model
 
     protected $fillable = [
         'personnel_id',
-        'weapon_id',
+        'loadCellID',
         'nokartu',
         'nama',
         'pangkat',
@@ -31,4 +31,3 @@ class Personnel extends Model
 
     protected $primaryKey = 'personnel_id';
 }
-

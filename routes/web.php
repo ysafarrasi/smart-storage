@@ -29,10 +29,6 @@ Route::get('/home',  [LoginController::class, 'index'])->name('index');
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
-
-
-
-
 Route::middleware(['auth'])->group(function () {
 
   Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -47,12 +43,13 @@ Route::middleware(['auth'])->group(function () {
   Route::get('/weapon',  [WeaponController::class, 'index'])->name('weapon');
 
   Route::get('/personnel',  [PersonnelController::class, 'index'])->name('personnel');
-  Route::get('/personnel/add-personnel',  [PersonnelController::class, 'store'])->name('personnel-add');
+  Route::get('/personnel/add-personnel',  [PersonnelController::class, 'create'])->name('personnel-add');
+  Route::post('/personnel',  [PersonnelController::class, 'store']);
+
   Route::get('/personnel/edit/{id}',  [PersonnelController::class, 'edit'])->name('personneledit');
   Route::post('/personnel/delete/{id}',  [PersonnelController::class, 'destroy'])->name('personnel-delete');
 
   Route::get('/fetch-personnel', [PersonnelController::class, 'fetchPersonnel'])->name('fetch-personnel');
-  // Route::get('/personnel-add',  [PersonnelController::class, 'create'])->name('personnel-add');
 
   Route::match(['get', 'post'], '/search', [SearchController::class, 'index'])->name('search.index');
 });
@@ -74,7 +71,7 @@ Route::get('setlocale/{locale?}', function ($locale = null) {
   }
 
   return redirect()->back();
-})->name('setlocale');
+})->name('setlocale.optional');
 
 
 

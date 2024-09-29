@@ -44,29 +44,29 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('dashboard') }}">
                     <i class="bi bi-grid"></i>
-                    <span>{{__('users.Dashboard')}}</span>
+                    <span>{{ __('users.Dashboard') }}</span>
                 </a>
             </li><!-- End Dashboard Nav -->
 
-            <li class="nav-heading">{{__('users.Halaman')}}</li>
+            <li class="nav-heading">{{ __('users.Halaman') }}</li>
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('board') }}">
                     <i class="bi bi-clipboard"></i>
-                    <span>{{__('users.Papan Status Senjata')}}</span>
+                    <span>{{ __('users.Papan Status Senjata') }}</span>
                 </a>
             </li><!-- End Profile Page Nav -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('personnel') }}">
                     <i class="fa-solid fa-person-rifle"></i>
-                    <span>{{__('users.Data Pengguna')}}</span>
+                    <span>{{ __('users.Data Pengguna') }}</span>
                 </a>
             </li><!-- End Profile Page Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('weapon') }}">
                     <i class="fa-solid fa-gun"></i>
-                    <span>{{__('users.Data Senjata')}}</span>
+                    <span>{{ __('users.Data Senjata') }}</span>
                 </a>
             </li><!-- End F.A.Q Page Nav -->
         </ul>
@@ -75,13 +75,15 @@
 
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>{{__('users.Tambah Data Pengguna')}}</h1>
+            <h1>{{ __('users.Tambah Data Pengguna') }}</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{__('users.Dashboard')}}</a></li>
-                    <li class="breadcrumb-item">{{__('users.Halaman')}}</li>
-                    <li class="breadcrumb-item"><a href="{{ route('personnel')}}">{{__('users.Data Pengguna')}}</a></li>
-                    <li class="breadcrumb-item active">{{__('users.Tambah Data Pengguna')}}</li>
+                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">{{ __('users.Dashboard') }}</a>
+                    </li>
+                    <li class="breadcrumb-item">{{ __('users.Halaman') }}</li>
+                    <li class="breadcrumb-item"><a href="{{ route('personnel') }}">{{ __('users.Data Pengguna') }}</a>
+                    </li>
+                    <li class="breadcrumb-item active">{{ __('users.Tambah Data Pengguna') }}</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -91,7 +93,18 @@
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">{{__('users.Tambah Data Pengguna')}}</h5>
+                            <h5 class="card-title">{{ __('users.Tambah Data Pengguna') }}</h5>
+
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $item)
+                                            <li>{{ $item }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+
+                            @endif
                             <!--Data Akses -->
                             <form method="POST" action="{{ route('personnel') }}" class="row g-3 needs-validation">
                                 @csrf
@@ -106,12 +119,13 @@
                                         placeholder="Tempelkan Kartu RFID" class="form-control"
                                         value="{{ $nokartu }}" required>
                                 </div>
+
                                 <div class="col-12">
                                     <label class="col-sm-2 col-form-label">{{ __('ID Senjata') }}</label>
                                     <div class="col">
                                         <select class="form-select" aria-label="Default select example"
                                             name="loadCellID" id="loadCellID" required>
-                                            <option value="">{{ __('users.Load Cell') }}</option>
+                                            <option value="">Buka Pilihan Ini</option>
 
                                             @php
                                                 // Mengambil id_senjata yang unik dari model Tmploadcell
@@ -127,7 +141,8 @@
                                                 @endphp
 
                                                 @if (!$isUsed)
-                                                    <option value="{{ $item }}">{{ $item }}</option>
+                                                    <option value="{{ $item }}">{{ $item }}
+                                                    </option>
                                                 @endif
                                                 {{-- <option value="{{ $item->loadCellID }}">{{ $item->loadCellID }}</option> --}}
                                             @endforeach
@@ -142,7 +157,8 @@
                                 </div>
                                 <div class="col-12">
                                     <label for="inputText" class="form-label">{{ __('Nama Pengguna') }}</label>
-                                    <input type="text" class="form-control" name="nama" id="nama" required>
+                                    <input type="text" class="form-control" name="nama" id="nama"
+                                        required>
                                 </div>
                                 <div class="col-12">
                                     <label for="inputText" class="form-label">{{ __('Pangkat') }}</label>
@@ -199,4 +215,3 @@
 </body>
 
 </html>
-

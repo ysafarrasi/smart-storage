@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, sshirink-to-fit=no">
     <script type="text/javascript" src="{{ asset('jquery/jquery.min.js') }}jquery/jquery.min.js"></script>
 
-    <title>{{__('users.Penyimpanan Senjata Otomatis')}} - Automation Weapon Rack</title>
+    <title>{{ __('users.Penyimpanan Senjata Otomatis') }} - Automation Weapon Rack</title>
     <meta name="keywords" content="{{ $metaKeywords ?? 'default, keywords' }}">
     <title>{{ $metaTitle ?? 'Default Title' }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    
+
 
     <!-- Favicons -->
     <link href="{{ asset('assets/img/Logo G - STAS RG.png') }}" rel="icon">
@@ -33,7 +33,6 @@
     <!-- Main CSS -->
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
 
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 
 <body>
@@ -47,29 +46,29 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('dashboard') }}">
                     <i class="bi bi-grid"></i>
-                    <span>{{__('users.Dashboard')}}</span>
+                    <span>{{ __('users.Dashboard') }}</span>
                 </a>
             </li><!-- End Dashboard Nav -->
 
-            <li class="nav-heading">{{__('users.Halaman')}}</li>
+            <li class="nav-heading">{{ __('users.Halaman') }}</li>
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('board') }}">
                     <i class="bi bi-clipboard"></i>
-                    <span>{{__('users.Papan Status Senjata')}}</span>
+                    <span>{{ __('users.Papan Status Senjata') }}</span>
                 </a>
             </li><!-- End Profile Page Nav -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('personnel') }}">
                     <i class="fa-solid fa-person-rifle"></i>
-                    <span>{{__('users.Data Pengguna')}}</span>
+                    <span>{{ __('users.Data Pengguna') }}</span>
                 </a>
             </li><!-- End Profile Page Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('weapon') }}">
                     <i class="fa-solid fa-gun"></i>
-                    <span>{{__('users.Data Senjata')}}</span>
+                    <span>{{ __('users.Data Senjata') }}</span>
                 </a>
             </li><!-- End F.A.Q Page Nav -->
         </ul>
@@ -78,12 +77,12 @@
 
     <main id="main" class="main">
         <div class="pagetitle">
-            <h1>{{__('users.Papan Status Senjata')}}</h1>
+            <h1>{{ __('users.Papan Status Senjata') }}</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#"><i class="bi bi-house-door"></i></a></li>
-                    <li class="breadcrumb-item">{{__('users.Halaman')}}</li>
-                    <li class="breadcrumb-item active">{{__('users.Data Senjata')}}</li>
+                    <li class="breadcrumb-item">{{ __('users.Halaman') }}</li>
+                    <li class="breadcrumb-item active">{{ __('users.Data Senjata') }}</li>
                 </ol>
             </nav>
         </div>
@@ -105,7 +104,7 @@
                             <ul class="nav nav-tabs nav-tabs-bordered">
                                 <li class="nav-item">
                                     <button class="nav-link active" data-bs-toggle="tab"
-                                        data-bs-target="#profile-overview">{{__('users.Papan Status Senjata')}}</button>
+                                        data-bs-target="#profile-overview">{{ __('users.Papan Status Senjata') }}</button>
                                 </li>
                             </ul>
 
@@ -130,6 +129,7 @@
     <!-- Main JS -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script>
         $(document).ready(function() {
             // Fungsi untuk memuat data secara real-time
