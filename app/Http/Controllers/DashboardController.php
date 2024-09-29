@@ -13,7 +13,42 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('dashboard');
+        $loadCells = Weapon::all();
+        $statuses = [];
+
+        foreach ($loadCells as $loadCell) {
+            // Menggunakan null coalescing operator untuk memberikan nilai default jika $loadCell null
+            $statusAbsen = $loadCell->status ?? null;
+            $loadCellID = $loadCell->loadCellID ?? null;
+
+            if ($loadCellID) {
+                $owner = Personnel::where('loadCellID', $loadCellID)->first();
+
+                if ($owner) {
+                    $nama = $owner->nama_pengguna ?? 'Unknown';
+                    $tanggal = Carbon::now('Asia/Jakarta')->format('Y-m-d');
+                    $jam = Carbon::now('Asia/Jakarta')->format('H:i:s');
+                    $status = Status::where('loadCellID', $loadCellID)->where('tanggal', $tanggal)->first();
+
+                    if ($statusAbsen == -1 && !$status) {
+                        Status::create([
+                            'loadCellID' => $loadCellID,
+                            'tanggal' => $tanggal,
+                            'time_out' => $jam,
+                        ]);
+                    } elseif ($statusAbsen == 1 && $status) {
+                        $status->update([
+                            'time_in' => $jam,
+                            'duration' => gmdate('H:i:s', Carbon::parse($jam, 'Asia/Jakarta')->diffInSeconds(Carbon::parse($status->time_out, 'Asia/Jakarta'))),
+                        ]);
+                    }
+
+                    $statuses[] = $status;
+                }
+            }
+        }
+
+        return view('dashboard', compact('statuses'));
     }
 
     public function showDATAHome()

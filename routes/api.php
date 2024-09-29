@@ -38,3 +38,7 @@ Route::get('rfid-data', [APIPersonnelController::class, 'getDataRFID']);
 Route::get('data-from-arduino', [ArduinoController::class, 'getData']);
 
 Route::get('personnel-data',  [APIPersonnelController::class, 'getPersonnel']);
+
+Route::resource('dashboard', APIDashboardController::class, [
+    'only' => ['index', 'show']
+]);

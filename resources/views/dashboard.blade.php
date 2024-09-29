@@ -129,41 +129,19 @@
                                                 <th scope="col">{{ __('users.Waktu Masuk') }}</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="dataTable">
-                                            @foreach ($status as $LogActivity)
+                                        <tbody>
+                                            @foreach ($statuses as $index => $status)
                                                 <tr>
-                                                    <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $LogActivity->loadCellID }}</td>
-                                                    <td>{{ $LogActivity->personnel_id }}</td>
-                                                    <td>{{ $LogActivity->nama }}</td>
-                                                    <td>{{ $LogActivity->tanggal }}</td>
-                                                    <td>{{ $LogActivity->waktu_keluar }}</td>
-                                                    <td>{{ $LogActivity->waktu_masuk }}</td>
+                                                    <td>{{ $index + 1 }}</td>
+                                                    <td>{{ $status->loadCellID }}</td>
+                                                    <td>{{ $status->personnel->personnel_id }}</td>
+                                                    <td>{{ $status->personnel->nama }}</td>
+                                                    <td>{{ $status->tanggal }}</td>
+                                                    <td>{{ $status->time_out }}</td>
+                                                    <td>{{ $status->time_in }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
-                                        <script>
-                                            fetch("http://127.0.0.1:8000/api/")
-                                                .then(response => response.json())
-                                                .then(data => {
-                                                    let html = '';
-                                                    data.forEach(logActivity => {
-                                                        html += `
-                                                            <tr>
-                                                                <td>${logActivity.id}</td>
-                                                                <td>${logActivity.loadCellID}</td>
-                                                                <td>${logActivity.personnel_id}</td>
-                                                                <td>${logActivity.nama}</td>
-                                                                <td>${logActivity.tanggal}</td>
-                                                                <td>${logActivity.waktu_keluar}</td>
-                                                                <td>${logActivity.waktu_masuk}</td>
-                                                            </tr>
-                                                        `;
-                                                    });
-                                                    document.getElementById('dataTable').innerHTML = html;
-                                                })
-                                                .catch(error => console.error('Error:', error));
-                                        </script>
                                     </table>
                                 </div>
 
@@ -197,6 +175,46 @@
 
     <!-- Template Main JS File -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
+
+    {{-- <script>
+        $.ajax({
+            url: "http://localhost:8000/api/dashboard/show",
+            method: "GET",
+            success: function(data) {
+                // Assuming the response is an object with keys 'code', 'message', and 'data'
+                var code = data.code;
+                var message = data.message;
+                var datas = data.data;
+
+                // Now you can use the variables code, message, and datas in your code
+                console.log(code, message, datas);
+
+                // Assuming you have a table with id 'dataTable' in your HTML
+                var dataTable = $('#dataTable');
+
+                // Clear the table
+                dataTable.empty();
+
+                // Loop through the datas and append to the table
+                $.each(datas, function(index, item) {
+                    // console.log(item);
+                    dataTable.append('<tr>' +
+                        '<td>' + (index + 1) + '</td>' +
+                        '<td>' + item.id_senjata + '</td>' +
+                        '<td>' + item.id_pengguna + '</td>' +
+                        '<td>' + item.nama_pengguna + '</td>' +
+                        '<td>' + item.tanggal + '</td>' +
+                        '<td>' + item.keluar + '</td>' +
+                        '<td>' + item.masuk + '</td>' +
+                        '</tr>');
+                });
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                // Handle error response
+                console.log("Error: ", textStatus, errorThrown);
+            }
+        });
+    </script> --}}
 
 </body>
 

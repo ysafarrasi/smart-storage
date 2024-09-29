@@ -185,7 +185,7 @@
                         var ledRed = $('<div>', {
                             class: 'pill'
                         }).append($('<div>', {
-                            class: 'led led-red' + (rackData.status == '0' ? ' on' : '')
+                            class: 'led led-red' + (rackData.status == '-1' ? ' on' : '')
                         }));
 
                         senjataContainer.append(ledGreen, ledYellow, ledRed);

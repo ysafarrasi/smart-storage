@@ -10,6 +10,7 @@ class Status extends Model
     use HasFactory;
     protected $table = 'status';
     public $timestamps = false; // jika tidak menggunakan timestamps
+    protected $primaryKey = 'loadCellID';
 
     protected $fillable = [
         'loadCellID',
