@@ -33,9 +33,8 @@ Route::middleware(['auth'])->group(function () {
 
   Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-
-  // Route::get('/dashboard', [DashboardController::class, 'index']);
   Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+  Route::get('/api/dashboard', [DashboardController::class, 'getDashboard']);
 
   Route::get('/board',  [BoardController::class, 'ShowDataBoard'])->name('board');
   Route::get('/load-data', action: [BoardController::class, 'loadData'])->name('load-data');
