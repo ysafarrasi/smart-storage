@@ -179,11 +179,12 @@
     <script>
         $(document).ready(function() {
             function fetchStatuses() {
+                console.log("Fetching statuses..."); // Log untuk memastikan fungsi dipanggil
                 $.ajax({
                     url: "{{ url('/api/dashboard') }}",
                     method: "GET",
                     success: function(data) {
-                        console.log(data); // Tambahkan log ini untuk melihat data yang diterima
+                        console.log("Data received: ", data); // Log untuk melihat data yang diterima
                         var dataTable = $('#status-data');
                         dataTable.empty();
 
@@ -211,7 +212,7 @@
             fetchStatuses();
 
             // Fetch statuses every 30 seconds
-            setInterval(fetchStatuses, 5000);
+            setInterval(fetchStatuses, 5000); // 30 seconds
         });
     </script>
 
