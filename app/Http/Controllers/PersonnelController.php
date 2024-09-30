@@ -27,7 +27,7 @@ class PersonnelController extends Controller
     public function fetchPersonnel()
     {
         try {
-            $response = Http::get('http://localhost:8000/api/personnel-data');
+            $response = Http::get('http://192.168.1.10:8000/api/personnel-data');
             $data = $response->json()['data'] ?? [];
 
             return response()->json($data);
@@ -43,7 +43,7 @@ class PersonnelController extends Controller
     public function create()
     {
         $client = new Client();
-        $url = "http://localhost:8000/api/rfid-data";
+        $url = "http://127.0.0.1:8000/api/rfid-data";
         $response = $client->request('GET', $url);
         $content = $response->getBody()->getContents();
         $contentArray = json_decode($content, true);
