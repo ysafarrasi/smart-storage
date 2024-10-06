@@ -70,6 +70,13 @@
                     <span>{{ __('users.Data Senjata') }}</span>
                 </a>
             </li><!-- End F.A.Q Page Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ route('daftaradmin.index') }}">
+                    <i class="fa-solid fa-user-shield"></i>
+                    <span>{{ __('users.DaftarkanAdmin') }}</span>
+                </a>
+            </li><!-- End F.A.Q Page Nav -->
         </ul>
 
     </aside><!-- End Sidebar-->
@@ -150,8 +157,6 @@
         </section>
 
     </main><!-- End #main -->
-
-    @include('partials.footer')
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
 

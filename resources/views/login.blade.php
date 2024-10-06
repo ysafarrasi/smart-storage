@@ -24,6 +24,8 @@
     <link rel="manifest" href="/docs/5.3/assets/img/favicons/manifest.json">
     <link rel="mask-icon" href="/docs/5.3/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
     <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon.ico">
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
     <meta name="theme-color" content="#712cf9">
 
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
@@ -234,18 +236,18 @@
                                     <button type="button" data-bs-target="#carouselExampleIndicators1"
                                         data-bs-slide-to="2" aria-label="Slide 3"></button>
                                 </div>
-                                <div class="carousel-inner">
+                                <div class="carousel-inner rounded-top">
                                     <div class="carousel-item active">
                                         <img src="assets/img/Slide 1 Card 1.jpg" class="d-block w-100" alt="..."
-                                            width="100%" height="240">
+                                            style="object-fit: cover; height: 250px; width: 350px;">
                                     </div>
                                     <div class="carousel-item">
                                         <img src="assets/img/Slide 2 Card 1.jpg" class="d-block w-100" alt="..."
-                                            width="100%" height="240">
+                                            style="object-fit: cover; height: 250px; width: 350px;">
                                     </div>
                                     <div class="carousel-item">
                                         <img src="assets/img/Slide 3 Card 1.jpg" class="d-block w-100" alt="..."
-                                            width="100%" height="240">
+                                            style="object-fit: cover; height: 250px; width: 350px;">
                                     </div>
                                 </div>
 
@@ -279,18 +281,18 @@
                                     <button type="button" data-bs-target="#carouselExampleIndicators2"
                                         data-bs-slide-to="2" aria-label="Slide 3"></button>
                                 </div>
-                                <div class="carousel-inner">
+                                <div class="carousel-inner rounded-top">
                                     <div class="carousel-item active">
                                         <img src="assets/img/Slide 1 Card 2.jpeg" class="d-block w-100" alt="..."
-                                            width="100%" height="240">
+                                            style="object-fit: cover; height: 250px; width: 350px;">
                                     </div>
                                     <div class="carousel-item">
                                         <img src="assets/img/Slide 2 Card 2.jpeg" class="d-block w-100" alt="..."
-                                            width="100%" height="240">
+                                            style="object-fit: cover; height: 250px; width: 350px;">
                                     </div>
                                     <div class="carousel-item">
                                         <img src="assets/img/Slide 3 Card 2.jpeg" class="d-block w-100" alt="..."
-                                            width="100%" height="240">
+                                            style="object-fit: cover; height: 250px; width: 350px;">
                                     </div>
                                 </div>
 
@@ -325,18 +327,18 @@
                                     <button type="button" data-bs-target="#carouselExampleIndicators3"
                                         data-bs-slide-to="2" aria-label="Slide 3"></button>
                                 </div>
-                                <div class="carousel-inner">
+                                <div class="carousel-inner rounded-top">
                                     <div class="carousel-item active">
                                         <img src="assets/img/Slide 1 Card 3.jpeg" class="d-block w-100" alt="..."
-                                            width="100%" height="240">
+                                            style="object-fit: cover; height: 250px; width: 350px;">
                                     </div>
                                     <div class="carousel-item">
                                         <img src="assets/img/Slide 2 Card 3.jpeg" class="d-block w-100" alt="..."
-                                            width="100%" height="240">
+                                            style="object-fit: cover; height: 250px; width: 350px;">
                                     </div>
                                     <div class="carousel-item">
                                         <img src="assets/img/Slide 3 Card 3.jpeg" class="d-block w-100" alt="..."
-                                            width="100%" height="240">
+                                            style="object-fit: cover; height: 250px; width: 350px;">
                                     </div>
                                 </div>
 
@@ -367,7 +369,7 @@
 
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                     <div class="col">
-                        <div class="card shadow-sm h-100">
+                        <div class="card shadow-sm h-100 ">
                             <video controls width="100%" height="240">
                                 <source src="assets/vid/Development of Automation Weapon Rack.mp4" type="video/webm" class="d-block w-100" />
                             </video>

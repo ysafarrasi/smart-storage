@@ -71,6 +71,13 @@
                     <span>{{ __('users.Data Senjata') }}</span>
                 </a>
             </li><!-- End F.A.Q Page Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ route('daftaradmin.index') }}">
+                    <i class="fa-solid fa-user-shield"></i>
+                    <span>{{ __('users.DaftarkanAdmin') }}</span>
+                </a>
+            </li><!-- End F.A.Q Page Nav -->
         </ul>
 
     </aside><!-- End Sidebar-->
@@ -121,8 +128,6 @@
             </div>
         </section>
     </main>
-
-    @include('partials.footer')
 
     <!-- Bootstrap JS -->
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

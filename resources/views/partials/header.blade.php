@@ -59,7 +59,7 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="pages-contact.php">
+                        <a class="dropdown-item d-flex align-items-center" href="{{ route('help') }}">
                             <i class="bi bi-question-circle"></i>
                             <span>{{__('users.Butuh Bantuan')}}</span>
                         </a>
@@ -69,7 +69,7 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="logout">
+                        <a class="dropdown-item d-flex align-items-center" href="{{ route('logout') }}">
                             <i class="bi bi-box-arrow-right"></i>
                             <span>{{__('users.Keluar')}}</span>
                         </a>

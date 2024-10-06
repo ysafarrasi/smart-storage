@@ -18,7 +18,6 @@ class APIDashboardController extends Controller
             'data' => [$datapersonnel, $datastatus]
         ]);
     }
-
     public function show()
     {
         $data = DB::table('personnel')

@@ -70,5 +70,7 @@ return [
 	'deskripsivideo2'=> 'isi deskripsi video 2',
 	'deskripsivideo3'=> 'isi deskripsi video 3',
 	'Edit' => 'Ubah',
-	'Butuh Bantuan' => 'Butuh Bantuan?'
+	'Butuh Bantuan' => 'Butuh Bantuan?',
+	'DaftarkanAdmin' => 'Daftarkan Admin',
+	'namaadmin' => 'Nama Admin',
 ];

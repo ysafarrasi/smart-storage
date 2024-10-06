@@ -3,10 +3,13 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BoardController;
+use App\Http\Controllers\ButuhBantuanController;
+use App\Http\Controllers\DaftarAdminController;
 use App\Http\Controllers\WeaponController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PersonnelController;
+use App\Http\Controllers\RegisterAdminController;
 use App\Http\Controllers\SearchController;
 
 /*
@@ -29,7 +32,18 @@ Route::get('/home',  [LoginController::class, 'index'])->name('index');
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
-Route::middleware(['auth'])->group(function () {
+
+
+
+
+Route::middleware(['auth:sanctum'])->group(function () {
+
+  Route::get('/daftaradmin', [DaftarAdminController::class, 'index'])->name('daftaradmin.index');
+  Route::get('/daftaradmin/create', [DaftarAdminController::class, 'create'])->name('daftaradmin.create');
+  Route::post('/daftaradmin', [DaftarAdminController::class, 'store'])->name('daftaradmin.store');
+  Route::get('/daftaradmin/edit/{id}', [DaftarAdminController::class, 'edit'])->name('daftaradmin.edit');
+  Route::put('/daftaradmin/update/{id}', [DaftarAdminController::class, 'update'])->name('daftaradmin.update');
+  Route::delete('/daftaradmin/{id}', [DaftarAdminController::class, 'destroy'])->name('daftaradmin.destroy');
 
   Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
@@ -49,8 +63,9 @@ Route::middleware(['auth'])->group(function () {
   Route::post('/personnel/delete/{id}',  [PersonnelController::class, 'destroy'])->name('personnel-delete');
 
   Route::get('/fetch-personnel', [PersonnelController::class, 'fetchPersonnel'])->name('fetch-personnel');
+  route::get('/help', [ButuhBantuanController::class, 'index'])->name('help');
 
-  Route::match(['get', 'post'], '/search', [SearchController::class, 'index'])->name('search.index');
+  // Route::match(['get', 'post'], '/search', [SearchController::class, 'index'])->name('search.index');
 });
 
 Route::get('setlocale/{locale}', function ($locale) {
@@ -71,8 +86,6 @@ Route::get('setlocale/{locale?}', function ($locale = null) {
 
   return redirect()->back();
 })->name('setlocale.optional');
-
-
 
 
 // Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');

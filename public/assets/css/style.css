@@ -1,5 +1,11 @@
 html {
   scroll-behavior: smooth;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
 }
 
 #header {
@@ -17,6 +23,7 @@ html {
 #main {
   background: linear-gradient(57deg, #FFF 0%, #ABA9AB 100%);
   margin-top: 50px;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .modal-content {

@@ -70,5 +70,7 @@ return [
 	'deskripsivideo2'=> 'input description video 2',
 	'deskripsivideo3'=> 'input description video 3',
 	'Edit' => 'Edit',
-	'Butuh Bantuan' => 'Need Help?'
+	'Butuh Bantuan' => 'Need Help?',
+	'DaftarkanAdmin' => 'Register Admin',
+	'namaadmin' => 'Admin Name'
 ];

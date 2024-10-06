@@ -22,12 +22,15 @@ class AuthController extends Controller
         $user = User::where('name', $request->name)->first();
 
         // Jika user ada dan password cocok
-        if ($user && $request->password == $user->password) {
+        if ($user && Hash::check($request->password, $user->password)) {
+            // Buatkan token auth untuk user
+            $token = $user->createToken('auth_token')->plainTextToken;
+
             // Login user
             Auth::login($user);
 
             // Redirect ke dashboard setelah login berhasil
-            return redirect()->intended(route('dashboard'));
+            return redirect()->intended(route('dashboard'))->with('token', $token);
         }
 
         // Jika login gagal, redirect kembali dengan error
@@ -36,12 +39,12 @@ class AuthController extends Controller
         ])->withInput();
     }
 
-    public function logout(Request $request)    
+    public function logout(Request $request)
     {
-        // Logout user dan hapus session
-        Auth::logout();
+        // Logout user menggunakan sanctum
+        Auth::guard('web')->logout();
 
-        // Hapus session yang sedang aktif
+        // Hapus token auth
         $request->session()->invalidate();
 
         // Buat token session baru

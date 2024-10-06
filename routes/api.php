@@ -9,6 +9,7 @@ use App\Http\Controllers\APIWeaponController;
 use App\Http\Controllers\PersonnelController;
 use App\Http\Controllers\APIDashboardController;
 use App\Http\Controllers\APIPersonnelController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,3 +39,10 @@ Route::get('rfid-data', [APIPersonnelController::class, 'getDataRFID']);
 Route::get('data-from-arduino', [ArduinoController::class, 'getData']);
 
 Route::get('personnel-data',  [APIPersonnelController::class, 'getPersonnel']);
+
+
+Route::post('login', [AuthController::class, 'login']);
+Route::middleware('auth:sanctum')->get('user', function (Request $request) {
+  route::resource('user', APIPersonnelController::class);
+  return $request->user();
+});
