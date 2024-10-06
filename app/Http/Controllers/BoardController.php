@@ -9,10 +9,11 @@ use Illuminate\Support\Facades\Http;
 
 class BoardController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('board');
     }
-    
+
     public function showDataBoard()
     {
         return view('/board');
@@ -20,7 +21,7 @@ class BoardController extends Controller
 
     public function loadData()
     {
-        $response = Http::get('http://localhost:8000/api/load-cell-data');
+        $response = Http::get('http://127.0.0.1:8000/api/load-cell-data');
         $data = $response->json()['data'] ?? [];
 
         // Urutkan data berdasarkan rackNumber secara ascending

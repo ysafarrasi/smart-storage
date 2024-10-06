@@ -4,6 +4,7 @@ use App\Models\Weapon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArduinoController;
+use App\Http\Controllers\AuthAPIController;
 use App\Http\Controllers\Arduino1Controller;
 use App\Http\Controllers\APIWeaponController;
 use App\Http\Controllers\PersonnelController;
@@ -25,6 +26,9 @@ use App\Http\Controllers\AuthController;
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+
+Route::post('/login', [AuthAPIController::class, 'login']);
+Route::post('/logout', [AuthAPIController::class, 'logout'])->middleware('auth:sanctum');
 
 Route::post('load-cell-data', [ArduinoController::class, 'postLoadCellData']);
 Route::post('rfid-data', [ArduinoController::class, 'postRFIDData']);
