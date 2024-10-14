@@ -27,7 +27,7 @@
           <div class="card-header text-center">Edit Admin</div>
           <div class="card-body">
             @csrf
-            <form method="POST" action="{{ route('daftaradmin.update',['id' => $user->id]) }}">
+            <form  action="{{ route('daftaradmin.update', $user->id) }}" method="POST" >
               @method('PUT')
               <div class="mb-3">
                 <input type="hidden" name="id" value="{{ $user->id }}">
@@ -44,11 +44,6 @@
                 <label for="password" class="form-label">Kata Sandi (isi jika ingin mengganti)</label>
                 <input id="password" type="password" class="form-control" name="password" placeholder="Masukkan kata sandi baru" autocomplete="new-password">
               </div>
-              <div class="mb-3">
-                <label for="password-confirm" class="form-label">Konfirmasi Kata Sandi</label>
-                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-              </div>
-              @method('PATCH')
               <button type="submit" class="btn btn-warning w-100">Simpan Perubahan</button>
             </form>
           </div>

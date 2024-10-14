@@ -42,19 +42,8 @@ class DaftarAdminController extends Controller
 
     // Memperbarui data admin
     public function update(Request $request, $id) {
-    $user = User::find($id);  
-    $validated = $request->validate([
-        'name' => 'required',
-        'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
-        'password' => 'sometimes|required|confirmed|min:6',
-    ]);
-    $user->name = $validated['name'];
-    $user->email = $validated['email'];
-    if ($request->has('password')) {
-        $user->password = Hash::make($validated['password']);
-    }
-    $user->save();
-    compact('user');
+    $user = User::findOrFail($id);  
+    $user->update($request->all());
     return redirect()->route('daftaradmin.index')->with('success', 'Admin berhasil diperbarui' );
 }
 

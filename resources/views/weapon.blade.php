@@ -177,25 +177,42 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            function loadData() {
-                $.ajax({
-                    url: '{{ route('load-data') }}',
-                    type: 'GET',
-                    success: function(data) {
-                        var weaponData = $('#weapon-data');
-                        weaponData.empty();
-                        $.each(data, function(index, item) {
-                            weaponData.append('<tr><td>' + (index + 1) + '</td><td>' + item
-                                .loadCellID + '</td><td>' + item.rackNumber + '</td><td>' +
-                                item
-                                .status + '</td><td>' + item.weight + '</td></tr>');
-                        });
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('AJAX Error: ' + status + ' ' + error);
-                    }
-                });
-            }
+
+            $(document).ready(function() {
+    function loadData() {
+            $.ajax({
+                url: '/api/weapons',
+                type: 'GET',
+                success: function(response) {
+                    var weaponData = $('#weapon-data');
+                    weaponData.empty();
+
+                    // Pastikan data array berada di response.data
+                    $.each(response.data, function(index, item) {
+                        var status = item.status == '0' ? 'tidak tersedia' : 
+                                    item.status == '1' ? 'masuk tidak ada magazine' : 'masuk tidak ada magazine';
+                                    item.status == '2' ? 'masuk ada magazine' : 'masuk ada magazine';
+                        
+                        weaponData.append('<tr>' +
+                            '<td>' + (index + 1) + '</td>' +
+                            '<td>' + item.loadCellID + '</td>' +
+                            '<td>' + item.rackNumber + '</td>' +
+                            '<td>' + status + '</td>' +
+                            '<td>' + item.weight + '</td>' +
+                            '</tr>');
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error('AJAX Error: ' + status + ' ' + error);
+                }
+            });
+        }
+
+        // Panggil fungsi loadData saat halaman selesai dimuat
+        loadData();
+    });
+
+            
 
             loadData(); // Initial load
             setInterval(loadData, 5000); // Refresh every 5 seconds

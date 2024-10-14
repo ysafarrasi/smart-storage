@@ -185,7 +185,7 @@
             function fetchStatuses() {
                 console.log("Fetching statuses..."); // Log untuk memastikan fungsi dipanggil
                 $.ajax({
-                    url: "{{ url('/api/dashboard') }}",
+                    url: "{{ url('http://127.0.0.1:8000/api/dashboard') }}",
                     method: "GET",
                     success: function(data) {
                         console.log("Data received: ", data); // Log untuk melihat data yang diterima

@@ -15,7 +15,7 @@ class APIUserController extends Controller
      */
     public function index()
     {
-        return User::all();
+        return response()->json(User::all(), 200);
     }
 
     /**
@@ -23,38 +23,36 @@ class APIUserController extends Controller
      */
     public function store(Request $request)
     {
-        // Validasi input yang diterima
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255', // Nama harus diisi, tipe string, maksimal 255 karakter
-            'email' => 'required|string|email|max:255|unique:users', // Email harus diisi, tipe string, email, maksimal 255 karakter, dan unik
-            'password' => 'required|string|min:6|confirmed', // Password harus diisi, tipe string, minimal 6 karakter, dan harus sama dengan konfirmasi password
-        ]);
+        $validator = $this->validateUser($request);
 
-        // Jika validasi gagal
         if ($validator->fails()) {
-            // Kembalikan respon error
             return response()->json([
-                'message' => 'Gagal menambahkan user, silahkan coba lagi',
+                'message' => 'Gagal menambahkan user, silakan cek inputan.',
                 'errors' => $validator->errors()->messages()
             ], 400);
         }
 
-        // Buat user baru
-        $user = User::create([
-            'name' => $request->input('name'), // Nama
-            'email' => $request->input('email'), // Email
-            'password' => Hash::make($request->input('password')), // Password yang dienkripsi
-        ]);
+        try {
+            $user = User::create([
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'password' => Hash::make($request->input('password')),
+            ]);
 
-        // Buat token untuk user
-        $token = $user->createToken('nama_token', ['*'])->plainTextToken; // Buat token dengan nama "nama_token" dan scope "*" (semua)
+            $token = $user->createToken('nama_token')->plainTextToken;
 
-        // Kembalikan respon sukses
-        return response()->json([
-            'message' => 'User created successfully',
-            'data' => $user,
-            'token' => $token
-        ]);
+            return response()->json([
+                'message' => 'User berhasil dibuat',
+                'data' => $user,
+                'token' => $token
+            ], 201);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Terjadi kesalahan saat menambahkan user',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     /**
@@ -62,7 +60,7 @@ class APIUserController extends Controller
      */
     public function show(User $user)
     {
-        return $user;
+        return response()->json($user, 200);
     }
 
     /**
@@ -70,30 +68,36 @@ class APIUserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-            'password' => 'sometimes|required|string|min:6|confirmed',
-        ]);
+        $validator = $this->validateUser($request, $user->id);
 
         if ($validator->fails()) {
             return response()->json([
-                'message' => 'Gagal mengupdate user, silahkan coba lagi',
+                'message' => 'Gagal mengupdate user, silakan cek inputan.',
                 'errors' => $validator->errors()->messages()
             ], 400);
         }
 
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        if ($request->input('password')) {
-            $user->password = Hash::make($request->input('password'));
-        }
-        $user->save();
+        try {
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
 
-        return response()->json([
-            'message' => 'User updated successfully',
-            'data' => $user
-        ]);
+            if ($request->filled('password')) {
+                $user->password = Hash::make($request->input('password'));
+            }
+
+            $user->save();
+
+            return response()->json([
+                'message' => 'User berhasil diupdate',
+                'data' => $user
+            ], 200);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Terjadi kesalahan saat mengupdate user',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     /**
@@ -101,11 +105,32 @@ class APIUserController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->delete();
+        try {
+            $user->delete();
 
-        return response()->json([
-            'message' => 'User deleted successfully'
-        ]);
+            return response()->json([
+                'message' => 'User berhasil dihapus'
+            ], 200);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Terjadi kesalahan saat menghapus user',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
+     * Validate user input.
+     */
+    private function validateUser(Request $request, $userId = null)
+    {
+        $rules = [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,' . ($userId ?? 'NULL'),
+            'password' => $userId ? 'sometimes|required|string|min:6|confirmed' : 'required|string|min:6|confirmed',
+        ];
+
+        return Validator::make($request->all(), $rules);
     }
 }
-

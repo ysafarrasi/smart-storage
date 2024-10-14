@@ -42,7 +42,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
   Route::get('/daftaradmin/create', [DaftarAdminController::class, 'create'])->name('daftaradmin.create');
   Route::post('/daftaradmin', [DaftarAdminController::class, 'store'])->name('daftaradmin.store');
   Route::get('/daftaradmin/edit/{id}', [DaftarAdminController::class, 'edit'])->name('daftaradmin.edit');
-  Route::put('/daftaradmin/update/{id}', [DaftarAdminController::class, 'update'])->name('daftaradmin.update');
+  Route::put('/daftaradmin/update/{user}', [DaftarAdminController::class, 'update'])->name('daftaradmin.update');
   Route::delete('/daftaradmin/{id}', [DaftarAdminController::class, 'destroy'])->name('daftaradmin.destroy');
 
   Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
