@@ -22,13 +22,13 @@
         rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
-    <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/quill/quill.snow.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
 
     <!-- Main CSS -->
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
@@ -101,6 +101,12 @@
                         <div class="card-body pt-4 d-flex flex-column align-items-center">
                             <img src="{{ asset('assets/img/Indicator Lights for Weapon Use.png') }}"
                                 alt="Weapon Status Board" width="200px">
+                            <p class="mt-3 text-center font-sans font-semibold">
+                                Keterangan warna status senjata:<br>
+                                <span class="text-success">Hijau</span> - Senjata tersedia untuk digunakan.<br>
+                                <span class="text-warning">Kuning</span> - Senjata masuk tanpa magazine.<br>
+                                <span class="text-danger">Merah</span> - Senjata masuk dengan magazine.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -140,17 +146,17 @@
             // Fungsi untuk memuat data secara real-time
             function loadData() {
                 $.ajax({
-                    url: '{{ route('load-data') }}',
+                    url: '/api/load-cell-data',
                     type: 'GET',
                     success: function(response) {
-                        updateUI(response);
+                        updateUI(response.data);
                     },
                     error: function(error) {
                         console.error('Error fetching data:', error);
                     }
                 });
             }
-
+    
             // Fungsi untuk memperbarui UI
             function updateUI(data) {
                 $('#rack-data').empty(); // Kosongkan data sebelum memuat yang baru
@@ -173,26 +179,26 @@
                         });
                         var senjataContainer = $('<div>', {
                             id: 'senjata' + rackData.loadCellID,
-                            class: 'container d-flex justify-content-evenly align-item-center'
+                            class: 'container d-flex justify-content-evenly align-items-center'
                         });
-
+    
                         // Menentukan warna LED berdasarkan status
                         var ledGreen = $('<div>', {
                             class: 'pill'
                         }).append($('<div>', {
-                            class: 'led led-green' + (rackData.status == '1' ? ' on' : '')
+                            class: 'led led-green' + (rackData.status == '2' ? ' on' : '')
                         }));
                         var ledYellow = $('<div>', {
                             class: 'pill'
                         }).append($('<div>', {
-                            class: 'led led-yellow' + (rackData.status == '2' ? ' on' : '')
+                            class: 'led led-yellow' + (rackData.status == '1' ? ' on' : '')
                         }));
                         var ledRed = $('<div>', {
                             class: 'pill'
                         }).append($('<div>', {
-                            class: 'led led-red' + (rackData.status == '-1' ? ' on' : '')
+                            class: 'led led-red' + (rackData.status == '0' ? ' on' : '')
                         }));
-
+    
                         senjataContainer.append(ledGreen, ledYellow, ledRed);
                         cardBody.append(cardTitle, senjataContainer);
                         card.append(cardBody);
@@ -201,17 +207,17 @@
                     });
                 } else {
                     // Tampilkan pesan jika tidak ada data yang tersedia
-                    $('#rack-data').html('<p>No data available.</p>');
+                    $('#rack-data').html('<p>Data tidak tersedia.</p>');
                 }
             }
-
-
+    
             // Memuat data pertama kali
             loadData();
-            // Memuat data setiap 5 detik
-            setInterval(loadData, 5000);
+            // Memuat data setiap 2 detik
+            setInterval(loadData, 2000);
         });
     </script>
+    
 </body>
 
 </html>

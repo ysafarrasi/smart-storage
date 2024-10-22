@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, sshirink-to-fit=no">
     <script type="text/javascript" src="{{ asset('jquery/jquery.min.js') }}"></script>
 
-    <title>{{_('users.DaftarkanAdmin')}} - {{ __('users.Penyimpanan Senjata Otomatis') }}</title>
+    <title>{{ __('users.DaftarkanAdmin') }} - {{ __('users.Penyimpanan Senjata Otomatis') }}</title>
     <meta name="keywords" content="{{ $metaKeywords ?? 'default, keywords' }}">
     <title>{{ $metaTitle ?? 'Default Title' }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
@@ -113,11 +113,11 @@
                                             <td>{{ $user->name }}</td>
                                             <td>{{ $user->email }}</td>
                                             <td>
-                                                <a href="{{ route('daftaradmin.edit', $user->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                                                <a href="{{ route('daftaradmin.edit', $user->id) }}" class="btn btn-sm btn-warning">{{ __('users.Edit') }}</a>
                                                 <form action="{{ route('daftaradmin.destroy', $user->id) }}" method="POST" style="display: inline;">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah yakin ingin menghapus admin {{ $user->name }}?')">Hapus</button>
+                                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah yakin ingin menghapus admin {{ $user->name }}?')">{{ __('users.Hapus') }}</button>
                                                 </form>
                                             </td>
                                         </tr>

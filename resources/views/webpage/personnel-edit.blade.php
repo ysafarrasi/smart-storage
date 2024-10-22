@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="{{ asset('jquery/jquery.min.js') }}"></script>
 
     <title>{{ __('Edit Data Personel - Penyimpanan Senjata Otomatis') }}</title>
@@ -30,15 +30,6 @@
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
-
-    <!-- pembacaan no kartu otmatis dengan js -->
-    <script type="text/javascript">
-        $(document).ready(function() {
-            setInterval(function() {
-                $("#norfid").load('nokartu.php')
-            }, 2); // pembacaan file no kartu sesuai detik karena 0 jadi refresh langsung muncul
-        });
-    </script>
 </head>
 
 <body>
@@ -73,8 +64,15 @@
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('weapon') }}">
-                    <i class="fa-solid fa-gun"></i>>
+                    <i class="fa-solid fa-gun"></i>
                     <span>{{ __('Data Senjata') }}</span>
+                </a>
+            </li><!-- End F.A.Q Page Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ route('daftaradmin.index') }}">
+                    <i class="bi bi-shield-lock"></i>
+                    <span>{{ __('Admin') }}</span>
                 </a>
             </li><!-- End F.A.Q Page Nav -->
         </ul>
@@ -167,10 +165,6 @@
             </div>
         </section>
     </main><!-- End #main -->
-
-    @include('partials.footer')
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
     <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>

@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Log;
-use App\Models\Weapon;
 use GuzzleHttp\Client;
 use App\Models\Tmprfid;
 use App\Models\Personnel;
+use App\Models\Weapon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Console\View\Components\Warn;
@@ -37,33 +37,81 @@ class PersonnelController extends Controller
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function create(Request $request)
     {
-        $client = new Client();
-        $url = "http://127.0.0.1:8000/api/rfid-data";
-        $response = $client->request('GET', $url);
-        $content = $response->getBody()->getContents();
-        $contentArray = json_decode($content, true);
-        $data = $contentArray['data'];
-
-        $weapon = Weapon::select('loadCellID')->get();
-
-        return view('webpage.personnel-add', compact('data', 'weapon'));
+        // Arahkan langsung ke fungsi store
+        return $this->store($request);
     }
-
+    
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        // menggunakan mass assignment
-        $personnel = Personnel::create($request->all());
-        return redirect()->route('personnel');
+        // buatkan client guzzle
+        $client = new Client();
+    
+        // buatkan url api local
+        $url = "http://127.0.0.1:8000/api/rfid-data";
+    
+        try {
+            // jalankan request GET ke api local
+            Log::info('Memulai request API ke ' . $url);
+            $response = $client->request('GET', $url);
+            Log::info('Request API berhasil');
+    
+            // dapatkan isi dari response
+            $content = $response->getBody()->getContents();
+            Log::info('Response dari API: ' . $content);
+    
+            // decode json menjadi array
+            $contentArray = json_decode($content, true);
+    
+            // Pastikan API mengembalikan data yang valid
+            if (!isset($contentArray['data'])) {
+                throw new \Exception('Format response API tidak valid. Tidak ada field "data".');
+            }
+    
+            // dapatkan data dari array
+            $data = $contentArray['data'];
+    
+            // dapatkan data weapon dari database
+            $weapon = Weapon::select('loadCellID')->get();
+    
+            // Buat instance Personnel baru
+            $personnel = new Personnel();
+    
+            // Ambil nomor kartu dari database atau data API
+            $tmprfid = Tmprfid::latest()->value('nokartu');
+    
+            // Ambil weapon loadCellID
+            $weapon = Weapon::value('loadCellID');
+    
+            // Set field personnel
+            $personnel->personnel_id = Personnel::max('personnel_id') + 1;
+            $personnel->nama = $request->nama;
+            $personnel->pangkat = $request->pangkat;
+            $personnel->nrp = $request->nrp;
+            $personnel->jabatan = $request->jabatan;
+            $personnel->kesatuan = $request->kesatuan;
+            $personnel->save();
+    
+            // return view dengan data yang di dapatkan
+            return redirect()->route('webpage.personnel-add', compact('data', 'weapon'));
+    
+        } catch (\GuzzleHttp\Exception\RequestException $e) {
+            // Menangani kesalahan pada saat request ke API (misal API tidak tersedia)
+            Log::error('Error saat melakukan request ke API: ' . $e->getMessage());
+            return response()->json(['error' => 'Gagal mengambil data dari API.'], 500);
+        } catch (\Exception $e) {
+            // Menangani kesalahan lainnya (misal kesalahan format data atau database)
+            Log::error('Error saat melakukan request ke API atau menyimpan data personnel: ' . $e->getMessage());
+            return response()->json(['error' => 'Terjadi kesalahan saat mengambil data dari API atau menyimpan personnel'], 500);
+        }
     }
-
+    
+    
+    
     // /**
     //  * Store a newly created resource in storage.
     //  */

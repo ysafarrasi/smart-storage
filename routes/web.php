@@ -42,7 +42,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
   Route::get('/daftaradmin/create', [DaftarAdminController::class, 'create'])->name('daftaradmin.create');
   Route::post('/daftaradmin', [DaftarAdminController::class, 'store'])->name('daftaradmin.store');
   Route::get('/daftaradmin/edit/{id}', [DaftarAdminController::class, 'edit'])->name('daftaradmin.edit');
-  Route::put('/daftaradmin/update/{user}', [DaftarAdminController::class, 'update'])->name('daftaradmin.update');
+  Route::put('/daftaradmin/update/{id}', [DaftarAdminController::class, 'update'])->name('daftaradmin.update');
   Route::delete('/daftaradmin/{id}', [DaftarAdminController::class, 'destroy'])->name('daftaradmin.destroy');
 
   Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -57,10 +57,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
   Route::get('/personnel',  [PersonnelController::class, 'index'])->name('personnel');
   Route::get('/personnel/add-personnel',  [PersonnelController::class, 'create'])->name('personnel-add');
-  Route::post('/personnel',  [PersonnelController::class, 'store']);
-
+  Route::post('/personnel',  [PersonnelController::class, 'store'])->name('personnel-store');
   Route::get('/personnel/edit/{id}',  [PersonnelController::class, 'edit'])->name('personneledit');
-  Route::post('/personnel/delete/{id}',  [PersonnelController::class, 'destroy'])->name('personnel-delete');
+  Route::delete('/personnel/delete/{id}',  [PersonnelController::class, 'destroy'])->name('personnel-delete');
 
   Route::get('/fetch-personnel', [PersonnelController::class, 'fetchPersonnel'])->name('fetch-personnel');
   route::get('/help', [ButuhBantuanController::class, 'index'])->name('help');

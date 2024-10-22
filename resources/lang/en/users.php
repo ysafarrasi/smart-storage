@@ -72,5 +72,18 @@ return [
 	'Edit' => 'Edit',
 	'Butuh Bantuan' => 'Need Help?',
 	'DaftarkanAdmin' => 'Register Admin',
-	'namaadmin' => 'Admin Name'
+	'konfirmasikatasandi' => 'Password Confirmation',
+	'minimal8' => 'Minimum 8 Characters',
+	'namaadmin' => 'Admin Name',
+	'masukanemail' => 'Enter Email',
+	'masukannama' => 'Enter Name',
+	'tambahadmin' => 'Add Admin',
+	'masukannamaadmin' => 'Enter Admin Name',
+	'Ulangi_Kata_Sandi' => 'Retype Password',
+	'Masukan_Nama_Admin' => 'Enter Admin Name',
+	'Masukan_Email_Admin' => 'Enter Admin Email',
+	'Masukan_Kata_Sandi_Admin' => 'Enter Admin Password',
+	'Ulangi_kata_Sandi_Admin' => 'Repeat Admin Password',
+
+
 ];

@@ -42,12 +42,25 @@ class DaftarAdminController extends Controller
 
     // Memperbarui data admin
     public function update(Request $request, $id) {
-    $user = User::findOrFail($id);  
-    $user->update($request->all());
-    return redirect()->route('daftaradmin.index')->with('success', 'Admin berhasil diperbarui' );
-}
+        $user = User::findOrFail($id);
 
-    
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'password' => 'sometimes|confirmed|min:6',
+        ]);
+
+        if ($request->password) {
+            $user->password = Hash::make($request->password);
+        }
+
+        if (!$user->update($request->only('name', 'email', 'password'))) {
+            return redirect()->route('daftaradmin.index')->with('error', 'Gagal memperbarui admin')->withInput();
+        }
+
+        return redirect()->route('daftaradmin.index')->with('success', 'Admin berhasil diperbarui');
+    }
+
     // Menampilkan detail admin
     public function show(User $user) {
         return view('admin.daftaradmin', compact('user'));
@@ -63,4 +76,5 @@ class DaftarAdminController extends Controller
         }
     }
 
+    // Tambahkan method patch
 }

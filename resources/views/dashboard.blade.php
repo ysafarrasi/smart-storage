@@ -123,6 +123,14 @@
                                         <span>{{ __('users. | Hari ini') }}</span>
                                     </h5>
 
+                                    <div class="tab-content pt-2">
+                                        <div class="row">
+                                            <div class="row" id="rack-data">
+                                                <!-- Data akan ditampilkan di sini -->
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <table class="table table-borderless datatable">
                                         <thead>
                                             <tr>
@@ -181,11 +189,89 @@
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
     <script>
+        // untuk menampilkan script board
+            $(document).ready(function() {
+            // Fungsi untuk memuat data secara real-time
+            function loadData() {
+                $.ajax({
+                    url: '/api/load-cell-data',
+                    type: 'GET',
+                    success: function(response) {
+                        updateUI(response.data);
+                    },
+                    error: function(error) {
+                        console.error('Error fetching data:', error);
+                    }
+                });
+            }
+    
+            // Fungsi untuk memperbarui UI
+            function updateUI(data) {
+                $('#rack-data').empty(); // Kosongkan data sebelum memuat yang baru
+                if (data.length > 0) {
+                    // Tampilkan data
+                    data.forEach(function(rackData) {
+                        var rackElement = $('<div>', {
+                            id: 'rack' + rackData.rackNumber,
+                            class: 'col-lg-6'
+                        });
+                        var card = $('<div>', {
+                            class: 'card'
+                        });
+                        var cardBody = $('<div>', {
+                            class: 'card-body'
+                        });
+                        var cardTitle = $('<h5>', {
+                            class: 'card-title',
+                            text: 'Rack ' + rackData.rackNumber
+                        });
+                        var senjataContainer = $('<div>', {
+                            id: 'senjata' + rackData.loadCellID,
+                            class: 'container d-flex justify-content-evenly align-items-center'
+                        });
+    
+                        // Menentukan warna LED berdasarkan status
+                        var ledGreen = $('<div>', {
+                            class: 'pill'
+                        }).append($('<div>', {
+                            class: 'led led-green' + (rackData.status == '2' ? ' on' : '')
+                        }));
+                        var ledYellow = $('<div>', {
+                            class: 'pill'
+                        }).append($('<div>', {
+                            class: 'led led-yellow' + (rackData.status == '1' ? ' on' : '')
+                        }));
+                        var ledRed = $('<div>', {
+                            class: 'pill'
+                        }).append($('<div>', {
+                            class: 'led led-red' + (rackData.status == '0' ? ' on' : '')
+                        }));
+    
+                        senjataContainer.append(ledGreen, ledYellow, ledRed);
+                        cardBody.append(cardTitle, senjataContainer);
+                        card.append(cardBody);
+                        rackElement.append(card);
+                        $('#rack-data').append(rackElement);
+                    });
+                } else {
+                    // Tampilkan pesan jika tidak ada data yang tersedia
+                    $('#rack-data').html('<p>Data tidak tersedia.</p>');
+                }
+            }
+    
+            // Memuat data pertama kali
+            loadData();
+            // Memuat data setiap 2 detik
+            setInterval(loadData, 2000);
+        });
+
+        // untuk status senjata
+
         $(document).ready(function() {
             function fetchStatuses() {
                 console.log("Fetching statuses..."); // Log untuk memastikan fungsi dipanggil
                 $.ajax({
-                    url: "{{ url('http://127.0.0.1:8000/api/dashboard') }}",
+                    url: "{{ url('/api/dashboard') }}",
                     method: "GET",
                     success: function(data) {
                         console.log("Data received: ", data); // Log untuk melihat data yang diterima

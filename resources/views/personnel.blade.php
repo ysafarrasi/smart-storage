@@ -152,24 +152,25 @@
                                                     <td>{{ $personnel->nrp }}</td>
                                                     <td>{{ $personnel->jabatan }}</td>
                                                     <td>{{ $personnel->kesatuan }}</td>
-                                                    <td>
+                                                    <td class="align-middle">
                                                         @if ($personnel)
-                                                            <a
-                                                                href="{{ route('personneledit', $personnel->personnel_id) }}">
-                                                                <button
-                                                                    class="btn btn-warning">{{ __('users.Edit') }}</button>
-                                                            </a>
-                                                        @else
-                                                            <p>No personnel found</p>
-                                                        @endif
+                                                            <div class="btn-group" role="group" aria-label="Basic example">
+                                                                <a href="{{ route('personneledit', $personnel->personnel_id) }}"
+                                                                    class="btn btn-warning rounded-pill me-2">{{ __('users.Edit') }}</a>
 
-                                                        <form
-                                                            action="{{ route('personnel-delete', $personnel->personnel_id) }}"
-                                                            method="POST" class="d-inline">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button
-                                                                class="btn btn-danger">{{ __('users.Hapus') }}</button>
+                                                                <form
+                                                                    action="{{ route('personnel-delete', $personnel->personnel_id) }}"
+                                                                    method="POST"
+                                                                    class="d-inline">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit"
+                                                                        class="btn btn-danger rounded-pill">{{ __('users.Hapus') }}</button>
+                                                                </form>
+                                                            </div>
+                                                        @else
+                                                            <p class="text-center">No personnel found</p>
+                                                        @endif
                                                         </form>
                                                     </td>
                                                 </tr>

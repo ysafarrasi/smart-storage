@@ -85,7 +85,41 @@ class APIPersonnelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nokartu' => 'required|unique:personnel,nokartu',
+            'loadCellID' => 'required',
+            'personnel_id' => 'required|unique:personnel,personnel_id',
+            'nama' => 'required',
+            'pangkat' => 'required',
+            'nrp' => 'required',
+            'jabatan' => 'required',
+            'kesatuan' => 'required'
+        ]);
+
+        try {
+            $personnel = new Personnel();
+            $personnel->nokartu = $request->nokartu;
+            $personnel->loadCellID = $request->loadCellID;
+            $personnel->personnel_id = $request->personnel_id;
+            $personnel->nama = $request->nama;
+            $personnel->pangkat = $request->pangkat;
+            $personnel->nrp = $request->nrp;
+            $personnel->jabatan = $request->jabatan;
+            $personnel->kesatuan = $request->kesatuan;
+            $personnel->save();
+
+            return response()->json([
+                'code' => 201,
+                'message' => 'data created successfully',
+                'data' => $personnel
+            ]);
+        } catch (\Exception $e) {
+            Log::error('Error storing personnel data: ' . $e->getMessage());
+            return response()->json([
+                'code' => 500,
+                'message' => 'Failed to store data'
+            ], 500);
+        }
     }
 
     /**
@@ -113,7 +147,19 @@ class APIPersonnelController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $personnel = Personnel::find($id);
+        if ($personnel) {
+            return response()->json([
+                'code' => 200,
+                'message' => 'data found',
+                'data' => $personnel
+            ]);
+        } else {
+            return response()->json([
+                'code' => 404,
+                'message' => 'data not found'
+            ]);
+        }
     }
 
     /**
@@ -121,7 +167,40 @@ class APIPersonnelController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'nokartu' => 'required|unique:personnel,nokartu',
+            'loadCellID' => 'required',
+            'personnel_id' => 'required|unique:personnel,personnel_id',
+            'nama' => 'required',
+            'pangkat' => 'required',
+            'nrp' => 'required',
+            'jabatan' => 'required',
+            'kesatuan' => 'required'
+        ]);
+
+        $personnel = Personnel::find($id);
+        if ($personnel) {
+            $personnel->nokartu = $request->nokartu;
+            $personnel->loadCellID = $request->loadCellID;
+            $personnel->personnel_id = $request->personnel_id;
+            $personnel->nama = $request->nama;
+            $personnel->pangkat = $request->pangkat;
+            $personnel->nrp = $request->nrp;
+            $personnel->jabatan = $request->jabatan;
+            $personnel->kesatuan = $request->kesatuan;
+            $personnel->save();
+
+            return response()->json([
+                'code' => 201,
+                'message' => 'data updated successfully',
+                'data' => $personnel
+            ]);
+        } else {
+            return response()->json([
+                'code' => 404,
+                'message' => 'data not found'
+            ]);
+        }
     }
 
     /**
@@ -129,6 +208,18 @@ class APIPersonnelController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $personnel = Personnel::find($id);
+        if ($personnel) {
+            $personnel->delete();
+            return response()->json([
+                'code' => 200,
+                'message' => 'data deleted successfully'
+            ]);
+        } else {
+            return response()->json([
+                'code' => 404,
+                'message' => 'data not found'
+            ]);
+        }
     }
 }

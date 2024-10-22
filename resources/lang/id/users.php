@@ -73,4 +73,20 @@ return [
 	'Butuh Bantuan' => 'Butuh Bantuan?',
 	'DaftarkanAdmin' => 'Daftarkan Admin',
 	'namaadmin' => 'Nama Admin',
+	'tambahadmin' => 'Tambah Admin',
+	'konfirmasikatasandi' => 'Konfirmasi Kata Sandi',
+	'minimal8' => 'Minimal 8 Karakter',
+	'masukanemail' => 'Masukan Email',
+	'masukannama' => 'Masukan Nama',
+	'masukannamaadmin' => 'Masukan Nama Admin',
+	'Ulangi_Kata_Sandi' => 'Ulangi Kata Sandi',
+	'Masukan_Nama_Admin' => 'Masukan Nama Admin',
+	'Masukan_Email_Admin' => 'Masukan Email Admin',
+	'Masukan_Kata_Sandi_Admin' => 'Masukan Kata Sandi Admin',
+	'Ulangi_kata_Sandi_Admin' => 'Ulangi Kata Sandi Admin',
+
+
+
+
+
 ];

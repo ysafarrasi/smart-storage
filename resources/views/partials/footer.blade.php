@@ -31,19 +31,7 @@
                     <div class="mb-3"></div>
                     <button type="button" class="btn btn-success rounded-pill" style="transition: all 0.2s ease-in-out;" onmouseover="this.style.backgroundColor='#198754'; this.style.color='white'" onmouseout="this.style.backgroundColor='#ffffff'; this.style.color='#198754'">
                         <img src="assets/img/Logo G - STAS RG.png" alt="Logo STAS RG" width="25px" class="me-2"> 2024 Stas-RG
-                    </button>
-                    <div class="mb-3"></div>
-                    <a href="{{ route('help') }}" class="btn btn-primary rounded-pill">
-                        <i class="bi bi-question-circle me-2"></i>{{ __('users.Butuh Bantuan') }}
-                    </a>
-                    @auth
-                    <div class="mb-3"></div>
-                    <a href="{{ route('daftaradmin.index') }}" class="btn btn-outline-success rounded-pill d-none d-md" role="button">
-                    <i class="bi bi-person-circle me-2"></i>Admin
-                    </a>
-                    
-                    </button>
-                    @endauth                
+                    </button>           
                 </div>
             </div>
             <!-- Copyright -->

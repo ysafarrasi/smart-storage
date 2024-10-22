@@ -111,12 +111,18 @@
                                         <li class="dropdown-header text-start">
                                             <h6>{{ __('users.Filter') }}</h6>
                                         </li>
-                                        <li><a class="dropdown-item" href="#">{{ __('Hari ini') }}</a></li>
-                                        <li><a class="dropdown-item" href="#">{{ __('Minggu ini') }}</a></li>
-                                        <li><a class="dropdown-item" href="#">{{ __('Bulan ini') }}</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="filterData('today')">{{ __('Hari ini') }}</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="filterData('week')">{{ __('Minggu ini') }}</a></li>
+                                        <li><a class="dropdown-item" href="#" onclick="filterData('month')">{{ __('Bulan ini') }}</a></li>
                                     </ul>
                                 </div>
-
+                                <script>
+                                    function filterData(filter) {
+                                        let url = new URL(window.location.href);
+                                        url.searchParams.set('filter', filter);
+                                        window.location.href = url.toString();
+                                    }
+                                </script>
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         {{ __('users.Data Senjata') }}
@@ -128,9 +134,8 @@
                                             <tr>
                                                 <th scope="col">No</th>
                                                 <th scope="col">{{ __('users.ID Senjata') }}</th>
-                                                </th>
                                                 <th scope="col">{{ __('users.Nomor Rak') }}</th>
-                                                <th scope="col">{{ __('users.Status') }}</th>
+                                                <th scope="col" style="min-width: 120px;">{{ __('users.Status') }}</th>
                                                 <th scope="col">{{ __('users.Berat') }}</th>
                                             </tr>
                                         </thead>
@@ -189,16 +194,16 @@
 
                     // Pastikan data array berada di response.data
                     $.each(response.data, function(index, item) {
-                        var status = item.status == '0' ? 'tidak tersedia' : 
-                                    item.status == '1' ? 'masuk tidak ada magazine' : 'masuk tidak ada magazine';
-                                    item.status == '2' ? 'masuk ada magazine' : 'masuk ada magazine';
+                        var status = item.status == '0' ? 'Tidak Tersedia' : 
+                                    item.status == '1' ? 'Masuk Tidak Ada Magazine' : 
+                                    item.status == '2' ? 'Masuk Ada Magazine' : 'Status Tidak Diketahui';
                         
                         weaponData.append('<tr>' +
                             '<td>' + (index + 1) + '</td>' +
                             '<td>' + item.loadCellID + '</td>' +
                             '<td>' + item.rackNumber + '</td>' +
                             '<td>' + status + '</td>' +
-                            '<td>' + item.weight + '</td>' +
+                            '<td>' + item.weight + ' Gram</td>' +
                             '</tr>');
                     });
                 },

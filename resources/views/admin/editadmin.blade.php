@@ -26,27 +26,32 @@
         <div class="card">
           <div class="card-header text-center">Edit Admin</div>
           <div class="card-body">
-            @csrf
-            <form  action="{{ route('daftaradmin.update', $user->id) }}" method="POST" >
-              @method('PUT')
-              <div class="mb-3">
-                <input type="hidden" name="id" value="{{ $user->id }}">
-              </div>
-              <div class="mb-3">
-                <label for="name" class="form-label">Nama</label>
-                <input id="name" type="text" class="form-control" name="name" value="{{ $user->name }}" placeholder="Masukkan nama" required>
-              </div>
-              <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input id="email" type="email" class="form-control" name="email" value="{{ $user->email }}" placeholder="Masukkan email" required>
-              </div>
-              <div class="mb-3">
-                <label for="password" class="form-label">Kata Sandi (isi jika ingin mengganti)</label>
-                <input id="password" type="password" class="form-control" name="password" placeholder="Masukkan kata sandi baru" autocomplete="new-password">
-              </div>
-              <button type="submit" class="btn btn-warning w-100">Simpan Perubahan</button>
+            <form action="{{ route('daftaradmin.update', $user->id ?? '') }}" method="POST">
+                @csrf
+                @method('PUT') <!-- Menempatkan di dalam form -->
+                
+                <div class="mb-3">
+                    <input type="hidden" name="id" value="{{ $user->id ?? '' }}">
+                </div>
+        
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nama</label>
+                    <input id="name" type="text" class="form-control" name="name" value="{{ $user->name ?? '' }}" placeholder="Masukkan nama" required>
+                </div>
+        
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input id="email" type="email" class="form-control" name="email" value="{{ $user->email ?? '' }}" placeholder="Masukkan email" required>
+                </div>
+        
+                <div class="mb-3">
+                    <label for="password" class="form-label">Kata Sandi (isi jika ingin mengganti)</label>
+                    <input id="password" type="password" class="form-control" name="password" placeholder="Masukkan kata sandi baru" autocomplete="new-password">
+                </div>
+        
+                <button type="submit" class="btn btn-warning w-100">Simpan Perubahan</button>
             </form>
-          </div>
+        </div>        
         </div>
       </div>
     </div>
