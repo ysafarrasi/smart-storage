@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, sshirink-to-fit=no">
-    <script type="text/javascript" src="{{ asset('jquery/jquery.min.js') }}jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ asset('jquery/jquery.min.js') }}"></script>
 
     <title>{{ __('users.Penyimpanan Senjata Otomatis') }} - Automation Weapon Rack</title>
     <meta name="keywords" content="{{ $metaKeywords ?? 'default, keywords' }}">
@@ -71,7 +71,6 @@
                     <span>{{ __('users.Data Senjata') }}</span>
                 </a>
             </li><!-- End F.A.Q Page Nav -->
-
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('daftaradmin.index') }}">
                     <i class="fa-solid fa-user-shield"></i>

@@ -12,7 +12,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Favicons -->
-    <link href="{{ asset('img/Logo G - STAS RG.png') }}" rel="icon">
+    <link href="{{ asset('assets/img/Logo G - STAS RG.png') }}" rel="icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">

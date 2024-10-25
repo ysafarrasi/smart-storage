@@ -14,6 +14,6 @@ class Tmprfid extends Model
     public $timestamps = false; // Tambahkan baris ini
 
     protected $fillable = [
-        'nokartu'
-    ];
+        'nokartu',
+    ];    
 }

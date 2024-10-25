@@ -11,7 +11,7 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="{{ asset('assets/img/stasrg1-modified.png') }}" rel="icon">
+    <link href="{{ asset('assets/img/Logo G - STAS RG.png') }}" rel="icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -69,9 +69,17 @@
                     <span>{{ __('users.Data Senjata') }}</span>
                 </a>
             </li><!-- End F.A.Q Page Nav -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ route('daftaradmin.index') }}">
+                    <i class="fa-solid fa-user-shield"></i>
+                    <span>{{ __('users.DaftarkanAdmin') }}</span>
+                </a>
+            </li><!-- End F.A.Q Page Nav -->
         </ul>
 
-    </aside><!-- End Sidebar-->
+    </aside>
+    <!-- End Sidebar-->
+    
 
     <main id="main" class="main">
         <div class="pagetitle">
@@ -94,7 +102,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">{{ __('users.Tambah Data Pengguna') }}</h5>
-
+        
                             @if ($errors->any())
                                 <div class="alert alert-danger">
                                     <ul>
@@ -103,101 +111,104 @@
                                         @endforeach
                                     </ul>
                                 </div>
-
                             @endif
+        
                             <!--Data Akses -->
-                            <form method="POST" action="{{ route('personnel') }}" class="row g-3 needs-validation">
+                            <form method="POST" action="{{ route('personnel-store') }}" class="row g-3 needs-validation">
                                 @csrf
-
+        
                                 @php
                                     $tmprfid = \App\Models\Tmprfid::first();
                                     $nokartu = $tmprfid ? $tmprfid->nokartu : 'Tidak ada data';
                                 @endphp
+        
                                 <div class="col-12">
-                                    <label for="inputNanme4" class="form-label">No Kartu</label>
-                                    <input type="text" name="nokartu" id="nokartu"
-                                        placeholder="Tempelkan Kartu RFID" class="form-control"
-                                        value="{{ $nokartu }}" required>
+                                    <label for="nokartu" class="form-label">No Kartu</label>
+                                    <input type="text" name="nokartu" id="nokartu" placeholder="Tempelkan Kartu RFID" class="form-control" readonly required>
                                 </div>
-
+                                <script> 
+                                    setInterval(function() {
+                                        fetch('/api/rfid-data') // Endpoint yang mengambil data dari model Tmprfid
+                                            .then(response => {
+                                                if (!response.ok) {
+                                                    throw new Error('Network response was not ok ' + response.statusText);
+                                                }
+                                                return response.json();
+                                            })
+                                            .then(data => {
+                                                if (data && data.nokartu) {
+                                                    document.getElementById('nokartu').value = data.nokartu;
+                                                } else {
+                                                    document.getElementById('nokartu').value = 'RFID tidak terbaca';
+                                                }
+                                            })
+                                            .catch(error => console.error('Error fetching RFID data:', error));
+                                    }, 3000); // Cek setiap 3 detik
+                                </script>
+        
                                 <div class="col-12">
-                                    <label class="col-sm-2 col-form-label">{{ __('ID Senjata') }}</label>
+                                    <label for="loadCellID" class="col-sm-2 col-form-label">{{ __('ID Senjata') }}</label>
                                     <div class="col">
-                                        <select class="form-select" aria-label="Default select example"
-                                            name="loadCellID" id="loadCellID" required>
+                                        <select class="form-select" name="loadCellID" id="loadCellID" required>
                                             <option value="">Buka Pilihan Ini</option>
-
+        
                                             @php
-                                                // Mengambil id_senjata yang unik dari model Tmploadcell
-                                                $weapon = DB::table('weapons')->distinct()->pluck('loadCellID');
+                                                // Mengambil loadCellID yang unik dari model Weapons
+                                                $weapons = DB::table('weapons')->distinct()->pluck('loadCellID');
                                             @endphp
-
-                                            @foreach ($weapon as $item)
+        
+                                            @foreach ($weapons as $item)
                                                 @php
-                                                    $isUsed = App\Models\Personnel::where(
-                                                        'loadCellID',
-                                                        $item,
-                                                    )->exists();
+                                                    $isUsed = App\Models\Personnel::where('loadCellID', $item)->exists();
                                                 @endphp
-
+        
                                                 @if (!$isUsed)
-                                                    <option value="{{ $item }}">{{ $item }}
-                                                    </option>
+                                                    <option value="{{ $item }}">{{ $item }}</option>
                                                 @endif
-                                                {{-- <option value="{{ $item->loadCellID }}">{{ $item->loadCellID }}</option> --}}
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
-
+        
                                 <div class="col-12">
-                                    <label for="inputText" class="form-label">{{ __('ID Personnel') }}</label>
-                                    <input type="text" class="form-control" name="personnel_id" id="personnel"
-                                        required>
+                                    <label for="personnel_id" class="form-label">{{ __('ID Personnel') }}</label>
+                                    <input type="text" class="form-control" name="personnel_id" id="personnel_id" required>
                                 </div>
                                 <div class="col-12">
-                                    <label for="inputText" class="form-label">{{ __('Nama Pengguna') }}</label>
-                                    <input type="text" class="form-control" name="nama" id="nama"
-                                        required>
+                                    <label for="nama" class="form-label">{{ __('Nama Pengguna') }}</label>
+                                    <input type="text" class="form-control" name="nama" id="nama" required>
                                 </div>
                                 <div class="col-12">
-                                    <label for="inputText" class="form-label">{{ __('Pangkat') }}</label>
-                                    <input type="text" class="form-control" name="pangkat" id="pangkat"
-                                        required>
+                                    <label for="pangkat" class="form-label">{{ __('Pangkat') }}</label>
+                                    <input type="text" class="form-control" name="pangkat" id="pangkat" required>
                                 </div>
                                 <div class="col-12">
-                                    <label for="inputNumber" class="form-label">{{ __('NRP') }}</label>
-                                    <input type="text" class="form-control" name="nrp" id="nrp"
-                                        required>
+                                    <label for="nrp" class="form-label">{{ __('NRP') }}</label>
+                                    <input type="text" class="form-control" name="nrp" id="nrp" required>
                                 </div>
                                 <div class="col-12">
-                                    <label for="inputText" class="form-label">{{ __('Jabatan') }}</label>
-                                    <input type="text" class="form-control" name="jabatan" id="jabatan"
-                                        required>
+                                    <label for="jabatan" class="form-label">{{ __('Jabatan') }}</label>
+                                    <input type="text" class="form-control" name="jabatan" id="jabatan" required>
                                 </div>
                                 <div class="col-12">
-                                    <label for="inputText" class="form-label">{{ __('Kesatuan') }}</label>
-                                    <input type="text" class="form-control" name="kesatuan" id="kesatuan"
-                                        required>
+                                    <label for="kesatuan" class="form-label">{{ __('Kesatuan') }}</label>
+                                    <input type="text" class="form-control" name="kesatuan" id="kesatuan" required>
                                 </div>
-
+        
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary" name="btnSubmit"
-                                        id="Submit">{{ __('Simpan') }}</button>
+                                    <button type="submit" class="btn btn-primary" id="Submit">{{ __('Simpan') }}</button>
                                     <button type="reset" class="btn btn-secondary">Reset</button>
                                 </div>
                             </form>
-
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+        
     </main><!-- End #main -->
-
-    @include('partials.footer')
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-            class="bi bi-arrow-up-short"></i></a>
+    
+            
 
     <!-- Vendor JS Files -->
     <script src="{{ asset('assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
@@ -215,3 +226,4 @@
 </body>
 
 </html>
+

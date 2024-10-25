@@ -37,78 +37,63 @@ class PersonnelController extends Controller
         }
     }
 
-    public function create(Request $request)
+    public function create()
     {
-        // Arahkan langsung ke fungsi store
-        return $this->store($request);
+        // Menampilkan tampilan form personnel-add
+        return view('webpage.personnel-add');
     }
+    
     
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        // buatkan client guzzle
-        $client = new Client();
+        // Ambil data nokartu terbaru dari API
+        $response = Http::get('http://127.0.0.1:8000/api/rfid-data');
+        $tmprfid = $response->json()['data'] ?? null;
     
-        // buatkan url api local
-        $url = "http://127.0.0.1:8000/api/rfid-data";
+        // Validasi data yang diterima dari form
+        $validatedData = $request->validate([
+            'nokartu' => 'required|integer|exists:tmprfids,nokartu',
+            'loadCellID' => 'required|exists:weapons,loadCellID', // Pastikan loadCellID valid dari tabel weapons
+            'personnel_id' => 'required|unique:personnels,personnel_id', // Pastikan personnel_id unik
+            'nama' => 'required|string|max:255',
+            'pangkat' => 'required|string|max:255',
+            'nrp' => 'required|string|max:255',
+            'jabatan' => 'required|string|max:255',
+            'kesatuan' => 'required|string|max:255',
+        ]);
+    
+        // Pastikan ada data nokartu yang valid
+        if (!$tmprfid || empty($tmprfid['nokartu'])) {
+            return back()->withErrors(['nokartu' => 'Tidak ada data kartu RFID yang tersedia.']);
+        }
     
         try {
-            // jalankan request GET ke api local
-            Log::info('Memulai request API ke ' . $url);
-            $response = $client->request('GET', $url);
-            Log::info('Request API berhasil');
-    
-            // dapatkan isi dari response
-            $content = $response->getBody()->getContents();
-            Log::info('Response dari API: ' . $content);
-    
-            // decode json menjadi array
-            $contentArray = json_decode($content, true);
-    
-            // Pastikan API mengembalikan data yang valid
-            if (!isset($contentArray['data'])) {
-                throw new \Exception('Format response API tidak valid. Tidak ada field "data".');
-            }
-    
-            // dapatkan data dari array
-            $data = $contentArray['data'];
-    
-            // dapatkan data weapon dari database
-            $weapon = Weapon::select('loadCellID')->get();
-    
             // Buat instance Personnel baru
             $personnel = new Personnel();
-    
-            // Ambil nomor kartu dari database atau data API
-            $tmprfid = Tmprfid::latest()->value('nokartu');
-    
-            // Ambil weapon loadCellID
-            $weapon = Weapon::value('loadCellID');
-    
-            // Set field personnel
-            $personnel->personnel_id = Personnel::max('personnel_id') + 1;
-            $personnel->nama = $request->nama;
-            $personnel->pangkat = $request->pangkat;
-            $personnel->nrp = $request->nrp;
-            $personnel->jabatan = $request->jabatan;
-            $personnel->kesatuan = $request->kesatuan;
+            $personnel->nokartu = $tmprfid['nokartu']; // Diambil dari API
+            $personnel->loadCellID = $validatedData['loadCellID']; // Diambil dari pilihan select yang ada di form
+            $personnel->personnel_id = $validatedData['personnel_id'];
+            $personnel->nama = $validatedData['nama'];
+            $personnel->pangkat = $validatedData['pangkat'];
+            $personnel->nrp = $validatedData['nrp'];
+            $personnel->jabatan = $validatedData['jabatan'];
+            $personnel->kesatuan = $validatedData['kesatuan'];
             $personnel->save();
     
-            // return view dengan data yang di dapatkan
-            return redirect()->route('webpage.personnel-add', compact('data', 'weapon'));
-    
-        } catch (\GuzzleHttp\Exception\RequestException $e) {
-            // Menangani kesalahan pada saat request ke API (misal API tidak tersedia)
-            Log::error('Error saat melakukan request ke API: ' . $e->getMessage());
-            return response()->json(['error' => 'Gagal mengambil data dari API.'], 500);
+            // Redirect ke halaman success
+            return redirect()->route('personnel')->with('success', 'Data personnel berhasil ditambahkan.');
         } catch (\Exception $e) {
-            // Menangani kesalahan lainnya (misal kesalahan format data atau database)
-            Log::error('Error saat melakukan request ke API atau menyimpan data personnel: ' . $e->getMessage());
-            return response()->json(['error' => 'Terjadi kesalahan saat mengambil data dari API atau menyimpan personnel'], 500);
+            // Tangani jika ada error saat menyimpan
+            dd($e->getMessage());
+            return back()->withErrors(['error' => 'Terjadi kesalahan saat menyimpan data personnel.']);
         }
     }
+    
+    
+    
     
     
     
@@ -171,23 +156,49 @@ class PersonnelController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit($id)
-    {
-        $personnel = Personnel::find($id); // Pastikan data ditemukan
-        $weapon = Weapon::select('loadCellID')->get();
-        if (!$personnel) {
-            abort(404); // Jika tidak ditemukan, tampilkan error 404
-        }
-        return view('webpage.personnel-edit', compact('personnel'), compact('weapon'),);
+{
+    $personnel = Personnel::find($id); // Pastikan data ditemukan
+    $weapon = Weapon::select('loadCellID')->get();
+    if (!$personnel) {
+        abort(404); // Jika tidak ditemukan, tampilkan error 404
     }
+    return view('webpage.personnel-edit', compact('personnel'), compact('weapon'));
+}
 
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
+/**
+ * Perbarui sumber daya yang ditentukan di penyimpanan.
+ */
+public function update(Request $request, string $id)
+{
+    $request->validate([
+        'loadCellID' => 'required',
+        'nama' => 'required',
+        'pangkat' => 'required',
+        'nrp' => 'required',
+        'jabatan' => 'required',
+        'kesatuan' => 'required',
+        'nokartu' => 'required',
+    ]);
+
+    $personnel = Personnel::where('personnel_id', $id)->first();
+
+    if ($personnel) {
+        $personnel->update([
+            'nama' => $request->nama,
+            'pangkat' => $request->pangkat,
+            'nrp' => $request->nrp,
+            'jabatan' => $request->jabatan,
+            'kesatuan' => $request->kesatuan,
+            'nokartu' => $request->nokartu,
+            'loadCellID' => $request->loadCellID
+        ]);
+
+        return redirect()->route('personnel')->with('success', 'Data berhasil diperbarui');
     }
+
+    return redirect()->route('personnel.edit', $id)->with('error', 'Data tidak ditemukan');
+}
 
     /**
      * Remove the specified resource from storage.
@@ -197,8 +208,8 @@ class PersonnelController extends Controller
         $personnel = Personnel::where('personnel_id', $id)->first();
 
         if ($personnel) {
-            $personnel->delete();
-            return redirect()->route('personnel')->with('success', 'Data berhasil dihapus');
+            $personnel->forceDelete();
+            return redirect()->route('personnel')->with('success', 'Data berhasil dihapus permanen');
         }
 
         return redirect()->route('webpage.personnel-delete', compact($personnel))->with('error', 'Data tidak ditemukan');

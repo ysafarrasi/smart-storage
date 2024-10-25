@@ -126,7 +126,15 @@
                                 <div class="card-body">
                                     <h5 class="card-title">
                                         {{ __('users.Data Senjata') }}
-                                        <span>{{ __(' | Hari ini') }}</span>
+                                        @if (request()->query('filter') == 'today')
+                                            <span>{{ __(' | Hari ini') }}</span>
+                                        @elseif (request()->query('filter') == 'week')
+                                            <span>{{ __(' | Minggu ini') }}</span>
+                                        @elseif (request()->query('filter') == 'month')
+                                            <span>{{ __(' | Bulan ini') }}</span>
+                                        @else
+                                            <span>{{ __(' | Semua') }}</span>
+                                        @endif
                                     </h5>
 
                                     <table class="table table-borderless datatable">
@@ -184,7 +192,7 @@
         $(document).ready(function() {
 
             $(document).ready(function() {
-    function loadData() {
+            function loadData() {
             $.ajax({
                 url: '/api/weapons',
                 type: 'GET',

@@ -26,4 +26,20 @@ class WeaponController extends Controller
         $data = $contentArray['data'];
         return view('weapon', ['data' => $data]);
     }
+
+    public function filter($timeframe)
+    {
+        $today = now();
+
+        $query = Weapon::query();
+
+        match ($timeframe) {
+            'today' => $query->whereDate('created_at', $today),
+            'week' => $query->whereBetween('created_at', [$today->startOfWeek(), $today->endOfWeek()]),
+            'month' => $query->whereMonth('created_at', $today->month)->whereYear('created_at', $today->year),
+        };
+
+        return $query->get();
+    }
 }
+

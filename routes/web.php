@@ -54,6 +54,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
   Route::get('/load-data', action: [BoardController::class, 'loadData'])->name('load-data');
 
   Route::get('/weapon',  [WeaponController::class, 'index'])->name('weapon');
+  Route::get('/senjata/filter/{timeframe}', [WeaponController::class, 'filter'])->name('senjata.filter');
+
 
   Route::get('/personnel',  [PersonnelController::class, 'index'])->name('personnel');
   Route::get('/personnel/add-personnel',  [PersonnelController::class, 'create'])->name('personnel-add');

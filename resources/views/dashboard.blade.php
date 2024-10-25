@@ -12,7 +12,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Favicons -->
-    <link href="{{ asset('img/Logo G - STAS RG.png') }}" rel="icon">
+    <link href="{{ asset('assets/img/Logo G - STAS RG.png') }}" rel="icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -54,7 +54,7 @@
                     <i class="bi bi-clipboard"></i>
                     <span>{{ __('users.Papan Status Senjata') }}</span>
                 </a>
-            </li><!-- End Profile Page Nav -->
+            </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('personnel') }}">
                     <i class="fa-solid fa-person-rifle"></i>
