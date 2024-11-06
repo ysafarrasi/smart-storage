@@ -47,55 +47,60 @@ class PersonnelController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        // Ambil data nokartu terbaru dari API
-        $response = Http::get('http://127.0.0.1:8000/api/rfid-data');
-        $tmprfid = $response->json()['data'] ?? null;
-    
-        // Validasi data yang diterima dari form
-        $validatedData = $request->validate([
-            'nokartu' => 'required|integer|exists:tmprfids,nokartu',
-            'loadCellID' => 'required|exists:weapons,loadCellID', // Pastikan loadCellID valid dari tabel weapons
-            'personnel_id' => 'required|unique:personnels,personnel_id', // Pastikan personnel_id unik
-            'nama' => 'required|string|max:255',
-            'pangkat' => 'required|string|max:255',
-            'nrp' => 'required|string|max:255',
-            'jabatan' => 'required|string|max:255',
-            'kesatuan' => 'required|string|max:255',
-        ]);
-    
-        // Pastikan ada data nokartu yang valid
-        if (!$tmprfid || empty($tmprfid['nokartu'])) {
-            return back()->withErrors(['nokartu' => 'Tidak ada data kartu RFID yang tersedia.']);
+
+        public function store(Request $request)
+        {
+            // Ambil data nokartu terbaru dari API dengan timeout yang lebih lama dan retry yang lebih panjang
+            try {
+                $response = Http::retry(5, 500) // Mencoba 5 kali dengan jeda 500ms antara setiap percobaan
+                                ->timeout(10) // Timeout 10 detik
+                                ->get('http://127.0.0.1:8000/api/rfid-data');
+        
+                if ($response->failed()) {
+                    return back()->withErrors(['nokartu' => 'Gagal mengambil data kartu RFID dari API.']);
+                }
+        
+                $tmprfid = $response->json()['data'] ?? null;
+            } catch (\Exception $e) {
+                return back()->withErrors(['nokartu' => 'Terjadi kesalahan saat mengambil data RFID: ' . $e->getMessage()]);
+            }
+        
+            // Pastikan ada data nokartu yang valid
+            if (!$tmprfid || empty($tmprfid['nokartu'])) {
+                return back()->withErrors(['nokartu' => 'Tidak ada data kartu RFID yang tersedia.']);
+            }
+        
+            // Validasi data form
+            $validatedData = $request->validate([
+                'loadCellID' => 'required|exists:weapons,loadCellID',
+                'personnel_id' => 'required|unique:personnels,personnel_id',
+                'nama' => 'required|string|max:255',
+                'pangkat' => 'required|string|max:255',
+                'nrp' => 'required|string|max:255',
+                'jabatan' => 'required|string|max:255',
+                'kesatuan' => 'required|string|max:255',
+            ]);
+        
+            try {
+                // Simpan data personnel baru ke database
+                $personnel = new Personnel();
+                $personnel->nokartu = $tmprfid['nokartu']; // Mengambil nomor kartu dari respons API
+                $personnel->loadCellID = $validatedData['loadCellID'];
+                $personnel->personnel_id = $validatedData['personnel_id'];
+                $personnel->nama = $validatedData['nama'];
+                $personnel->pangkat = $validatedData['pangkat'];
+                $personnel->nrp = $validatedData['nrp'];
+                $personnel->jabatan = $validatedData['jabatan'];
+                $personnel->kesatuan = $validatedData['kesatuan'];
+                $personnel->save();
+        
+                return redirect()->route('personnel')->with('success', 'Data personnel berhasil ditambahkan dan nomor kartu disimpan.');
+            } catch (\Exception $e) {
+                return back()->withErrors(['error' => 'Terjadi kesalahan saat menyimpan data personnel: ' . $e->getMessage()]);
+            }
         }
-    
-        try {
-            // Buat instance Personnel baru
-            $personnel = new Personnel();
-            $personnel->nokartu = $tmprfid['nokartu']; // Diambil dari API
-            $personnel->loadCellID = $validatedData['loadCellID']; // Diambil dari pilihan select yang ada di form
-            $personnel->personnel_id = $validatedData['personnel_id'];
-            $personnel->nama = $validatedData['nama'];
-            $personnel->pangkat = $validatedData['pangkat'];
-            $personnel->nrp = $validatedData['nrp'];
-            $personnel->jabatan = $validatedData['jabatan'];
-            $personnel->kesatuan = $validatedData['kesatuan'];
-            $personnel->save();
-    
-            // Redirect ke halaman success
-            return redirect()->route('personnel')->with('success', 'Data personnel berhasil ditambahkan.');
-        } catch (\Exception $e) {
-            // Tangani jika ada error saat menyimpan
-            dd($e->getMessage());
-            return back()->withErrors(['error' => 'Terjadi kesalahan saat menyimpan data personnel.']);
-        }
-    }
-    
-    
-    
-    
-    
+        
+        
     
     // /**
     //  * Store a newly created resource in storage.

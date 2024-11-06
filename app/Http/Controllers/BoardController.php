@@ -21,7 +21,7 @@ class BoardController extends Controller
 
     public function loadData()
     {
-        $response = Http::get('http://127.0.0.1:8000/api/load-cell-data');
+        $response = Http::get('/api/load-cell-data');
         $data = $response->json()['data'] ?? [];
 
         // Urutkan data berdasarkan rackNumber secara ascending

@@ -12,28 +12,37 @@ class AuthAPIController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
+            'name' => 'required|string',
+            'password' => 'required|string'
         ]);
 
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('name', $request->name)->first();
 
         if (! $user || ! Hash::check($request->password, $user->password)) {
-            throw ValidationException::withMessages([
-                'email' => ['The provided credentials are incorrect.'],
-            ]);
+            return response()->json([
+                'message' => 'Login failed, invalid credentials'
+            ], 401);
         }
 
-        $tokenName = $request->input('tokenAPI', 'default_token_name');
-        $token = $user->createToken($tokenName)->plainTextToken;
+        $token = $user->createToken('API Token')->plainTextToken;
 
-        return response()->json(['token' => $token], 200);
+        return response()->json([
+            'message' => 'Login successful',
+            'token' => $token,
+            'user' => $user
+        ], 200);
     }
 
+    /**
+     * Method for user logout.
+     */
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
 
-        return response()->json(['message' => 'Logged out successfully'], 200);
+        return response()->json([
+            'message' => 'Logout successful'
+        ], 200);
     }
+
 }

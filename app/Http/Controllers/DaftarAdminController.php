@@ -39,27 +39,36 @@ class DaftarAdminController extends Controller
         }
         return view('admin.editadmin', compact('user'));
     }
-
-    // Memperbarui data admin
+    
     public function update(Request $request, $id) {
         $user = User::findOrFail($id);
-
+    
+        // Validasi input
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $user->id,
-            'password' => 'sometimes|confirmed|min:6',
+            'password' => 'nullable|confirmed|min:6',
         ]);
-
-        if ($request->password) {
+    
+        // Mengisi data yang diperbarui
+        $user->fill($request->only('name', 'email'));
+    
+        // Cek dan hash password baru jika diisi
+        if ($request->filled('password')) {
             $user->password = Hash::make($request->password);
         }
-
-        if (!$user->update($request->only('name', 'email', 'password'))) {
-            return redirect()->route('daftaradmin.index')->with('error', 'Gagal memperbarui admin')->withInput();
+    
+        // Simpan data ke database
+        if (!$user->save()) {
+            return redirect()->route('daftaradmin.index')
+                            ->with('error', 'Gagal memperbarui admin')
+                            ->withInput();
         }
-
-        return redirect()->route('daftaradmin.index')->with('success', 'Admin berhasil diperbarui');
+    
+        return redirect()->route('daftaradmin.index')
+                        ->with('success', 'Admin berhasil diperbarui');
     }
+    
 
     // Menampilkan detail admin
     public function show(User $user) {

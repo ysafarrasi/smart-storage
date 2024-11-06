@@ -106,97 +106,111 @@
                             @if ($errors->any())
                                 <div class="alert alert-danger">
                                     <ul>
-                                        @foreach ($errors->all() as $item)
-                                            <li>{{ $item }}</li>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
                                         @endforeach
                                     </ul>
                                 </div>
                             @endif
         
-                            <!--Data Akses -->
-                            <form method="POST" action="{{ route('personnel-store') }}" class="row g-3 needs-validation">
+                            <!-- Form Tambah Data Pengguna -->
+                            <form method="POST" action="{{ route('personnel-store') }}" class="row g-3 needs-validation" novalidate>
                                 @csrf
         
-                                @php
-                                    $tmprfid = \App\Models\Tmprfid::first();
-                                    $nokartu = $tmprfid ? $tmprfid->nokartu : 'Tidak ada data';
-                                @endphp
-        
+                                <!-- Input No Kartu RFID -->
                                 <div class="col-12">
                                     <label for="nokartu" class="form-label">No Kartu</label>
-                                    <input type="text" name="nokartu" id="nokartu" placeholder="Tempelkan Kartu RFID" class="form-control" readonly required>
+                                    <input 
+                                        type="text" 
+                                        name="nokartu" 
+                                        id="nokartu" 
+                                        placeholder="Tempelkan Kartu RFID" 
+                                        class="form-control" 
+                                        readonly 
+                                        required>
+                                    <span id="rfidError" class="text-danger"></span>
                                 </div>
-                                <script> 
-                                    setInterval(function() {
-                                        fetch('/api/rfid-data') // Endpoint yang mengambil data dari model Tmprfid
-                                            .then(response => {
-                                                if (!response.ok) {
-                                                    throw new Error('Network response was not ok ' + response.statusText);
-                                                }
-                                                return response.json();
-                                            })
+        
+                                <script>
+                                    const interval = setInterval(() => {
+                                        fetch('http://127.0.0.1/api/rfid-data')
+                                            .then(response => response.json())
                                             .then(data => {
-                                                if (data && data.nokartu) {
-                                                    document.getElementById('nokartu').value = data.nokartu;
+                                                const nokartuInput = document.getElementById('nokartu');
+                                                const rfidError = document.getElementById('rfidError');
+                                
+                                                if (data && data.data && data.data.nokartu) {
+                                                    nokartuInput.value = data.data.nokartu;
+                                                    rfidError.innerText = ''; // Hapus pesan error
+                                                    clearInterval(interval); // Hentikan interval setelah RFID terbaca
                                                 } else {
-                                                    document.getElementById('nokartu').value = 'RFID tidak terbaca';
+                                                    nokartuInput.value = '';
+                                                    rfidError.innerText = 'RFID tidak terbaca, coba lagi.';
                                                 }
                                             })
-                                            .catch(error => console.error('Error fetching RFID data:', error));
+                                            .catch(error => {
+                                                console.error('Error fetching RFID data:', error);
+                                                document.getElementById('rfidError').innerText = 'Terjadi kesalahan saat mengambil data RFID.';
+                                            });
                                     }, 3000); // Cek setiap 3 detik
-                                </script>
+                                </script>                                                               
         
+                                <!-- Pilihan Load Cell ID (ID Senjata) -->
                                 <div class="col-12">
-                                    <label for="loadCellID" class="col-sm-2 col-form-label">{{ __('ID Senjata') }}</label>
-                                    <div class="col">
-                                        <select class="form-select" name="loadCellID" id="loadCellID" required>
-                                            <option value="">Buka Pilihan Ini</option>
+                                    <label for="loadCellID" class="form-label">{{ __('ID Senjata') }}</label>
+                                    <select class="form-select" name="loadCellID" id="loadCellID" required>
+                                        <option value="">Pilih ID Senjata</option>
         
+                                        @php
+                                            $weapons = DB::table('weapons')->distinct()->pluck('loadCellID');
+                                        @endphp
+        
+                                        @foreach ($weapons as $item)
                                             @php
-                                                // Mengambil loadCellID yang unik dari model Weapons
-                                                $weapons = DB::table('weapons')->distinct()->pluck('loadCellID');
+                                                $isUsed = App\Models\Personnel::where('loadCellID', $item)->exists();
                                             @endphp
         
-                                            @foreach ($weapons as $item)
-                                                @php
-                                                    $isUsed = App\Models\Personnel::where('loadCellID', $item)->exists();
-                                                @endphp
-        
-                                                @if (!$isUsed)
-                                                    <option value="{{ $item }}">{{ $item }}</option>
-                                                @endif
-                                            @endforeach
-                                        </select>
-                                    </div>
+                                            @if (!$isUsed)
+                                                <option value="{{ $item }}">{{ $item }}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
                                 </div>
         
+                                <!-- Input Data Personnel -->
                                 <div class="col-12">
                                     <label for="personnel_id" class="form-label">{{ __('ID Personnel') }}</label>
                                     <input type="text" class="form-control" name="personnel_id" id="personnel_id" required>
                                 </div>
+        
                                 <div class="col-12">
                                     <label for="nama" class="form-label">{{ __('Nama Pengguna') }}</label>
                                     <input type="text" class="form-control" name="nama" id="nama" required>
                                 </div>
+        
                                 <div class="col-12">
                                     <label for="pangkat" class="form-label">{{ __('Pangkat') }}</label>
                                     <input type="text" class="form-control" name="pangkat" id="pangkat" required>
                                 </div>
+        
                                 <div class="col-12">
                                     <label for="nrp" class="form-label">{{ __('NRP') }}</label>
                                     <input type="text" class="form-control" name="nrp" id="nrp" required>
                                 </div>
+        
                                 <div class="col-12">
                                     <label for="jabatan" class="form-label">{{ __('Jabatan') }}</label>
                                     <input type="text" class="form-control" name="jabatan" id="jabatan" required>
                                 </div>
+        
                                 <div class="col-12">
                                     <label for="kesatuan" class="form-label">{{ __('Kesatuan') }}</label>
                                     <input type="text" class="form-control" name="kesatuan" id="kesatuan" required>
                                 </div>
         
+                                <!-- Tombol Submit dan Reset -->
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary" id="Submit">{{ __('Simpan') }}</button>
+                                    <button type="submit" class="btn btn-primary">{{ __('Simpan') }}</button>
                                     <button type="reset" class="btn btn-secondary">Reset</button>
                                 </div>
                             </form>
@@ -205,6 +219,7 @@
                 </div>
             </div>
         </section>
+        
         
     </main><!-- End #main -->
     
