@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script type="text/javascript" src="{{ asset('jquery/jquery.min.js') }}"></script>
 
     <title>{{ __('Edit Data Personel - Penyimpanan Senjata Otomatis') }}</title>
@@ -71,8 +71,8 @@
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('daftaradmin.index') }}">
-                    <i class="bi bi-shield-lock"></i>
-                    <span>{{ __('Admin') }}</span>
+                    <i class="fa-solid fa-user-shield"></i>
+                    <span>{{ __('users.DaftarkanAdmin') }}</span>
                 </a>
             </li><!-- End F.A.Q Page Nav -->
         </ul>
@@ -101,43 +101,37 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ __('Edit Data Personel') }}</h5>
                             <!--Data Akses -->
-                            <form method="POST" action="{{ route('personnel')}} "
-                                class="row g-3 needs-validation">
-                                @method('POST')
+                            <form method="POST" action="{{ route('personnel-update', $personnel->personnel_id) }}" class="row g-3 needs-validation">
+                                @method('PATCH') <!-- Gunakan PATCH untuk update -->
                                 @csrf
-                                <div id="norfid"></div>
-
                                 <div class="col-12">
                                     <label class="col-sm-2 col-form-label">{{ __('ID Senjata') }}</label>
                                     <div class="col">
                                         <select class="form-select" name="loadCellID" id="loadCellID" required>
                                             <option value="{{ $personnel->loadCellID }}">{{ $personnel->loadCellID }}</option>
-                                            @php
-                                                $weapon = DB::table('weapons')->distinct()->pluck('loadCellID');
-                                            @endphp
-
                                             @foreach ($weapon as $item)
-                                                @if ($item != $personnel->loadCellID)
-                                                    <option value="{{ $item }}">{{ $item }}</option>
+                                                @if ($item->loadCellID != $personnel->loadCellID)
+                                                    <option value="{{ $item->loadCellID }}">{{ $item->loadCellID }}</option>
                                                 @endif
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
+
                                 <div class="col-12">
                                     <label for="inputEmail" class="form-label">{{ __('ID Personnel') }}</label>
                                     <input type="text" class="form-control" name="personnel_id" id="personnel_id"
-                                        value="{{ $personnel->personel_id }}" required>
+                                        value="{{ $personnel->personnel_id }}" readonly>
                                 </div>
                                 <div class="col-12">
                                     <label for="inputText" class="form-label">{{ __('Nama Pengguna') }}</label>
-                                    <input type="text" class="form-control" name="name" id="name"
-                                        value="{{ $personnel->name }}" required>
+                                    <input type="text" class="form-control" name="nama" id="nama"
+                                        value="{{ $personnel->nama }}" required>
                                 </div>
                                 <div class="col-12">
                                     <label for="inputText" class="form-label">{{ __('Pangkat') }}</label>
-                                    <input type="text" class="form-control" name="rank" id="rank"
-                                        value="{{ $personnel->rank }}" required>
+                                    <input type="text" class="form-control" name="pangkat" id="pangkat"
+                                        value="{{ $personnel->pangkat }}" required>
                                 </div>
                                 <div class="col-12">
                                     <label for="inputNumber" class="form-label">{{ __('NRP') }}</label>
@@ -146,19 +140,20 @@
                                 </div>
                                 <div class="col-12">
                                     <label for="inputText" class="form-label">{{ __('Jabatan') }}</label>
-                                    <input type="text" class="form-control" name="position" id="position"
-                                        value="{{ $personnel->position }}" required>
+                                    <input type="text" class="form-control" name="jabatan" id="jabatan"
+                                        value="{{ $personnel->jabatan }}" required>
                                 </div>
                                 <div class="col-12">
                                     <label for="inputText" class="form-label">{{ __('Kesatuan') }}</label>
-                                    <input type="text" class="form-control" name="unit" id="unit"
-                                        value="{{ $personnel->unit }}" required>
+                                    <input type="text" class="form-control" name="kesatuan" id="kesatuan"
+                                        value="{{ $personnel->kesatuan }}" required>
                                 </div>
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary" name="btnSubmit"id="btnSubmit">{{ __('Simpan') }}</button>
+                                    <button type="submit" class="btn btn-primary">{{ __('Simpan') }}</button>
                                     <button type="reset" class="btn btn-secondary">Reset</button>
                                 </div>
-                            </form><!-- Vertical Form -->
+                            </form>
+                            <!-- Vertical Form -->
                         </div>
                     </div>
                 </div>

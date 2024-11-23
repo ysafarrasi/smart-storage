@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Weapon;
+use App\Models\Personnel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class APIWeaponController extends Controller
 {
@@ -35,4 +37,24 @@ class APIWeaponController extends Controller
             ]);
         }
     }
+
+    public function getLoadCells()
+    {
+        $loadCells = DB::table('weapons')->distinct()->pluck('loadCellID');
+        return response()->json([
+            'code' => 200,
+            'data' => $loadCells
+        ]);
+    }
+
+    public function checkLoadCell($loadCellID)
+    {
+        $isUsed = Personnel::where('loadCellID', $loadCellID)->exists();
+        return response()->json([
+            'isUsed' => $isUsed
+        ]);
+    }
+
+
 }
+

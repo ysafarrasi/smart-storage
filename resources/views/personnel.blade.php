@@ -155,7 +155,7 @@
                                                     <td class="align-middle">
                                                         @if ($personnel)
                                                             <div class="btn-group" role="group" aria-label="Basic example">
-                                                                <a href="{{ route('personneledit', $personnel->personnel_id) }}"
+                                                                <a href="{{ route('personnel-edit', $personnel->personnel_id) }}"
                                                                     class="btn btn-warning rounded-pill me-2">{{ __('users.Edit') }}</a>
 
                                                                 <form

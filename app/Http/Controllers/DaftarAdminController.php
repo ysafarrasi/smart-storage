@@ -33,42 +33,40 @@ class DaftarAdminController extends Controller
     }
 
     // Menampilkan form edit admin
-    public function edit(User $user) {
-        if (!$user) {
-            return redirect()->route('daftaradmin.index')->with('error', 'Admin tidak ditemukan');
-        }
-        return view('admin.editadmin', compact('user'));
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);  // Mengambil data user berdasarkan ID
+        return view('admin.editadmin', compact('user'));  // Menampilkan halaman edit dengan data user
     }
-    
-    public function update(Request $request, $id) {
-        $user = User::findOrFail($id);
-    
-        // Validasi input
+
+    // Metode untuk menangani pembaruan data admin
+    public function update(Request $request, $id)
+    {
         $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,' . $user->id,
-            'password' => 'nullable|confirmed|min:6',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . $id,
+            'password' => 'nullable|confirmed|min:8',  // Validasi password jika ada
         ]);
-    
-        // Mengisi data yang diperbarui
-        $user->fill($request->only('name', 'email'));
-    
-        // Cek dan hash password baru jika diisi
+
+        $user = User::findOrFail($id);  // Mengambil data user berdasarkan ID
+
+        // Update data admin
+        $user->name = $request->name;
+        $user->email = $request->email;
+
+        // Cek apakah password diisi, jika ya, maka update password
         if ($request->filled('password')) {
             $user->password = Hash::make($request->password);
         }
-    
-        // Simpan data ke database
-        if (!$user->save()) {
-            return redirect()->route('daftaradmin.index')
-                            ->with('error', 'Gagal memperbarui admin')
-                            ->withInput();
-        }
-    
-        return redirect()->route('daftaradmin.index')
-                        ->with('success', 'Admin berhasil diperbarui');
+
+        // Simpan perubahan
+        $user->save();
+
+        // Redirect atau beri notifikasi sukses
+        return redirect()->route('daftaradmin.index')->with('success', 'Admin berhasil diperbarui.');
     }
-    
+
+
 
     // Menampilkan detail admin
     public function show(User $user) {

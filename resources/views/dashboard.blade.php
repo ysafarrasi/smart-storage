@@ -93,36 +93,28 @@
 
         <section class="section dashboard">
             <div class="row">
-
-                <!-- Left side columns -->
                 <div class="col">
                     <div class="row">
-
                         <!-- Recent -->
                         <div class="col-12">
                             <div class="card recent-sales overflow-auto">
-
                                 <div class="filter">
-                                    <a class="icon" href="#" data-bs-toggle="dropdown"><i
-                                            class="bi bi-three-dots"></i></a>
-                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow" id="filter-options">
                                         <li class="dropdown-header text-start">
                                             <h6>{{ __('users.Filter') }}</h6>
                                         </li>
-
-                                        <li><a class="dropdown-item" href="#">{{ __('users.Hari ini') }}</a></li>
-                                        <li><a class="dropdown-item" href="#">{{ __('users.Bulan ini') }}</a>
-                                        </li>
-                                        <li><a class="dropdown-item" href="#">{{ __('users.Tahun ini') }}</a>
-                                        </li>
+                                        <li><a class="dropdown-item filter-option" data-filter="today" href="#">{{ __('users.Hari ini') }}</a></li>
+                                        <li><a class="dropdown-item filter-option" data-filter="month" href="#">{{ __('users.Bulan ini') }}</a></li>
+                                        <li><a class="dropdown-item filter-option" data-filter="year" href="#">{{ __('users.Tahun ini') }}</a></li>
                                     </ul>
                                 </div>
-
+        
                                 <div class="card-body">
                                     <h5 class="card-title">{{ __('users.Status Penggunaan Senjata') }}
-                                        <span>{{ __('users. | Hari ini') }}</span>
+                                        <span id="filter-label">{{ __('users. | Hari ini') }}</span>
                                     </h5>
-
+        
                                     <div class="tab-content pt-2">
                                         <div class="row">
                                             <div class="row" id="rack-data">
@@ -130,7 +122,7 @@
                                             </div>
                                         </div>
                                     </div>
-
+        
                                     <table class="table table-borderless datatable">
                                         <thead>
                                             <tr>
@@ -144,29 +136,17 @@
                                             </tr>
                                         </thead>
                                         <tbody id="status-data">
-                                            {{-- @foreach ($statuses as $index => $status)
-                                                <tr>
-                                                    <td>{{ $index + 1 }}</td>
-                                                    <td>{{ $status->loadCellID }}</td>
-                                                    <td>{{ $status->personnel->personnel_id }}</td>
-                                                    <td>{{ $status->personnel->nama }}</td>
-                                                    <td>{{ $status->tanggal }}</td>
-                                                    <td>{{ $status->time_out }}</td>
-                                                    <td>{{ $status->time_in }}</td>
-                                                </tr>
-                                            @endforeach --}}
+                                            <!-- Data yang difilter akan ditampilkan di sini -->
                                         </tbody>
                                     </table>
                                 </div>
-
                             </div>
                         </div><!-- End Recent -->
-
                     </div>
                 </div><!-- End Left side columns -->
-
             </div>
         </section>
+        
 
     </main><!-- End #main -->
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
@@ -305,6 +285,63 @@
             setInterval(fetchStatuses, 5000); // 30 seconds
         });
     </script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const filterOptions = document.querySelectorAll('.filter-option');
+        const filterLabel = document.getElementById('filter-label');
+        const statusData = document.getElementById('status-data');
+
+        filterOptions.forEach(option => {
+            option.addEventListener('click', (event) => {
+                event.preventDefault();
+                const filter = option.getAttribute('data-filter');
+
+                // Update label
+                if (filter === 'today') {
+                    filterLabel.textContent = '{{ __("users. | Hari ini") }}';
+                } else if (filter === 'month') {
+                    filterLabel.textContent = '{{ __("users.| Bulan ini") }}';
+                } else if (filter === 'year') {
+                    filterLabel.textContent = '{{ __("users.| Tahun ini") }}';
+                }
+
+                // Fetch and display filtered data
+                fetchFilteredData(filter);
+            });
+        });
+
+        function fetchFilteredData(filter) {
+            // Contoh fetch data dari API (ubah URL sesuai backend Anda)
+            const url = `/api/status-senjata?filter=${filter}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    displayData(data);
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        }
+
+        function displayData(data) {
+            statusData.innerHTML = ''; // Hapus data lama
+            data.forEach((item, index) => {
+                statusData.innerHTML += `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${item.id_senjata}</td>
+                        <td>${item.id_pengguna}</td>
+                        <td>${item.nama_pengguna}</td>
+                        <td>${item.tanggal}</td>
+                        <td>${item.waktu_keluar}</td>
+                        <td>${item.waktu_masuk}</td>
+                    </tr>
+                `;
+            });
+        }
+    });
+    </script>
+
 
 </body>
 

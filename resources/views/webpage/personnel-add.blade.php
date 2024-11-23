@@ -3,9 +3,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, ">
     <script type="text/javascript" src="{{ asset('jquery/jquery.min.js') }}"></script>
-
+shrink-to-fit=no
     <title>Tambah Data Personil - Penyimpanan Senjata Otomatis</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
@@ -79,7 +79,7 @@
 
     </aside>
     <!-- End Sidebar-->
-    
+
 
     <main id="main" class="main">
         <div class="pagetitle">
@@ -102,7 +102,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">{{ __('users.Tambah Data Pengguna') }}</h5>
-        
+
                             @if ($errors->any())
                                 <div class="alert alert-danger">
                                     <ul>
@@ -112,102 +112,110 @@
                                     </ul>
                                 </div>
                             @endif
-        
+
                             <!-- Form Tambah Data Pengguna -->
                             <form method="POST" action="{{ route('personnel-store') }}" class="row g-3 needs-validation" novalidate>
                                 @csrf
-        
+
                                 <!-- Input No Kartu RFID -->
                                 <div class="col-12">
                                     <label for="nokartu" class="form-label">No Kartu</label>
-                                    <input 
-                                        type="text" 
-                                        name="nokartu" 
-                                        id="nokartu" 
-                                        placeholder="Tempelkan Kartu RFID" 
-                                        class="form-control" 
-                                        readonly 
+                                    <input
+                                        type="text"
+                                        name="nokartu"
+                                        id="nokartu"
+                                        placeholder="Tempelkan Kartu RFID"
+                                        class="form-control"
+                                        readonly
                                         required>
                                     <span id="rfidError" class="text-danger"></span>
                                 </div>
-        
+
                                 <script>
-                                    const interval = setInterval(() => {
-                                        fetch('http://127.0.0.1/api/rfid-data')
+                                    const rfidInput = document.getElementById('nokartu');
+                                    const rfidError = document.getElementById('rfidError');
+                                    setInterval(() => {
+                                        fetch('http://192.168.1.10:8000/api/rfid-data')
                                             .then(response => response.json())
                                             .then(data => {
-                                                const nokartuInput = document.getElementById('nokartu');
-                                                const rfidError = document.getElementById('rfidError');
-                                
-                                                if (data && data.data && data.data.nokartu) {
-                                                    nokartuInput.value = data.data.nokartu;
-                                                    rfidError.innerText = ''; // Hapus pesan error
-                                                    clearInterval(interval); // Hentikan interval setelah RFID terbaca
+                                                if (data.code === 200 && data.data && data.data.length > 0) {
+                                                    rfidInput.value = data.data[0].nokartu;
+                                                    rfidError.innerText = '';
                                                 } else {
-                                                    nokartuInput.value = '';
+                                                    rfidInput.value = '';
                                                     rfidError.innerText = 'RFID tidak terbaca, coba lagi.';
                                                 }
                                             })
-                                            .catch(error => {
-                                                console.error('Error fetching RFID data:', error);
-                                                document.getElementById('rfidError').innerText = 'Terjadi kesalahan saat mengambil data RFID.';
+                                            .catch(() => {
+                                                rfidError.innerText = 'Terjadi kesalahan saat mengambil data RFID.';
                                             });
-                                    }, 3000); // Cek setiap 3 detik
-                                </script>                                                               
-        
+                                    }, 1000);
+                                </script>
+
                                 <!-- Pilihan Load Cell ID (ID Senjata) -->
                                 <div class="col-12">
                                     <label for="loadCellID" class="form-label">{{ __('ID Senjata') }}</label>
                                     <select class="form-select" name="loadCellID" id="loadCellID" required>
                                         <option value="">Pilih ID Senjata</option>
-        
-                                        @php
-                                            $weapons = DB::table('weapons')->distinct()->pluck('loadCellID');
-                                        @endphp
-        
-                                        @foreach ($weapons as $item)
-                                            @php
-                                                $isUsed = App\Models\Personnel::where('loadCellID', $item)->exists();
-                                            @endphp
-        
-                                            @if (!$isUsed)
-                                                <option value="{{ $item }}">{{ $item }}</option>
-                                            @endif
-                                        @endforeach
                                     </select>
+                                    <span id="loadCellError" class="text-danger"></span>
                                 </div>
-        
+
+                                <script>
+                                    const loadCellSelect = document.getElementById('loadCellID');
+                                    const loadCellError = document.getElementById('loadCellError');
+
+                                    fetch('http://192.168.1.10:8000/api/load-cell-data')
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            if (data.code === 200 && data.data && data.data.length > 0) {
+                                                data.data.forEach(item => {
+                                                    const option = document.createElement('option');
+                                                    option.value = item.loadCellID;
+                                                    option.textContent = item.loadCellID;
+                                                    loadCellSelect.appendChild(option);
+                                                });
+                                                loadCellError.innerText = '';
+                                            } else {
+                                                loadCellError.innerText = 'Tidak ada ID Senjata yang tersedia.';
+                                            }
+                                        })
+                                        .catch(() => {
+                                            loadCellError.innerText = 'Terjadi kesalahan saat mengambil data ID Senjata.';
+                                        });
+                                </script>
+
                                 <!-- Input Data Personnel -->
                                 <div class="col-12">
                                     <label for="personnel_id" class="form-label">{{ __('ID Personnel') }}</label>
                                     <input type="text" class="form-control" name="personnel_id" id="personnel_id" required>
                                 </div>
-        
+
                                 <div class="col-12">
                                     <label for="nama" class="form-label">{{ __('Nama Pengguna') }}</label>
-                                    <input type="text" class="form-control" name="nama" id="nama" required>
+                                    <input type="text" class="form-control" name="nama" id="nama" value="{{ old('nama') }}" required>
                                 </div>
-        
+
                                 <div class="col-12">
                                     <label for="pangkat" class="form-label">{{ __('Pangkat') }}</label>
-                                    <input type="text" class="form-control" name="pangkat" id="pangkat" required>
+                                    <input type="text" class="form-control" name="pangkat" id="pangkat" value="{{ old('pangkat') }}" required>
                                 </div>
-        
+
                                 <div class="col-12">
                                     <label for="nrp" class="form-label">{{ __('NRP') }}</label>
                                     <input type="text" class="form-control" name="nrp" id="nrp" required>
                                 </div>
-        
+
                                 <div class="col-12">
                                     <label for="jabatan" class="form-label">{{ __('Jabatan') }}</label>
                                     <input type="text" class="form-control" name="jabatan" id="jabatan" required>
                                 </div>
-        
+
                                 <div class="col-12">
                                     <label for="kesatuan" class="form-label">{{ __('Kesatuan') }}</label>
                                     <input type="text" class="form-control" name="kesatuan" id="kesatuan" required>
                                 </div>
-        
+
                                 <!-- Tombol Submit dan Reset -->
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-primary">{{ __('Simpan') }}</button>
@@ -219,11 +227,10 @@
                 </div>
             </div>
         </section>
-        
-        
+
     </main><!-- End #main -->
-    
-            
+
+
 
     <!-- Vendor JS Files -->
     <script src="{{ asset('assets/vendor/apexcharts/apexcharts.min.js') }}"></script>

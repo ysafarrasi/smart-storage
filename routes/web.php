@@ -54,13 +54,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
   Route::get('/load-data', action: [BoardController::class, 'loadData'])->name('load-data');
 
   Route::get('/weapon',  [WeaponController::class, 'index'])->name('weapon');
-  Route::get('/senjata/filter/{timeframe}', [WeaponController::class, 'filter'])->name('senjata.filter');
+  Route::get('/weapons/filter/{timeframe}', [WeaponController::class, 'filter'])->name('senjata.filter');
 
 
   Route::get('/personnel',  [PersonnelController::class, 'index'])->name('personnel');
   Route::get('/personnel/add-personnel',  [PersonnelController::class, 'create'])->name('personnel-add');
   Route::post('/personnel',  [PersonnelController::class, 'store'])->name('personnel-store');
-  Route::get('/personnel/edit/{id}',  [PersonnelController::class, 'edit'])->name('personneledit');
+  Route::get('/personnel/edit/{id}', [PersonnelController::class, 'edit'])->name('personnel-edit');
+  Route::patch('/personnel/update/{id}', [PersonnelController::class, 'update'])->name('personnel-update');
   Route::delete('/personnel/delete/{id}',  [PersonnelController::class, 'destroy'])->name('personnel-delete');
 
   Route::get('/fetch-personnel', [PersonnelController::class, 'fetchPersonnel'])->name('fetch-personnel');
@@ -92,7 +93,7 @@ Route::get('setlocale/{locale?}', function ($locale = null) {
 // Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 // Route::get('/dashboard', [DashboardController::class, 'showDATAHome'])->middleware('auth')->name('dashboard');
 
-// Route::get('/board',  [BoardController::class, 'ShowDataBoard'])->middleware('auth')->name('board'); 
+// Route::get('/board',  [BoardController::class, 'ShowDataBoard'])->middleware('auth')->name('board');
 // Route::get('/load-data', action: [BoardController::class, 'loadData'])->name('load-data');
 
 // Route::get('/weapon',  [WeaponController::class, 'index'])->name('weapon');

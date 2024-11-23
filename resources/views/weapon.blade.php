@@ -148,15 +148,6 @@
                                             </tr>
                                         </thead>
                                         <tbody id="weapon-data">
-                                            {{-- @foreach ($data as $item)
-                                                <tr>
-                                                    <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $item['loadCellID'] }}</td>
-                                                    <td>{{ $item['rackNumber'] }}</td>
-                                                    <td>{{ $item['status'] }}</td>
-                                                    <td>{{ $item['weight'] }}</td>
-                                                </tr>
-                                            @endforeach --}}
                                         </tbody>
                                     </table>
                                 </div>
@@ -189,12 +180,11 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script type="text/javascript">
-        $(document).ready(function() {
 
             $(document).ready(function() {
             function loadData() {
             $.ajax({
-                url: '/api/weapons',
+                url: 'api/load-cell-data',
                 type: 'GET',
                 success: function(response) {
                     var weaponData = $('#weapon-data');
@@ -220,15 +210,11 @@
                 }
             });
         }
-
         // Panggil fungsi loadData saat halaman selesai dimuat
         loadData();
-    });
-
-            
-
-            loadData(); // Initial load
-            setInterval(loadData, 5000); // Refresh every 5 seconds
+        // Memuat data setiap 5 detik});
+        loadData(); // Initial load
+        setInterval(loadData, 5000); // Refresh every 5 seconds
         });
     </script>
 </body>
