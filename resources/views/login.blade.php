@@ -28,6 +28,9 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
     <meta name="theme-color" content="#712cf9">
 
+    {{-- logo stas --}}
+    <link href="{{ asset('assets/img/Logo G - STAS RG.png') }}" rel="icon">
+
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
 </head>
@@ -56,7 +59,7 @@
     </header>
 
     <main id="main">
-        
+
 
         <section class="py-5 text-center container">
             <div class="row py-lg-5">
@@ -364,7 +367,7 @@
         </div>
 
         {{-- Slide video --}}
-        <div class="album py-5" background-image="assets/img/background.jpg"> 
+        <div class="album py-5" background-image="assets/img/background.jpg">
             <div class="container">
 
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -379,7 +382,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>                    
+                    </div>
                     <div class="col">
                         <div class="card shadow-sm h-100">
                             <video controls width="100%" height="240">
@@ -391,7 +394,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>   
+                    </div>
 
                     <div class="col">
                         <div class="card shadow-sm h-100">

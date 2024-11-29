@@ -12,7 +12,7 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-    
+
     'Penyimpanan Senjata Otomatis' => 'Weapon Storage System',
     'Deskripsi' => 'Automated Weapon Storage Dashboard: Easily monitor and control access to weapons. Our system gives you full control over who can access your weapons, at any time.',
     'Mulai' => 'Start',
@@ -86,6 +86,10 @@ return [
 	'Masukan_Email_Admin' => 'Enter Admin Email',
 	'Masukan_Kata_Sandi_Admin' => 'Enter Admin Password',
 	'Ulangi_kata_Sandi_Admin' => 'Repeat Admin Password',
+    'Tambahkanadmin' => 'Add Admin',
+    'EditAdmin' => 'Edit Admin',
+    'Namaadmin' => 'Admin name',
+    'simpanperubahan' => 'Save Changes',
 
 
 ];

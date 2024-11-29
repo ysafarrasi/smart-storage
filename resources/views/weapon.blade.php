@@ -31,6 +31,8 @@
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.css') }}">
+    <script src="{{ asset('assets/fontawesome/js/all.min.js') }}" defer></script>
 
 </head>
 
@@ -49,31 +51,30 @@
                 </a>
             </li><!-- End Dashboard Nav -->
 
-            <li class="nav-heading">{{ __('users.halaman') }}</li>
+            <li class="nav-heading">{{ __('users.Halaman') }}</li>
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('board') }}">
                     <i class="bi bi-clipboard"></i>
                     <span>{{ __('users.Papan Status Senjata') }}</span>
                 </a>
-            </li><!-- End Profile Page Nav -->
+            </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('personnel') }}">
-                    <i class="fa-solid fa-person-rifle"></i>
+                    <i class="fa-solid fa-person-rifle" style="color:#899bbd; margin-right: 10px;"></i>
                     <span>{{ __('users.Data Pengguna') }}</span>
                 </a>
             </li><!-- End Profile Page Nav -->
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('weapon') }}">
-                    <i class="fa-solid fa-gun"></i>
+                    <i class="fa-solid fa-gun" style="color:#899bbd; margin-right: 10px;"></i>
                     <span>{{ __('users.Data Senjata') }}</span>
                 </a>
             </li><!-- End F.A.Q Page Nav -->
-
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('daftaradmin.index') }}">
-                    <i class="fa-solid fa-user-shield"></i>
+                    <i class="fa-solid fa-user-shield" style="color:#899bbd; margin-right: 10px;"></i>
                     <span>{{ __('users.DaftarkanAdmin') }}</span>
                 </a>
             </li><!-- End F.A.Q Page Nav -->
@@ -192,10 +193,10 @@
 
                     // Pastikan data array berada di response.data
                     $.each(response.data, function(index, item) {
-                        var status = item.status == '0' ? 'Tidak Tersedia' : 
-                                    item.status == '1' ? 'Masuk Tidak Ada Magazine' : 
+                        var status = item.status == '0' ? 'Tidak Tersedia' :
+                                    item.status == '1' ? 'Masuk Tidak Ada Magazine' :
                                     item.status == '2' ? 'Masuk Ada Magazine' : 'Status Tidak Diketahui';
-                        
+
                         weaponData.append('<tr>' +
                             '<td>' + (index + 1) + '</td>' +
                             '<td>' + item.loadCellID + '</td>' +

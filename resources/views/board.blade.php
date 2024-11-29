@@ -30,6 +30,8 @@
     <link href="{{ asset('assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
     <!-- Main CSS -->
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.css') }}">
+    <script src="{{ asset('assets/fontawesome/js/all.min.js') }}" defer></script>
 
 </head>
 
@@ -42,7 +44,7 @@
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('dashboard') }}">
+                <a class="nav-link collapsed " href="{{ route('dashboard') }}">
                     <i class="bi bi-grid"></i>
                     <span>{{ __('users.Dashboard') }}</span>
                 </a>
@@ -55,23 +57,23 @@
                     <i class="bi bi-clipboard"></i>
                     <span>{{ __('users.Papan Status Senjata') }}</span>
                 </a>
-            </li><!-- End Profile Page Nav -->
+            </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('personnel') }}">
-                    <i class="fa-solid fa-person-rifle"></i>
+                    <i class="fa-solid fa-person-rifle" style="color:#899bbd; margin-right: 10px;"></i>
                     <span>{{ __('users.Data Pengguna') }}</span>
                 </a>
             </li><!-- End Profile Page Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('weapon') }}">
-                    <i class="fa-solid fa-gun"></i>
+                    <i class="fa-solid fa-gun" style="color:#899bbd; margin-right: 10px;"></i>
                     <span>{{ __('users.Data Senjata') }}</span>
                 </a>
             </li><!-- End F.A.Q Page Nav -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('daftaradmin.index') }}">
-                    <i class="fa-solid fa-user-shield"></i>
+                    <i class="fa-solid fa-user-shield" style="color:#899bbd; margin-right: 10px;"></i>
                     <span>{{ __('users.DaftarkanAdmin') }}</span>
                 </a>
             </li><!-- End F.A.Q Page Nav -->
@@ -166,7 +168,7 @@
                     }
                 });
             }
-    
+
             // Fungsi untuk memperbarui UI
             function updateUI(data) {
                 $('#rack-data').empty(); // Kosongkan data sebelum memuat yang baru
@@ -191,24 +193,24 @@
                             id: 'senjata' + rackData.loadCellID,
                             class: 'container d-flex justify-content-evenly align-items-center'
                         });
-    
+
                         // Menentukan warna LED berdasarkan status
                         var ledGreen = $('<div>', {
                             class: 'pill'
                         }).append($('<div>', {
-                            class: 'led led-green' + (rackData.status == '2' ? ' on' : '')
+                            class: 'led led-green' + (rackData.status == '1' ? ' on' : '')
                         }));
                         var ledYellow = $('<div>', {
                             class: 'pill'
                         }).append($('<div>', {
-                            class: 'led led-yellow' + (rackData.status == '1' ? ' on' : '')
+                            class: 'led led-yellow' + (rackData.status == '2' ? ' on' : '')
                         }));
                         var ledRed = $('<div>', {
                             class: 'pill'
                         }).append($('<div>', {
-                            class: 'led led-red' + (rackData.status == '0' ? ' on' : '')
+                            class: 'led led-red' + (rackData.status == '-1' ? ' on' : '')
                         }));
-    
+
                         senjataContainer.append(ledGreen, ledYellow, ledRed);
                         cardBody.append(cardTitle, senjataContainer);
                         card.append(cardBody);
@@ -220,14 +222,14 @@
                     $('#rack-data').html('<p>Data tidak tersedia.</p>');
                 }
             }
-    
+
             // Memuat data pertama kali
             loadData();
             // Memuat data setiap 2 detik
             setInterval(loadData, 2000);
         });
     </script>
-    
+
 </body>
 
 </html>

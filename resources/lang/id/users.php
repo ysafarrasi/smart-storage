@@ -86,6 +86,10 @@ return [
 	'Masukan_Email_Admin' => 'Masukan Email Admin',
 	'Masukan_Kata_Sandi_Admin' => 'Masukan Kata Sandi Admin',
 	'Ulangi_kata_Sandi_Admin' => 'Ulangi Kata Sandi Admin',
+    'Tambahkanadmin' => 'Tambahkan Admin',
+    'EditAdmin' => 'Edit Admin',
+    'Namaadmin' => 'Nama Admin',
+    'simpanperubahan' => 'Simpan Perubahan'
 
 
 

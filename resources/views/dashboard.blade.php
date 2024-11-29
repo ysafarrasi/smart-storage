@@ -30,6 +30,11 @@
     <link href="{{ asset('assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
     <!-- Template Main CSS File -->
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.css') }}">
+    <script src="{{ asset('assets/fontawesome/js/all.min.js') }}" defer></script>
+
+
+
 </head>
 
 <body>
@@ -57,20 +62,20 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('personnel') }}">
-                    <i class="fa-solid fa-person-rifle"></i>
+                    <i class="fa-solid fa-person-rifle" style="color:#899bbd; margin-right: 10px;"></i>
                     <span>{{ __('users.Data Pengguna') }}</span>
                 </a>
             </li><!-- End Profile Page Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('weapon') }}">
-                    <i class="fa-solid fa-gun"></i>
+                    <i class="fa-solid fa-gun" style="color:#899bbd; margin-right: 10px;"></i>
                     <span>{{ __('users.Data Senjata') }}</span>
                 </a>
             </li><!-- End F.A.Q Page Nav -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('daftaradmin.index') }}">
-                    <i class="fa-solid fa-user-shield"></i>
+                    <i class="fa-solid fa-user-shield" style="color:#899bbd; margin-right: 10px;"></i>
                     <span>{{ __('users.DaftarkanAdmin') }}</span>
                 </a>
             </li><!-- End F.A.Q Page Nav -->
@@ -109,12 +114,12 @@
                                         <li><a class="dropdown-item filter-option" data-filter="year" href="#">{{ __('users.Tahun ini') }}</a></li>
                                     </ul>
                                 </div>
-        
+
                                 <div class="card-body">
                                     <h5 class="card-title">{{ __('users.Status Penggunaan Senjata') }}
                                         <span id="filter-label">{{ __('users. | Hari ini') }}</span>
                                     </h5>
-        
+
                                     <div class="tab-content pt-2">
                                         <div class="row">
                                             <div class="row" id="rack-data">
@@ -122,7 +127,6 @@
                                             </div>
                                         </div>
                                     </div>
-        
                                     <table class="table table-borderless datatable">
                                         <thead>
                                             <tr>
@@ -146,7 +150,7 @@
                 </div><!-- End Left side columns -->
             </div>
         </section>
-        
+
 
     </main><!-- End #main -->
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
@@ -161,7 +165,8 @@
     <script src="{{ asset('assets/vendor/simple-datatables/simple-datatables.js') }}"></script>
     <script src="{{ asset('assets/vendor/tinymce/tinymce.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
-    <script src="https://kit.fontawesome.com/878a3fab63.js" crossorigin="anonymous"></script>
+
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -184,7 +189,7 @@
                     }
                 });
             }
-    
+
             // Fungsi untuk memperbarui UI
             function updateUI(data) {
                 $('#rack-data').empty(); // Kosongkan data sebelum memuat yang baru
@@ -209,24 +214,24 @@
                             id: 'senjata' + rackData.loadCellID,
                             class: 'container d-flex justify-content-evenly align-items-center'
                         });
-    
+
                         // Menentukan warna LED berdasarkan status
                         var ledGreen = $('<div>', {
                             class: 'pill'
                         }).append($('<div>', {
-                            class: 'led led-green' + (rackData.status == '2' ? ' on' : '')
+                            class: 'led led-green' + (rackData.status == '1' ? ' on' : '')
                         }));
                         var ledYellow = $('<div>', {
                             class: 'pill'
                         }).append($('<div>', {
-                            class: 'led led-yellow' + (rackData.status == '1' ? ' on' : '')
+                            class: 'led led-yellow' + (rackData.status == '2' ? ' on' : '')
                         }));
                         var ledRed = $('<div>', {
                             class: 'pill'
                         }).append($('<div>', {
-                            class: 'led led-red' + (rackData.status == '0' ? ' on' : '')
+                            class: 'led led-red' + (rackData.status == '-1' ? ' on' : '')
                         }));
-    
+
                         senjataContainer.append(ledGreen, ledYellow, ledRed);
                         cardBody.append(cardTitle, senjataContainer);
                         card.append(cardBody);
@@ -238,7 +243,7 @@
                     $('#rack-data').html('<p>Data tidak tersedia.</p>');
                 }
             }
-    
+
             // Memuat data pertama kali
             loadData();
             // Memuat data setiap 2 detik

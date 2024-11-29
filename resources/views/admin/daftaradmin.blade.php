@@ -30,6 +30,8 @@
     <link href="{{ asset('assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
     <!-- Template Main CSS File -->
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.css') }}">
+    <script src="{{ asset('assets/fontawesome/js/all.min.js') }}" defer></script>
 </head>
 
 <body>
@@ -54,23 +56,23 @@
                     <i class="bi bi-clipboard"></i>
                     <span>{{ __('users.Papan Status Senjata') }}</span>
                 </a>
-            </li><!-- End Profile Page Nav -->
+            </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('personnel') }}">
-                    <i class="fa-solid fa-person-rifle"></i>
+                    <i class="fa-solid fa-person-rifle" style="color:#899bbd; margin-right: 10px;"></i>
                     <span>{{ __('users.Data Pengguna') }}</span>
                 </a>
             </li><!-- End Profile Page Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('weapon') }}">
-                    <i class="fa-solid fa-gun"></i>
+                    <i class="fa-solid fa-gun" style="color:#899bbd; margin-right: 10px;"></i>
                     <span>{{ __('users.Data Senjata') }}</span>
                 </a>
             </li><!-- End F.A.Q Page Nav -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('daftaradmin.index') }}">
-                    <i class="fa-solid fa-user-shield"></i>
+                    <i class="fa-solid fa-user-shield" style="color:#899bbd; margin-right: 10px;"></i>
                     <span>{{ __('users.DaftarkanAdmin') }}</span>
                 </a>
             </li><!-- End F.A.Q Page Nav -->
@@ -85,6 +87,7 @@
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('daftaradmin.index') }}"><i class="fa-solid fa-user-shield"></i></a></li>
+                    <li class="breadcrumb-item">{{ __('users.Halaman') }}</li>
                     <li class="breadcrumb-item active">{{ __('users.DaftarkanAdmin') }}</li>
                 </ol>
             </nav>
@@ -123,7 +126,7 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
-                            </table>                           
+                            </table>
                             <div class="text-end mt-3">
                                 <a href="{{ route('daftaradmin.create') }}" class="btn btn-primary">{{ __('users.Tambah Data') }}</a>
                             </div>
