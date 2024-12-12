@@ -3,15 +3,14 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, ">
+    <meta name="viewport" content="width=device-width, initial-scale=1,shrink-to-fit=no ">
     <script type="text/javascript" src="{{ asset('jquery/jquery.min.js') }}"></script>
-shrink-to-fit=no
     <title>Tambah Data Personil - Penyimpanan Senjata Otomatis</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="{{ asset('assets/img/Logo G - STAS RG.png') }}" rel="icon">
+    <link href="assets/img/Logo G - STAS RG.png" rel="icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -30,6 +29,8 @@ shrink-to-fit=no
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.css') }}">
+    <script src="{{ asset('assets/fontawesome/js/all.min.js') }}" defer></script>
 
 </head>
 
@@ -55,30 +56,29 @@ shrink-to-fit=no
                     <i class="bi bi-clipboard"></i>
                     <span>{{ __('users.Papan Status Senjata') }}</span>
                 </a>
-            </li><!-- End Profile Page Nav -->
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('personnel') }}">
-                    <i class="fa-solid fa-person-rifle"></i>
+                    <i class="fa-solid fa-person-rifle" style="color:#899bbd; margin-right: 10px;"></i>
                     <span>{{ __('users.Data Pengguna') }}</span>
                 </a>
             </li><!-- End Profile Page Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('weapon') }}">
-                    <i class="fa-solid fa-gun"></i>
+                    <i class="fa-solid fa-gun" style="color:#899bbd; margin-right: 10px;"></i>
                     <span>{{ __('users.Data Senjata') }}</span>
                 </a>
             </li><!-- End F.A.Q Page Nav -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('daftaradmin.index') }}">
-                    <i class="fa-solid fa-user-shield"></i>
+                    <i class="fa-solid fa-user-shield" style="color:#899bbd; margin-right: 10px;"></i>
                     <span>{{ __('users.DaftarkanAdmin') }}</span>
                 </a>
             </li><!-- End F.A.Q Page Nav -->
         </ul>
 
-    </aside>
-    <!-- End Sidebar-->
+    </aside><!-- End Sidebar-->
 
 
     <main id="main" class="main">
@@ -119,12 +119,12 @@ shrink-to-fit=no
 
                                 <!-- Input No Kartu RFID -->
                                 <div class="col-12">
-                                    <label for="nokartu" class="form-label">No Kartu</label>
+                                    <label for="nokartu" class="form-label">{{ __('users.No Kartu RFID') }}</label>
                                     <input
                                         type="text"
                                         name="nokartu"
                                         id="nokartu"
-                                        placeholder="Tempelkan Kartu RFID"
+                                        placeholder="{{ __('users.Tempelkan Kartu RFID') }}"
                                         class="form-control"
                                         readonly
                                         required>
@@ -143,11 +143,11 @@ shrink-to-fit=no
                                                     rfidError.innerText = '';
                                                 } else {
                                                     rfidInput.value = '';
-                                                    rfidError.innerText = 'RFID tidak terbaca, coba lagi.';
+                                                    rfidError.innerText = '{{ __('users.RFID tidak terbaca, coba lagi') }}';
                                                 }
                                             })
                                             .catch(() => {
-                                                rfidError.innerText = 'Terjadi kesalahan saat mengambil data RFID.';
+                                                rfidError.innerText = '{{ __('users.Terjadi kesalahan saat mengambil data RFID') }}';
                                             });
                                     }, 1000);
                                 </script>
@@ -156,7 +156,7 @@ shrink-to-fit=no
                                 <div class="col-12">
                                     <label for="loadCellID" class="form-label">{{ __('ID Senjata') }}</label>
                                     <select class="form-select" name="loadCellID" id="loadCellID" required>
-                                        <option value="">Pilih ID Senjata</option>
+                                        <option value="">{{ __('users.Pilih ID Senjata') }}</option>
                                     </select>
                                     <span id="loadCellError" class="text-danger"></span>
                                 </div>
@@ -177,11 +177,11 @@ shrink-to-fit=no
                                                 });
                                                 loadCellError.innerText = '';
                                             } else {
-                                                loadCellError.innerText = 'Tidak ada ID Senjata yang tersedia.';
+                                                loadCellError.innerText = '{{ __('users.Tidak ada ID Senjata yang tersedia') }}.';
                                             }
                                         })
                                         .catch(() => {
-                                            loadCellError.innerText = 'Terjadi kesalahan saat mengambil data ID Senjata.';
+                                            loadCellError.innerText = '{{ __('users.Terjadi kesalahan saat mengambil data ID Senjata') }}';
                                         });
                                 </script>
 
@@ -197,22 +197,22 @@ shrink-to-fit=no
                                 </div>
 
                                 <div class="col-12">
-                                    <label for="pangkat" class="form-label">{{ __('Pangkat') }}</label>
+                                    <label for="pangkat" class="form-label">{{ __('users.Pangkat') }}</label>
                                     <input type="text" class="form-control" name="pangkat" id="pangkat" value="{{ old('pangkat') }}" required>
                                 </div>
 
                                 <div class="col-12">
-                                    <label for="nrp" class="form-label">{{ __('NRP') }}</label>
+                                    <label for="nrp" class="form-label">{{ __('users.NRP') }}</label>
                                     <input type="text" class="form-control" name="nrp" id="nrp" required>
                                 </div>
 
                                 <div class="col-12">
-                                    <label for="jabatan" class="form-label">{{ __('Jabatan') }}</label>
+                                    <label for="jabatan" class="form-label">{{ __('users.Jabatan') }}</label>
                                     <input type="text" class="form-control" name="jabatan" id="jabatan" required>
                                 </div>
 
                                 <div class="col-12">
-                                    <label for="kesatuan" class="form-label">{{ __('Kesatuan') }}</label>
+                                    <label for="kesatuan" class="form-label">{{ __('users.Kesatuan') }}</label>
                                     <input type="text" class="form-control" name="kesatuan" id="kesatuan" required>
                                 </div>
 

@@ -3,15 +3,16 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, sshirink-to-fit=no">
     <script type="text/javascript" src="{{ asset('jquery/jquery.min.js') }}"></script>
 
-    <title>{{ __('Edit Data Personel - Penyimpanan Senjata Otomatis') }}</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
+    <title>{{ __('users.Edit Data Personnels Senjata Otomatis') }}</title>
+    <meta name="keywords" content="{{ $metaKeywords ?? 'default, keywords' }}">
+    <title>{{ $metaTitle ?? 'Default Title' }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Favicons -->
-    <link href="{{ asset('assets/img/stasrg1-modified.png') }}" rel="icon">
+    <link href="{{ asset('assets/img/Logo G - STAS RG.png') }}" rel="icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -27,9 +28,11 @@
     <link href="{{ asset('assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
-
-    <!-- Template Main CSS File -->
+    <!-- Main CSS -->
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.css') }}">
+    <script src="{{ asset('assets/fontawesome/js/all.min.js') }}" defer></script>
+
 </head>
 
 <body>
@@ -43,35 +46,34 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('dashboard') }}">
                     <i class="bi bi-grid"></i>
-                    <span>{{ __('Dashboard') }}</span>
+                    <span>{{ __('users.Dashboard') }}</span>
                 </a>
             </li><!-- End Dashboard Nav -->
 
-            <li class="nav-heading">{{ __('Halaman') }}</li>
+            <li class="nav-heading">{{ __('users.Halaman') }}</li>
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('board') }}">
                     <i class="bi bi-clipboard"></i>
-                    <span>{{ __('Papan Status Senjata') }}</span>
+                    <span>{{ __('users.Papan Status Senjata') }}</span>
                 </a>
-            </li><!-- End Profile Page Nav -->
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('personnel') }}">
-                    <i class="fa-solid fa-person-rifle"></i>
-                    <span>{{ __('Data Pengguna') }}</span>
+                    <i class="fa-solid fa-person-rifle" style="color:#899bbd; margin-right: 10px;"></i>
+                    <span>{{ __('users.Data Pengguna') }}</span>
                 </a>
             </li><!-- End Profile Page Nav -->
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('weapon') }}">
-                    <i class="fa-solid fa-gun"></i>
-                    <span>{{ __('Data Senjata') }}</span>
+                    <i class="fa-solid fa-gun" style="color:#899bbd; margin-right: 10px;"></i>
+                    <span>{{ __('users.Data Senjata') }}</span>
                 </a>
             </li><!-- End F.A.Q Page Nav -->
-
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('daftaradmin.index') }}">
-                    <i class="fa-solid fa-user-shield"></i>
+                    <i class="fa-solid fa-user-shield" style="color:#899bbd; margin-right: 10px;"></i>
                     <span>{{ __('users.DaftarkanAdmin') }}</span>
                 </a>
             </li><!-- End F.A.Q Page Nav -->
@@ -124,32 +126,32 @@
                                         value="{{ $personnel->personnel_id }}" readonly>
                                 </div>
                                 <div class="col-12">
-                                    <label for="inputText" class="form-label">{{ __('Nama Pengguna') }}</label>
+                                    <label for="inputText" class="form-label">{{ __('users.Nama Pengguna') }}</label>
                                     <input type="text" class="form-control" name="nama" id="nama"
                                         value="{{ $personnel->nama }}" required>
                                 </div>
                                 <div class="col-12">
-                                    <label for="inputText" class="form-label">{{ __('Pangkat') }}</label>
+                                    <label for="inputText" class="form-label">{{ __('users.Pangkat') }}</label>
                                     <input type="text" class="form-control" name="pangkat" id="pangkat"
                                         value="{{ $personnel->pangkat }}" required>
                                 </div>
                                 <div class="col-12">
-                                    <label for="inputNumber" class="form-label">{{ __('NRP') }}</label>
+                                    <label for="inputNumber" class="form-label">{{ __('users.NRP') }}</label>
                                     <input type="text" class="form-control" name="nrp" id="nrp"
                                         value="{{ $personnel->nrp }}" required>
                                 </div>
                                 <div class="col-12">
-                                    <label for="inputText" class="form-label">{{ __('Jabatan') }}</label>
+                                    <label for="inputText" class="form-label">{{ __('users.Jabatan') }}</label>
                                     <input type="text" class="form-control" name="jabatan" id="jabatan"
                                         value="{{ $personnel->jabatan }}" required>
                                 </div>
                                 <div class="col-12">
-                                    <label for="inputText" class="form-label">{{ __('Kesatuan') }}</label>
+                                    <label for="inputText" class="form-label">{{ __('users.Kesatuan') }}</label>
                                     <input type="text" class="form-control" name="kesatuan" id="kesatuan"
                                         value="{{ $personnel->kesatuan }}" required>
                                 </div>
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">{{ __('Simpan') }}</button>
+                                    <button type="submit" class="btn btn-primary">{{ __('users.Simpan') }}</button>
                                     <button type="reset" class="btn btn-secondary">Reset</button>
                                 </div>
                             </form>

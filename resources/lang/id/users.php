@@ -89,7 +89,13 @@ return [
     'Tambahkanadmin' => 'Tambahkan Admin',
     'EditAdmin' => 'Edit Admin',
     'Namaadmin' => 'Nama Admin',
-    'simpanperubahan' => 'Simpan Perubahan'
+    'simpanperubahan' => 'Simpan Perubahan',
+    'No Kartu RFID' => 'Nomor Kartu RFID',
+    'RFID tidak terbaca, coba lagi' => 'RFID tidak terbaca, coba lagi.',
+    'Terjadi kesalahan saat mengambil data RFID' => 'Terjadi kesalahan saat mengambil data RFID.',
+    'Pilih ID Senjata' => 'Pilih ID Senjata',
+    'Tidak ada ID Senjata yang tersedia' => 'Tidak ada ID Senjata yang tersedia.',
+    'Terjadi kesalahan saat mengambil data ID Senjata' => 'Terjadi kesalahan saat mengambil data ID Senjata.',
 
 
 

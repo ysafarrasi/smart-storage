@@ -33,7 +33,6 @@
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.css') }}">
     <script src="{{ asset('assets/fontawesome/js/all.min.js') }}" defer></script>
-
 </head>
 
 <body>

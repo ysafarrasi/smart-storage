@@ -101,10 +101,13 @@
                             <img src="{{ asset('assets/img/Indicator Lights for Weapon Use.png') }}"
                                 alt="Weapon Status Board" width="200px">
                             <p class="mt-3 text-center font-sans font-semibold">
-                                Keterangan warna status senjata:<br>
-                                <span class="text-success">Hijau</span> - Senjata tersedia untuk digunakan.<br>
-                                <span class="text-warning">Kuning</span> - Senjata masuk tanpa magazine.<br>
-                                <span class="text-danger">Merah</span> - Senjata masuk dengan magazine.
+                                Keterangan warna status senjata:
+                                <br>
+                                <span class="text-success">Hijau </span>: Senjata tersedia dan tidak ada magazinenya.
+                                <br>
+                                <span class="text-warning">Kuning </span>: Senjata tersedia dan ada magazinenya.
+                                <br>
+                                <span class="text-danger">Merah </span>: Senjata tidak tersedia dalam rak.
                             </p>
                         </div>
                     </div>
@@ -198,17 +201,17 @@
                         var ledGreen = $('<div>', {
                             class: 'pill'
                         }).append($('<div>', {
-                            class: 'led led-green' + (rackData.status == '1' ? ' on' : '')
+                            class: 'led led-green' + (rackData.status == '2' ? ' on' : '')
                         }));
                         var ledYellow = $('<div>', {
                             class: 'pill'
                         }).append($('<div>', {
-                            class: 'led led-yellow' + (rackData.status == '2' ? ' on' : '')
+                            class: 'led led-yellow' + (rackData.status == '1' ? ' on' : '')
                         }));
                         var ledRed = $('<div>', {
                             class: 'pill'
                         }).append($('<div>', {
-                            class: 'led led-red' + (rackData.status == '-1' ? ' on' : '')
+                            class: 'led led-red' + (rackData.status == '0' ? ' on' : '')
                         }));
 
                         senjataContainer.append(ledGreen, ledYellow, ledRed);

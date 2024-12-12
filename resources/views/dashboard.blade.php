@@ -219,17 +219,17 @@
                         var ledGreen = $('<div>', {
                             class: 'pill'
                         }).append($('<div>', {
-                            class: 'led led-green' + (rackData.status == '1' ? ' on' : '')
+                            class: 'led led-green' + (rackData.status == '2' ? ' on' : '')
                         }));
                         var ledYellow = $('<div>', {
                             class: 'pill'
                         }).append($('<div>', {
-                            class: 'led led-yellow' + (rackData.status == '2' ? ' on' : '')
+                            class: 'led led-yellow' + (rackData.status == '1' ? ' on' : '')
                         }));
                         var ledRed = $('<div>', {
                             class: 'pill'
                         }).append($('<div>', {
-                            class: 'led led-red' + (rackData.status == '-1' ? ' on' : '')
+                            class: 'led led-red' + (rackData.status == '0' ? ' on' : '')
                         }));
 
                         senjataContainer.append(ledGreen, ledYellow, ledRed);

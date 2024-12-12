@@ -3,8 +3,58 @@
   --dots-color: fff;
 }
 
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/poppins/Poppins-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Poppins';
+    font-style: italic;
+    font-weight: 400;
+    src: url('../fonts/poppins/Poppins-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../fonts/poppins/Poppins-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Poppins';
+    font-style: italic;
+    font-weight: 700;
+    src: url('../fonts/poppins/Poppins-Bold') format('truetype');
+}
+
+@font-face {
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/nunito/Nunito-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../fonts/nunito/Nunito-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/opensans/OpenSans-Regular.ttf') format('truetype');
+}
+
+
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Poppins", "Nunito", "Open Sans", sans-serif;
   background: linear-gradient(57deg, #FFF 0%, #ABA9AB 100%);
   color: #444444;
 }

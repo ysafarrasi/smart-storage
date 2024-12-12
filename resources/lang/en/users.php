@@ -90,6 +90,11 @@ return [
     'EditAdmin' => 'Edit Admin',
     'Namaadmin' => 'Admin name',
     'simpanperubahan' => 'Save Changes',
-
-
+    'No Kartu RFID' => 'RFID Card Number',
+    'RFID tidak terbaca, coba lagi' => 'RFID not recognized, try again.',
+    'Terjadi kesalahan saat mengambil data RFID' => 'An error occurred while fetching RFID data.',
+    'Pilih ID Senjata' => 'Choose Weapon ID',
+    'Tidak ada ID Senjata yang tersedia' => 'No weapon ID is available.',
+    'Terjadi kesalahan saat mengambil data ID Senjata' => 'An error occurred while fetching weapon ID data.',
+    'Edit Data Personnels Senjata Otomatis' => 'Edit Automated Weapon Storage Personnel Data'
 ];
