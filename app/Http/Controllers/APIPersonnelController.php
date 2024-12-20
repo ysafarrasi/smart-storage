@@ -15,6 +15,16 @@ class APIPersonnelController extends Controller
      * Display a listing of the resource.
      */
 
+    public function PersonnelData()
+    {
+        $personnel = Personnel::all();
+        return response()->json([
+            'code' => 200,
+            'message' => 'success',
+            'data' => $personnel
+        ]);
+    }
+
     public function getDataRFID()
     {
         $tmprfid = Tmprfid::orderBy('nokartu', 'asc')->get();

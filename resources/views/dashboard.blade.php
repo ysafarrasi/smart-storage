@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, sshirink-to-fit=no">
     <script type="text/javascript" src="{{ asset('jquery/jquery.min.js') }}"></script>
 
-    <title>Dashboard - {{ __('users.Penyimpanan Senjata Otomatis') }} - Automation Weapon Rack</title>
+    <title>Dashboard - {{ __('users.Penyimpanan Senjata Otomatis') }}</title>
     <meta name="keywords" content="{{ $metaKeywords ?? 'default, keywords' }}">
     <title>{{ $metaTitle ?? 'Default Title' }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
@@ -150,6 +150,67 @@
                 </div><!-- End Left side columns -->
             </div>
         </section>
+
+        <div class="d-flex justify-content-end mt-3">
+            <button id="download-excel" class="btn btn-primary">
+                <i class="bi bi-file-earmark-spreadsheet me-1"></i> {{__('users.unduh data excel')}}
+            </button>
+        </div>
+
+        <!-- Import pustaka SheetJS -->
+        <script src="{{ asset('assets/js/xlsx.full.min.js') }}"></script>
+
+        <script>
+            document.getElementById('download-excel').addEventListener('click', function () {
+                // URL endpoint API untuk mengambil data
+                var url = "{{ url('/api/dashboard') }}";
+
+                // Inisialisasi permintaan AJAX
+                var xhttp = new XMLHttpRequest();
+
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState === 4 && this.status === 200) {
+                        var data = JSON.parse(xhttp.responseText);
+
+                        // Format data untuk Excel dengan pengecekan null
+                        var formattedData = data.map(function (row, index) {
+                            return {
+                                "No": index + 1,
+                                "ID Senjata": row.loadCellID || 'N/A',
+                                "ID Pengguna": row.personnel ? row.personnel.personnel_id || 'N/A' : 'N/A',
+                                "Nama Pengguna": row.personnel ? row.personnel.nama || 'N/A' : 'N/A',
+                                "Tanggal": row.tanggal || 'N/A',
+                                "Waktu Keluar": row.time_out || 'N/A',
+                                "Waktu Masuk": row.time_in || 'N/A'
+                            };
+                        });
+
+                        // Konversi data JSON menjadi lembar kerja Excel
+                        var ws = XLSX.utils.json_to_sheet(formattedData);
+
+                        // Membuat workbook dan menambahkan worksheet ke dalamnya
+                        var wb = XLSX.utils.book_new();
+                        XLSX.utils.book_append_sheet(wb, ws, "Data Senjata");
+
+                        // Mengunduh file Excel dengan nama "data_senjata.xlsx"
+                        XLSX.writeFile(wb, "data_senjata.xlsx");
+                    } else if (this.readyState === 4) {
+                        // Handle error jika status bukan 200
+                        console.error("Gagal mengambil data dari API: " + this.status);
+                        alert("Gagal mengambil data. Periksa koneksi atau API.");
+                    }
+                };
+
+                // Kirim permintaan GET ke endpoint API
+                xhttp.open("GET", url, true);
+                xhttp.send();
+            });
+        </script>
+
+
+
+
+
 
 
     </main><!-- End #main -->

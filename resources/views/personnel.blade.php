@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script type="text/javascript" src="{{ asset('jquery/jquery.min.js') }}"></script>
 
-    <title>Personnel - {{ __('users.Penyimpanan Senjata Otomatis') }} - Automation Weapon Rack</title>
+    <title>Personnel - {{ __('users.Penyimpanan Senjata Otomatis') }}</title>
     <meta name="keywords" content="{{ $metaKeywords ?? 'default, keywords' }}">
     <title>{{ $metaTitle ?? 'Default Title' }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
@@ -177,9 +177,18 @@
                                             @endforeach
                                         </tbody>
                                     </table>
-                                    <a href="{{ route('personnel-add') }}">
-                                        <button class="btn btn-primary">{{ __('users.Tambah Data') }}</button>
-                                    </a>
+                                    <div class="d-flex justify-content-start mt-3">
+                                        <button id="download-excel-personnel" class="btn btn-success me-2" onclick="downloadExcelPersonnel()">
+                                            <i class="bi bi-file-earmark-spreadsheet me-1"></i> Unduh Data Excel
+                                        </button>
+                                        <a href="{{ route('personnel-add') }}">
+                                            <button class="btn btn-primary">{{ __('users.Tambah Data') }}</button>
+                                        </a>
+                                    </div>
+
+                                    <script>
+
+                                    </script>
                                 </div>
 
                             </div>

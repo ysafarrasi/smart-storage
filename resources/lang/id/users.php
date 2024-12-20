@@ -96,9 +96,11 @@ return [
     'Pilih ID Senjata' => 'Pilih ID Senjata',
     'Tidak ada ID Senjata yang tersedia' => 'Tidak ada ID Senjata yang tersedia.',
     'Terjadi kesalahan saat mengambil data ID Senjata' => 'Terjadi kesalahan saat mengambil data ID Senjata.',
-
-
-
-
+    'tambahkan data personnel' => 'Tambahkan Data Personnel',
+    'unduh data excel' => 'Unduh Data Excel',
+    'weapon_status_color' => 'Keterangan warna status senjata:',
+    'green_status' => 'Hijau: Senjata tersedia dan tidak ada magazinenya.',
+    'yellow_status' => 'Kuning: Senjata tersedia dan ada magazinenya.',
+    'red_status' => 'Merah: Senjata tidak tersedia dalam rak.',
 
 ];

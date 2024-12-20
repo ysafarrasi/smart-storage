@@ -3,7 +3,7 @@
 
     <div class="d-flex align-items-center justify-content-start">
         <a href="#" class="logo d-flex align-items-center">
-            <img src="assets/img/stas-rg_logo-removebg-preview.png" alt="">
+            <img src="{{ asset('assets/img/stas-rg_logo-removebg-preview.png') }}" alt="">
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -29,14 +29,13 @@
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <li>
                         <a class="dropdown-item" href="{{ route('setlocale', ['locale' => 'id']) }}">
-                            <img src="assets\img\bendera-id.png" alt="" class="rounded-circle" width="20px">
+                            <img src="{{ asset('assets/img/bendera-id.png') }}" alt="" class="rounded-circle" width="20px">
                             ID
                         </a>
                     </li>
                     <li>
                         <a class="dropdown-item" href="{{ route('setlocale', ['locale' => 'en']) }}">
-                            <img src="assets\img\bendera-amerika.png" alt="" class="rounded-circle"
-                                width="20px">
+                            <img src="{{ asset('assets/img/bendera-amerika.png') }}" alt="" class="rounded-circle" width="20px">
                             EN
                         </a>
                     </li>

@@ -5,12 +5,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1,shrink-to-fit=no ">
     <script type="text/javascript" src="{{ asset('jquery/jquery.min.js') }}"></script>
-    <title>Tambah Data Personil - Penyimpanan Senjata Otomatis</title>
+    <title>{{ __('users.tambahkan data personnel')}} - Penyimpanan Senjata Otomatis</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="assets/img/Logo G - STAS RG.png" rel="icon">
+    <link href="{{ asset('assets/img/Logo G - STAS RG.png') }}" rel="icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, sshirink-to-fit=no">
     <script type="text/javascript" src="{{ asset('jquery/jquery.min.js') }}"></script>
 
-    <title>{{ __('users.Penyimpanan Senjata Otomatis') }} - Automation Weapon Rack</title>
+    <title>{{ __('users.Papan Status Senjata')}} {{ __('users.Penyimpanan Senjata Otomatis') }}</title>
     <meta name="keywords" content="{{ $metaKeywords ?? 'default, keywords' }}">
     <title>{{ $metaTitle ?? 'Default Title' }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
@@ -101,13 +101,13 @@
                             <img src="{{ asset('assets/img/Indicator Lights for Weapon Use.png') }}"
                                 alt="Weapon Status Board" width="200px">
                             <p class="mt-3 text-center font-sans font-semibold">
-                                Keterangan warna status senjata:
+                                {{__('users.weapon_status_color')}}
                                 <br>
-                                <span class="text-success">Hijau </span>: Senjata tersedia dan tidak ada magazinenya.
+                                <span class="text-success">{{ __('users.green_status') }}
                                 <br>
-                                <span class="text-warning">Kuning </span>: Senjata tersedia dan ada magazinenya.
+                                <span class="text-warning">{{ __('users.yellow_status') }}
                                 <br>
-                                <span class="text-danger">Merah </span>: Senjata tidak tersedia dalam rak.
+                                <span class="text-danger">{{ __('users.red_status') }}
                             </p>
                         </div>
                     </div>

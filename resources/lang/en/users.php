@@ -96,5 +96,12 @@ return [
     'Pilih ID Senjata' => 'Choose Weapon ID',
     'Tidak ada ID Senjata yang tersedia' => 'No weapon ID is available.',
     'Terjadi kesalahan saat mengambil data ID Senjata' => 'An error occurred while fetching weapon ID data.',
-    'Edit Data Personnels Senjata Otomatis' => 'Edit Automated Weapon Storage Personnel Data'
+    'Edit Data Personnels Senjata Otomatis' => 'Edit Automated Weapon Storage Personnel Data',
+    'tambahkan data personnel' => 'Add Personnel Data',
+    'unduh data excel' => 'Download Excel Data',
+    'weapon_status_color' => 'Weapon status color description:',
+    'green_status' => 'Green: Weapon is available without a magazine.',
+    'yellow_status' => 'Yellow: Weapon is available with a magazine.',
+    'red_status' => 'Red: Weapon is not available on the rack.',
+
 ];

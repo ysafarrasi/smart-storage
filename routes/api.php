@@ -48,6 +48,8 @@ Route::get('dashboard-show', [APIDashboardController::class, 'show']);
 
 // Rute untuk data personnel
 Route::get('personnel-data', [APIPersonnelController::class, 'getPersonnel']);
+
+Route::get('personnel', [APIPersonnelController::class, 'PersonnelData']);
 // Rute terkait Arduino
 Route::post('load-cell-data', [ArduinoController::class, 'postLoadCellData']);
 Route::post('rfid-data', [ArduinoController::class, 'postRFIDData']);
@@ -65,7 +67,7 @@ Route::get('rfid-data', [APIPersonnelController::class, 'getDataRFID']);
 // // Rute dengan autentikasi Sanctum
 // Route::middleware('auth:sanctum')->group(function () {
 
-    
+
 // });
 
 
