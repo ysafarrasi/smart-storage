@@ -185,9 +185,14 @@
                                             <button class="btn btn-primary">{{ __('users.Tambah Data') }}</button>
                                         </a>
                                     </div>
-
+                                    <script src="{{ asset('assets/js/xlsx.full.min.js') }}"></script>
                                     <script>
-
+                                        function downloadExcelPersonnel() {
+                                            var wb = XLSX.utils.book_new();
+                                            var ws = XLSX.utils.table_to_sheet(document.querySelector('.datatable'));
+                                            XLSX.utils.book_append_sheet(wb, ws, 'Personnel Data');
+                                            XLSX.writeFile(wb, 'personnel_data.xlsx');
+                                        }
                                     </script>
                                 </div>
 

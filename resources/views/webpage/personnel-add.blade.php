@@ -135,7 +135,7 @@
                                     const rfidInput = document.getElementById('nokartu');
                                     const rfidError = document.getElementById('rfidError');
                                     setInterval(() => {
-                                        fetch('http://192.168.1.10:8000/api/rfid-data')
+                                        fetch('/api/rfid-data')
                                             .then(response => response.json())
                                             .then(data => {
                                                 if (data.code === 200 && data.data && data.data.length > 0) {
@@ -165,7 +165,7 @@
                                     const loadCellSelect = document.getElementById('loadCellID');
                                     const loadCellError = document.getElementById('loadCellError');
 
-                                    fetch('http://192.168.1.10:8000/api/load-cell-data')
+                                    fetch('/api/load-cell-data')
                                         .then(response => response.json())
                                         .then(data => {
                                             if (data.code === 200 && data.data && data.data.length > 0) {
@@ -192,7 +192,7 @@
                                 </div>
 
                                 <div class="col-12">
-                                    <label for="nama" class="form-label">{{ __('Nama Pengguna') }}</label>
+                                    <label for="nama" class="form-label">{{ __('users.Nama Pengguna') }}</label>
                                     <input type="text" class="form-control" name="nama" id="nama" value="{{ old('nama') }}" required>
                                 </div>
 
@@ -218,7 +218,7 @@
 
                                 <!-- Tombol Submit dan Reset -->
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">{{ __('Simpan') }}</button>
+                                    <button type="submit" class="btn btn-primary">{{ __('users.Simpan') }}</button>
                                     <button type="reset" class="btn btn-secondary">Reset</button>
                                 </div>
                             </form>

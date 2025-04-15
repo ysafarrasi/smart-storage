@@ -26,7 +26,7 @@ return [
 	'Kata Sandi' => 'Password',
 	'Keluar' => 'Logout',
 	'Dashboard' => 'Dashboard',
-	'Data Pengguna' => 'User Data',
+	'Data Pengguna' => 'Personnel Data',
 	'Data Senjata' => 'Weapon Data',
 	'Pangkat' => 'Rank',
 	'NRP' => 'NRP',
@@ -100,8 +100,27 @@ return [
     'tambahkan data personnel' => 'Add Personnel Data',
     'unduh data excel' => 'Download Excel Data',
     'weapon_status_color' => 'Weapon status color description:',
-    'green_status' => 'Green: Weapon is available without a magazine.',
-    'yellow_status' => 'Yellow: Weapon is available with a magazine.',
+    'green_status' => 'Green: Weapon is available with a magazine.',
+    'yellow_status' => 'Yellow: Weapon is available without a magazine.',
     'red_status' => 'Red: Weapon is not available on the rack.',
+
+    // Halaman Bantuan
+
+    'halamanbantuan_title' => 'Need Help',
+    'halamanbantuan_heading' => 'How Can We Help You?',
+    'halamanbantuan_technical_support' => 'Technical Support',
+    'halamanbantuan_technical_support_desc' => 'Get assistance with technical issues or product malfunctions.',
+    'halamanbantuan_billing_inquiries' => 'Billing Inquiries',
+    'halamanbantuan_billing_inquiries_desc' => 'Questions regarding your bills or payments.',
+    'halamanbantuan_general_questions' => 'General Questions',
+    'halamanbantuan_general_questions_desc' => 'Have questions about our services? We are here to help!',
+    'halamanbantuan_contact_support' => 'Contact Support',
+    'halamanbantuan_billing_help' => 'Billing Help',
+    'halamanbantuan_ask_us' => 'Ask Us',
+    'halamanbantuan_contact_us' => 'Contact Us Directly',
+    'halamanbantuan_name' => 'Name',
+    'halamanbantuan_email' => 'Email',
+    'halamanbantuan_message' => 'Message',
+    'halamanbantuan_submit' => 'Submit',
 
 ];

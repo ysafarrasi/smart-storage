@@ -12,11 +12,11 @@ class ArduinoController extends Controller
     public function postLoadCellData(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'slaveNumber' => 'required',
-            'status' => 'required',
-            'weight' => 'required',
             'loadCellID' => 'required',
             'rackNumber' => 'required',
+            'status' => 'required',
+            'weight' => 'required',
+
         ]);
 
         if ($validator->fails()) {
@@ -71,7 +71,7 @@ class ArduinoController extends Controller
         }
     }
 
-    
+
     public function getData()
     {
         $data = Weapon::all();
@@ -81,5 +81,5 @@ class ArduinoController extends Controller
             'data' => $data
         ]);
     }
-    
+
 }

@@ -9,11 +9,11 @@ class Tmprfid extends Model
 {
     use HasFactory;
     protected $table = 'tmprfids';
-    protected $primaryKey = 'nokartu';
+    protected $primaryKey = 'id';
 
     public $timestamps = false; // Tambahkan baris ini
 
     protected $fillable = [
         'nokartu',
-    ];    
+    ];
 }

@@ -186,7 +186,7 @@
                             class: 'card'
                         });
                         var cardBody = $('<div>', {
-                            class: 'card-body'
+                            class: 'card-body d-flex flex-column align-items-center text-center' // Center alignment
                         });
                         var cardTitle = $('<h5>', {
                             class: 'card-title',
@@ -194,28 +194,62 @@
                         });
                         var senjataContainer = $('<div>', {
                             id: 'senjata' + rackData.loadCellID,
-                            class: 'container d-flex justify-content-evenly align-items-center'
+                            class: 'container d-flex justify-content-center align-items-center mb-2' // Center LEDs
                         });
 
                         // Menentukan warna LED berdasarkan status
                         var ledGreen = $('<div>', {
-                            class: 'pill'
+                            class: 'pill me-2' // Tambahkan margin kanan
                         }).append($('<div>', {
-                            class: 'led led-green' + (rackData.status == '2' ? ' on' : '')
+                            class: 'led led-green' + (rackData.status == '2' ? ' on' : ''),
+                            css: {
+                                marginRight: '10px' // Tambahkan jarak antar indikator
+                            }
                         }));
                         var ledYellow = $('<div>', {
-                            class: 'pill'
+                            class: 'pill me-2' // Tambahkan margin kanan
                         }).append($('<div>', {
-                            class: 'led led-yellow' + (rackData.status == '1' ? ' on' : '')
+                            class: 'led led-orange' + (rackData.status == '1' ? ' on' : ''),
+                            css: {
+                                marginRight: '10px' // Tambahkan jarak antar indikator
+                            }
                         }));
                         var ledRed = $('<div>', {
-                            class: 'pill'
+                            class: 'pill' // Tidak perlu margin kanan di akhir
                         }).append($('<div>', {
-                            class: 'led led-red' + (rackData.status == '0' ? ' on' : '')
+                            class: 'led led-red' + (rackData.status == '0' ? ' on' : ''),
+                            css: {
+                                marginRight: '10px' // Tambahkan jarak antar indikator
+                            }
                         }));
 
                         senjataContainer.append(ledGreen, ledYellow, ledRed);
-                        cardBody.append(cardTitle, senjataContainer);
+
+                        // Menambahkan keterangan status dengan span
+                        var statusDescription = $('<span>', {
+                            class: 'status-description',
+                            css: {
+                                fontSize: '12px', // Memperkecil ukuran tulisan
+                                fontWeight: 'normal', // Mengurangi ketebalan font
+                                display: 'block', // Make it a block element for proper centering
+                                marginTop: '8px' // Add some spacing above the text
+                            }
+                        });
+
+                        // Menentukan warna teks berdasarkan status
+                        if (rackData.status == '2') {
+                            statusDescription.text('Available with a magazine.');
+                            statusDescription.css('color', 'green'); // Warna hijau
+                        } else if (rackData.status == '1') {
+                            statusDescription.text('Available without a magazine.');
+                            statusDescription.css('color', 'orange'); // Warna kuning/orange
+                        } else if (rackData.status == '0') {
+                            statusDescription.text('Not available on the rack.');
+                            statusDescription.css('color', 'red'); // Warna merah
+                        }
+
+                        // Append status description below the LEDs
+                        cardBody.append(cardTitle, senjataContainer, statusDescription);
                         card.append(cardBody);
                         rackElement.append(card);
                         $('#rack-data').append(rackElement);

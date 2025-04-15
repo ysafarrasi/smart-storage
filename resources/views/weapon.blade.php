@@ -185,7 +185,7 @@
             $(document).ready(function() {
             function loadData() {
             $.ajax({
-                url: 'api/load-cell-data',
+                url: '/api/load-cell-data',
                 type: 'GET',
                 success: function(response) {
                     var weaponData = $('#weapon-data');
