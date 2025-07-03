@@ -58,23 +58,9 @@ automation-weapon-rack/
 
 ---
 
-## 🤝 Kontribusi
-
-Pull Request, masukan, dan ide pengembangan sangat terbuka.
-Silakan buat issue jika menemukan bug atau butuh fitur baru.
-
----
-
 ## ⚠️ Disclaimer
 
 Proyek ini dikembangkan sebagai prototipe edukasi atau sistem internal.
 Penggunaan pada sistem senjata nyata harus sesuai standar keamanan & regulasi yang berlaku.
-
----
-
-## 📧 Kontak
-
-Untuk pertanyaan atau kolaborasi:
-📬 \[[email@example.com](mailto:email@example.com)]
 
 ---
