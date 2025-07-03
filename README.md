@@ -54,41 +54,6 @@ automation-weapon-rack/
 
 ---
 
-## ⚡ Cara Setup Awal
-
-### Perangkat Keras:
-
-1. Siapkan:
-
-   * Arduino Mega
-   * Ethernet Shield
-   * Sensor pintu/magnetik
-   * Solenoid lock (opsional)
-   * Koneksi LAN ke server
-2. Ikuti wiring sesuai folder `schematics`
-
-### Perangkat Lunak:
-
-1. Upload kode dari folder `firmware` ke Arduino via Arduino IDE
-2. Pastikan server Laravel berjalan:
-
-   ```bash
-   cd web-dashboard
-   composer install
-   php artisan migrate
-   php artisan serve
-   ```
-3. Edit konfigurasi jaringan pada Arduino:
-
-   ```cpp
-   byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
-   IPAddress server(xxx, xxx, xxx, xxx); // IP server Laravel
-   ```
-4. Pastikan MySQL dan PhpMyAdmin sudah aktif
-5. Akses dashboard web untuk monitoring dan data log
-
----
-
 ## 📊 Potensi Pengembangan
 
 * Penyempurnaan dashboard dengan grafik & statistik
