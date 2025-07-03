@@ -6,6 +6,8 @@
 
 Sistem otomasi untuk **Weapon Rack (Lemari Senjata)** yang bertujuan meningkatkan keamanan, efisiensi, dan kemudahan monitoring. Sistem ini memanfaatkan Arduino Mega, Ethernet Shield, sensor, serta dashboard berbasis web untuk memantau status rak senjata secara real-time.
 
+⚠️ **Catatan:** Repository ini adalah versi prototipe untuk keperluan edukasi dan pengembangan. Tidak memuat informasi rahasia, spesifikasi teknis militer, atau detail keamanan sebenarnya.
+
 ---
 
 ## 🚀 Fitur Utama
@@ -28,7 +30,7 @@ Sistem otomasi untuk **Weapon Rack (Lemari Senjata)** yang bertujuan meningkatka
 | **Dashboard Web**      | HTML, CSS, JavaScript, PHP                  |
 | **Framework Web**      | Laravel (PHP Framework)                     |
 | **API Komunikasi**     | REST API bawaan Laravel (HTTP via Ethernet) |
-| **Database**           | MySQL        |
+| **Database**           | MySQL dengan PhpMyAdmin sebagai GUI         |
 
 ---
 
@@ -46,16 +48,10 @@ automation-weapon-rack/
 
 ---
 
-## 🖥️ Diagram Sistem
-
-![Weapon Rack Diagram](images/weapon-rack-diagram.png)
-
-> *Ilustrasi sistem Automation Weapon Rack dengan Arduino Mega, Ethernet Shield, sensor, dan integrasi ke server Laravel.*
-
----
-
 ## 📊 Potensi Pengembangan
 
+* Autentikasi pengguna lebih aman (RFID, sidik jari)
+* Sistem alarm otomatis jika akses ilegal
 * Penyempurnaan dashboard dengan grafik & statistik
 * Backup power supply untuk kondisi darurat
 * Pencatatan log berbasis waktu real-time
@@ -79,6 +75,6 @@ Penggunaan pada sistem senjata nyata harus sesuai standar keamanan & regulasi ya
 ## 📧 Kontak
 
 Untuk pertanyaan atau kolaborasi:
-📨 \[[yasikhafrs@gmail.com](mailto:yasikhafrs@gmail.com)]
+📬 \[[email@example.com](mailto:email@example.com)]
 
 ---
